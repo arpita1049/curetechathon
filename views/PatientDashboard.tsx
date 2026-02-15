@@ -5,9 +5,10 @@ import TreatmentComparison from './TreatmentComparison';
 
 interface PatientDashboardProps {
   onLogout: () => void;
+  user?: any;
 }
 
-const PatientDashboard: React.FC<PatientDashboardProps> = () => {
+const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) => {
   const [view, setView] = useState<'HOME' | 'COST'>('HOME');
 
   if (view === 'COST') return <TreatmentComparison onBack={() => setView('HOME')} />;
@@ -21,12 +22,12 @@ const PatientDashboard: React.FC<PatientDashboardProps> = () => {
         <div className="flex items-center gap-4">
           <div className="relative">
             <div className="w-16 h-16 bg-gradient-to-tr from-teal-500 to-emerald-400 rounded-3xl neo-shadow flex items-center justify-center text-white font-black text-2xl border-4 border-white">
-              RK
+              {user?.displayName ? user.displayName.substring(0, 2).toUpperCase() : 'RK'}
             </div>
             <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 border-4 border-white rounded-full"></div>
           </div>
           <div>
-            <h2 className="text-2xl font-black text-teal-950">Namaste, Rajesh</h2>
+            <h2 className="text-2xl font-black text-teal-950">Namaste, {user?.displayName ? user.displayName.split(' ')[0] : 'Rajesh'}</h2>
             <div className="flex items-center gap-2 text-[10px] font-black text-teal-600/60 uppercase tracking-widest">
               <MapPin className="w-3 h-3" /> Rampur Village
             </div>
@@ -44,30 +45,30 @@ const PatientDashboard: React.FC<PatientDashboardProps> = () => {
             <Trophy className="w-4 h-4 text-amber-400" />
             <span className="text-[10px] font-black uppercase tracking-widest">Community Leaderboard</span>
           </div>
-          
+
           <h3 className="text-xl font-bold opacity-80 mb-2">My Health Vitality</h3>
           <div className="flex items-baseline gap-2 mb-4">
             <span className="text-7xl font-black tracking-tighter transition-transform group-hover:scale-105 duration-500">{healthScore}</span>
             <span className="text-2xl font-bold opacity-40">/ 100</span>
           </div>
-          
+
           <p className="text-sm font-medium leading-relaxed max-w-xs mb-8 opacity-80 text-center md:text-left">
             You are doing amazing! Your health index is higher than <span className="text-emerald-300 font-bold">75%</span> of your neighbors.
           </p>
-          
+
           <button className="w-full md:w-auto px-10 py-4 bg-white text-teal-800 rounded-2xl font-black text-sm neo-shadow hover:scale-105 transition-all shadow-xl">
             Get Rewards
           </button>
         </div>
-        
+
         {/* Background Decorative Element */}
         <Activity className="absolute right-[-20%] bottom-[-20%] w-80 h-80 opacity-[0.05] -rotate-12 transition-transform group-hover:rotate-0 duration-1000" />
       </div>
 
       {/* Main Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <button 
-          onClick={() => {}} 
+        <button
+          onClick={() => { }}
           className="flex flex-col items-start p-8 bg-white rounded-[2.5rem] neo-shadow border border-teal-50 hover:border-teal-200 transition-all group text-left relative overflow-hidden"
         >
           <div className="p-4 bg-blue-500 text-white rounded-2xl neo-shadow mb-6 group-hover:scale-110 transition-transform">
@@ -82,8 +83,8 @@ const PatientDashboard: React.FC<PatientDashboardProps> = () => {
           </div>
         </button>
 
-        <button 
-          onClick={() => setView('COST')} 
+        <button
+          onClick={() => setView('COST')}
           className="flex flex-col items-start p-8 bg-white rounded-[2.5rem] neo-shadow border border-teal-50 hover:border-teal-200 transition-all group text-left relative overflow-hidden"
         >
           <div className="p-4 bg-orange-500 text-white rounded-2xl neo-shadow mb-6 group-hover:scale-110 transition-transform">
@@ -105,7 +106,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = () => {
           <h3 className="text-2xl font-black text-teal-950">Next Steps</h3>
           <button className="text-xs font-black text-teal-600 uppercase tracking-widest hover:underline">Full History</button>
         </div>
-        
+
         <div className="space-y-4">
           <div className="p-6 bg-white rounded-3xl neo-shadow border border-teal-50 flex items-center gap-6 group hover:border-teal-200 transition-all">
             <div className="flex flex-col items-center justify-center w-16 h-16 bg-red-50 rounded-2xl text-red-600 neo-shadow">
@@ -124,7 +125,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = () => {
           </div>
 
           <div className="p-6 bg-white rounded-3xl neo-shadow border border-teal-50 flex items-center gap-6 opacity-60 grayscale group">
-             <div className="flex flex-col items-center justify-center w-16 h-16 bg-slate-50 rounded-2xl text-slate-500 border border-slate-100">
+            <div className="flex flex-col items-center justify-center w-16 h-16 bg-slate-50 rounded-2xl text-slate-500 border border-slate-100">
               <span className="text-xs font-black uppercase">May</span>
               <span className="text-2xl font-black">08</span>
             </div>

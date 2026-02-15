@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Mail, Lock, User, Github, Chrome, ArrowRight, Eye, EyeOff, ChevronLeft, Shield } from 'lucide-react';
+import { auth, googleProvider } from '../firebase';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { ChevronLeft, Shield, User, Mail, Lock, EyeOff, Eye, ArrowRight, Chrome, Github } from 'lucide-react';
 
 interface AuthProps {
   mode: 'login' | 'signup';
@@ -56,10 +58,76 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t }) => {
 
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login/signup logic
-    alert(`${mode === 'login' ? 'Logging in' : 'Creating account'} for ${email}`);
+
+    if (loading) return;
+
+    if (mode === 'signup' && !name.trim()) {
+      alert("Please enter your full name");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      if (mode === 'signup') {
+        console.log("Starting sign-up process for:", email);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("User created successfully:", userCredential.user.uid);
+
+        try {
+          await updateProfile(userCredential.user, { displayName: name });
+          console.log("Profile updated successfully");
+        } catch (profileError) {
+          console.error("Profile update failed, but user was created:", profileError);
+        }
+
+        alert("Account created successfully!");
+      } else {
+        console.log("Starting login process for:", email);
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+    } catch (error: any) {
+      console.error("Authentication Error Details:", {
+        code: error.code,
+        message: error.message,
+        email: email
+      });
+
+      let friendlyMessage = error.message;
+
+      if (error.code === 'auth/email-already-in-use') {
+        friendlyMessage = "This email is already registered. Please login instead.";
+      } else if (error.code === 'auth/weak-password') {
+        friendlyMessage = "Password is too weak. Please use at least 6 characters.";
+      } else if (error.code === 'auth/invalid-email') {
+        friendlyMessage = "The email address is invalid.";
+      } else if (error.code === 'auth/operation-not-allowed') {
+        friendlyMessage = "Email/Password sign-up is not enabled in the Firebase Console. Please enable it in 'Sign-in method'.";
+      } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        friendlyMessage = "Invalid email or password.";
+      } else if (error.code === 'auth/network-request-failed') {
+        friendlyMessage = "Network error. Please check your internet connection.";
+      } else if (error.code === 'auth/internal-error') {
+        friendlyMessage = "Firebase internal error. Check if your API key is correct and valid.";
+      }
+
+      alert(`Error (${error.code}): ${friendlyMessage}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      // alert("Google Sign-In successful!");
+    } catch (error: any) {
+      console.error("Google Sign-In Error:", error);
+      alert(error.message);
+    }
   };
 
   return (
@@ -186,10 +254,20 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t }) => {
 
             <button
               type="submit"
-              className="w-full py-5 bg-sky-600 text-white font-black text-lg rounded-[2rem] btn-shadow hover:bg-sky-700 transition-all shadow-xl flex items-center justify-center gap-3 btn-3d"
+              disabled={loading}
+              className={`w-full py-5 bg-sky-600 text-white font-black text-lg rounded-[2rem] btn-shadow hover:bg-sky-700 transition-all shadow-xl flex items-center justify-center gap-3 btn-3d ${loading ? 'opacity-70 cursor-not-allowed scale-95' : ''}`}
             >
-              {mode === 'login' ? t.continue : t.signup}
-              <ArrowRight className="w-5 h-5" />
+              {loading ? (
+                <>
+                  <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                  {mode === 'login' ? 'Logging in...' : 'Creating Account...'}
+                </>
+              ) : (
+                <>
+                  {mode === 'login' ? t.continue : t.signup}
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
             </button>
           </form>
 
@@ -200,7 +278,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t }) => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center gap-2 py-3 border border-slate-100 dark:border-slate-700 rounded-2xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all btn-3d">
+              <button onClick={handleGoogleSignIn} type="button" className="flex items-center justify-center gap-2 py-3 border border-slate-100 dark:border-slate-700 rounded-2xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all btn-3d">
                 <Chrome className="w-4 h-4" /> {t.google}
               </button>
               <button className="flex items-center justify-center gap-2 py-3 border border-slate-100 dark:border-slate-700 rounded-2xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all btn-3d">

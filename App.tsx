@@ -11,18 +11,46 @@ import ServiceDetail from './views/ServiceDetail';
 import Emergency from './views/Emergency';
 import AIAssistant from './components/AIAssistant';
 import { UserRole } from './types';
-import { Activity, LogOut, Globe, ChevronDown, PhoneCall } from 'lucide-react';
+import { Activity, LogOut, Globe, ChevronDown, PhoneCall, Sun, Moon } from 'lucide-react';
+import { auth } from './firebase';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { translations } from './translations';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
 
+
+  const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<UserRole>(UserRole.NONE);
   const [currentView, setCurrentView] = useState<'landing' | 'booking' | 'login' | 'signup' | 'onboarding' | 'dashboard' | 'service' | 'emergency'>('landing');
   const [selectedService, setSelectedService] = useState<any>(null);
   const [language, setLanguage] = useState<'english' | 'hindi' | 'marathi'>('english');
   const [showLangMenu, setShowLangMenu] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+      if (firebaseUser) {
+        setUserRole(UserRole.PATIENT);
+        setCurrentView('dashboard');
+      } else {
+        setUserRole(UserRole.NONE);
+        // Using a functional update or checking current view state indirectly
+        // is safer if we want to avoid depending on currentView directly.
+        // However, for simplicity and correct behavior, we only redirect if 
+        // the user was previously in a protected view.
+        setCurrentView(prev => {
+          if (prev === 'dashboard' || prev === 'onboarding') {
+            return 'landing';
+          }
+          return prev;
+        });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,12 +60,30 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
 
-  const handleLogout = () => {
-    setUserRole(UserRole.NONE);
-    setCurrentView('landing');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      // State updates handled by onAuthStateChanged
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error("Logout Error:", error);
+    }
   };
 
   const handleOnboardingComplete = (role: UserRole) => {
@@ -87,7 +133,7 @@ const App: React.FC = () => {
     if (currentView === 'dashboard') {
       switch (userRole) {
         case UserRole.PHW: return <PHWDashboard onLogout={handleLogout} />;
-        case UserRole.PATIENT: return <PatientDashboard onLogout={handleLogout} />;
+        case UserRole.PATIENT: return <PatientDashboard user={user} onLogout={handleLogout} />;
         case UserRole.DOCTOR: return <DoctorDashboard onLogout={handleLogout} />;
         default: return <LandingPage onBookClick={navigateToBooking} onServiceClick={handleServiceClick} t={t.landing} />;
       }
@@ -205,6 +251,14 @@ const App: React.FC = () => {
                   </div>
                 )}
               </div>
+
+              <button
+                onClick={toggleTheme}
+                className="p-2.5 rounded-full border-2 border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 transition-all animate-nav-combined [animation-delay:425ms] opacity-0 [animation-fill-mode:forwards]"
+                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
 
               <button
                 className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-lg hover:shadow-red-500/30 animate-pulse active:scale-95 animate-nav-combined [animation-delay:450ms] opacity-0 [animation-fill-mode:forwards] btn-3d"
