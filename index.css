@@ -219,6 +219,66 @@
   animation: float3d 6s ease-in-out infinite;
 }
 
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -234,4 +294,22 @@
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #334155;
+}
+
+.neo-shadow {
+  box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .neo-shadow {
+  box-shadow: 8px 8px 16px #0f172a, -8px -8px 16px #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neo-inner {
+  box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+}
+
+.dark .neo-inner {
+  box-shadow: inset 5px 5px 10px #0f172a, inset -5px -5px 10px #1e293b;
 }

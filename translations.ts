@@ -37,6 +37,9 @@ export const translations = {
                 item1: { title: 'Experienced Specialists', desc: 'Our doctors are leaders in their fields with decades of experience.' },
                 item2: { title: 'Modern Technology', desc: 'We utilize latest medical advancements for diagnosis.' },
                 item3: { title: 'Patient-First', desc: 'Your comfort and health are our top priorities.' },
+                item4: { title: '24/7 Availability', desc: 'Round-the-clock medical assistance for your peace of mind.' },
+                item5: { title: 'Secure Data', desc: 'Your health records are protected by advanced encryption.' },
+                item6: { title: 'Affordable Pricing', desc: 'Quality healthcare made accessible for everyone.' },
                 testimonial: "\"CURE Clinic has completely changed my perspective on healthcare. The staff is professional, the facility is clean, and the care is genuinely personal.\"",
                 patient: 'David Thompson',
                 since: 'Patient since 2021'
@@ -46,6 +49,15 @@ export const translations = {
                 desc: 'Schedule your consultation today and experience the future of professional, world-class healthcare tailored to your needs.',
                 open: 'Open 24/7',
                 secure: 'Secure Data'
+            },
+            doctors: {
+                title: 'EXPERT PERSPECTIVES',
+                subtitle: 'What Our Specialists Say',
+                list: [
+                    { name: 'Dr. Sarah Mitchell', role: 'Chief Cardiologist', feedback: 'At CURE, we combine elite medical expertise with a human touch that is rare in modern healthcare.' },
+                    { name: 'Dr. James Wilson', role: 'Senior Neurologist', feedback: 'The integration of AI diagnostics with personalized care plans sets a new standard for local medicine.' },
+                    { name: 'Dr. Elena Rodriguez', role: 'Lead Pediatrician', feedback: 'Seeing our young patients thrive through early, technology-driven intervention is why we do what we do.' }
+                ]
             }
         },
         auth: {
@@ -132,6 +144,9 @@ export const translations = {
                 item1: { title: 'अनुभवी विशेषज्ञ', desc: 'हमारे डॉक्टर दशकों के अनुभव के साथ अपने क्षेत्रों में अग्रणी हैं।' },
                 item2: { title: 'आधुनिक तकनीक', desc: 'हम निदान के लिए नवीनतम चिकित्सा प्रगति का उपयोग करते हैं।' },
                 item3: { title: 'रोगियों को प्राथमिकता', desc: 'आपकी सुविधा और स्वास्थ्य हमारी सर्वोच्च प्राथमिकता है।' },
+                item4: { title: '24/7 उपलब्धता', desc: 'आपकी मानसिक शांति के लिए चौबीसों घंटे चिकित्सा सहायता उपलब्ध है।' },
+                item5: { title: 'सुरक्षित डेटा', desc: 'आपके स्वास्थ्य रिकॉर्ड उन्नत एन्क्रिप्शन द्वारा सुरक्षित हैं।' },
+                item6: { title: 'किफायती मूल्य', desc: 'गुणवत्तापूर्ण स्वास्थ्य सेवा सभी के लिए सुलभ बनाई गई है।' },
                 testimonial: "\"CURE क्लिनिक ने स्वास्थ्य सेवा के प्रति मेरा नजरिया पूरी तरह से बदल दिया है। कर्मचारी पेशेवर हैं, सुविधा साफ है, और देखभाल वास्तव में व्यक्तिगत है।\"",
                 patient: 'डेविड थॉम्पसन',
                 since: '2021 से मरीज'
@@ -141,6 +156,15 @@ export const translations = {
                 desc: 'आज ही अपनी परामर्श सूची निर्धारित करें और अपनी आवश्यकताओं के अनुसार पेशेवर, विश्व स्तरीय स्वास्थ्य सेवा के भविष्य का अनुभव करें।',
                 open: '24/7 उपलब्ध',
                 secure: 'सुरक्षित डेटा'
+            },
+            doctors: {
+                title: 'विशेषज्ञों का दृष्टिकोण',
+                subtitle: 'हमारे विशेषज्ञ क्या कहते हैं',
+                list: [
+                    { name: 'डॉ. सारा मिशेल', role: 'मुख्य हृदय रोग विशेषज्ञ', feedback: 'CURE में, हम मानवीय स्पर्श के साथ कुलीन चिकित्सा विशेषज्ञता को जोड़ते हैं जो आधुनिक स्वास्थ्य सेवा में दुर्लभ है।' },
+                    { name: 'डॉ. जेम्स विल्सन', role: 'वरिष्ठ न्यूरोलॉजिस्ट', feedback: 'व्यक्तिगत देखभाल योजनाओं के साथ एआई निदान का एकीकरण स्थानीय चिकित्सा के लिए एक नया मानक स्थापित करता है।' },
+                    { name: 'डॉ. एलेना रोड्रिगेज', role: 'मुख्य बाल रोग विशेषज्ञ', feedback: 'प्रारंभिक, तकनीक-संचालित हस्तक्षेप के माध्यम से हमारे युवा रोगियों को फलते-फूलते देखना ही हमारे काम का उद्देश्य है।' }
+                ]
             }
         },
         auth: {
@@ -227,6 +251,9 @@ export const translations = {
                 item1: { title: 'अनुभवी तज्ञ', desc: 'आमचे डॉक्टर त्यांच्या क्षेत्रातील अग्रगण्य असून त्यांना दशकांचा अनुभव आहे।' },
                 item2: { title: 'आधुनिक तंत्रज्ञान', desc: 'आम्ही निदानासाठी नवीनतम वैद्यकीय प्रगतीचा वापर करतो।' },
                 item3: { title: 'रुग्ण-प्रथम दृष्टिकोन', desc: 'तुमची सोय आणि आरोग्य ही आमची सर्वोच्च प्राथमिकता आहे।' },
+                item4: { title: '24/7 उपलब्धता', desc: 'तुमच्या मानसिक शांततेसाठी चोवीस तास वैद्यकीय मदत उपलब्ध आहे।' },
+                item5: { title: 'सुरक्षित डेटा', desc: 'तुमचे आरोग्य रेकॉर्ड प्रगत एन्क्रिप्शनद्वारे सुरक्षित आहेत।' },
+                item6: { title: 'परवडणारे दर', desc: 'दर्जेदार आरोग्य सेवा सर्वांसाठी सुलभ केली आहे।' },
                 testimonial: "\"CURE क्लिनिकने आरोग्यसेवेबद्दलचा माझा दृष्टिकोन पूर्णपणे बदलला आहे। कर्मचारी व्यावसायिक आहेत, सुविधा स्वच्छ आहे आणि काळजी खरोखर वैयक्तिक आहे।\"",
                 patient: 'डेव्हिड थॉम्पसन',
                 since: '2021 पासून रुग्ण'
@@ -236,6 +263,15 @@ export const translations = {
                 desc: 'आजच तुमच्या सल्लामसलतचे वेळापत्रक निश्चित करा आणि तुमच्या गरजांनुसार व्यावसायिक, जागतिक दर्जाच्या आरोग्यसेवेच्या भविष्याचा अनुभव घ्या।',
                 open: '24/7 खुले',
                 secure: 'सुरक्षित डेटा'
+            },
+            doctors: {
+                title: 'तज्ञांचा दृष्टिकोन',
+                subtitle: 'आमचे तज्ञ काय म्हणतात',
+                list: [
+                    { name: 'डॉ. सारा मिशेल', role: 'मुख्य हृदयतज्ज्ञ', feedback: 'CURE मध्ये, आम्ही आधुनिक आरोग्यसेवेमध्ये दुर्मिळ असलेल्या मानवी स्पर्शासह उच्चभ्रू वैद्यकीय तज्ञांची जोड देतो।' },
+                    { name: 'डॉ. जेम्स विल्सन', role: 'वरिष्ठ न्यूरोलॉजिस्ट', feedback: 'वैयक्तिक काळजी योजनांसह AI निदानाचे एकत्रीकरण स्थानिक औषधांसाठी एक नवीन मानक सेट करते।' },
+                    { name: 'डॉ. एलेना रॉड्रिग्ज', role: 'प्रमुख बालरोगतज्ज्ञ', feedback: 'सुरुवातीच्या, तंत्रज्ञान-आधारित हस्तक्षेपामुळे आमचे लहान रुग्ण सुदृढ होताना पाहणे हेच आमच्या कामाचे फळ आहे।' }
+                ]
             }
         },
         auth: {

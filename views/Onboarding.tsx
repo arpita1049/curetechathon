@@ -54,11 +54,10 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 <button
                   key={l.name}
                   onClick={() => { setLang(l.name); setStep(2); }}
-                  className={`p-5 flex items-center justify-between rounded-2xl border-2 transition-all group ${
-                    lang === l.name 
-                      ? 'border-teal-500 bg-teal-50/50 neo-shadow' 
-                      : 'border-slate-100 bg-white hover:border-teal-200'
-                  }`}
+                  className={`p-5 flex items-center justify-between rounded-2xl border-2 transition-all group ${lang === l.name
+                    ? 'border-teal-500 bg-teal-50/50 neo-shadow'
+                    : 'border-slate-100 bg-white hover:border-teal-200'
+                    }`}
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center font-bold text-teal-600 text-sm">
@@ -76,8 +75,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               ))}
             </div>
           </div>
-        ) : (
-          <div className="space-y-6">
+        ) : step === 2 ? (
+          <div className="space-y-6 animate-in slide-in-from-right">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-teal-100 rounded-lg text-teal-600">
                 <UserCircle2 className="w-5 h-5" />
@@ -89,10 +88,15 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               {roles.map((r) => (
                 <button
                   key={r.id}
-                  onClick={() => onComplete(r.id, lang)}
+                  onClick={() => {
+                    if (r.id === UserRole.DOCTOR) {
+                      setStep(3);
+                    } else {
+                      onComplete(r.id, lang);
+                    }
+                  }}
                   className="w-full p-4 flex items-center gap-5 border-2 border-slate-50 bg-white hover:border-teal-400 hover:bg-teal-50/30 rounded-3xl transition-all group text-left neo-shadow"
                 >
-                  {/* Fix: Adding <any> to React.ReactElement to allow custom props in cloneElement */}
                   <div className={`p-4 ${r.color} text-white rounded-2xl neo-shadow group-hover:scale-105 transition-transform`}>
                     {React.cloneElement(r.icon as React.ReactElement<any>, { className: 'w-7 h-7' })}
                   </div>
@@ -105,12 +109,64 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               ))}
             </div>
 
-            <button 
+            <button
               onClick={() => setStep(1)}
               className="w-full py-4 text-teal-500 font-bold text-sm hover:text-teal-600 transition-colors bg-teal-50/50 rounded-2xl"
             >
               Change Language
             </button>
+          </div>
+        ) : (
+          /* Step 3: Doctor Verification Form */
+          <div className="space-y-6 animate-in slide-in-from-right">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
+                <Stethoscope className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-teal-900">Doctor Verification</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-slate-500 uppercase ml-1">Full Name</label>
+                <input type="text" placeholder="Dr. " className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-200" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold text-slate-500 uppercase ml-1">Specialization</label>
+                  <select className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-200">
+                    <option>Cardiology</option>
+                    <option>General Medicine</option>
+                    <option>Pediatrics</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-500 uppercase ml-1">Experience</label>
+                  <input type="text" placeholder="Years" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-500 uppercase ml-1">Medical Reg. Number</label>
+                <input type="text" placeholder="MCI-XXXX-XXXX" className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-200" />
+              </div>
+
+              <div className="p-4 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 text-center hover:bg-indigo-50 hover:border-indigo-200 transition-colors cursor-pointer group">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-indigo-500 shadow-sm mx-auto mb-2 group-hover:scale-110 transition-transform">
+                  <FileIcon className="w-5 h-5" />
+                </div>
+                <p className="text-xs font-bold text-slate-500">Upload Medical Council Certificate</p>
+                <p className="text-[10px] text-slate-400">(PDF, JPG, PNG)</p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onComplete(UserRole.DOCTOR, lang)}
+              className="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2"
+            >
+              Verify & Submit <Check className="w-5 h-5" />
+            </button>
+
+            <button onClick={() => setStep(2)} className="w-full text-xs font-bold text-slate-400 hover:text-indigo-600">Back</button>
           </div>
         )}
       </div>
@@ -118,10 +174,13 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   );
 };
 
+const FileIcon = (props: any) => (
+  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
+);
+
 // Internal Activity icon for Onboarding branding
 const Activity = (props: any) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
 );
 
-// Fix: Adding the missing default export for Onboarding
 export default Onboarding;
