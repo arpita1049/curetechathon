@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Shield, Users, Clock, Heart, ArrowRight, Star, Stethoscope, Microscope, Baby, Pill, Activity, PhoneCall, Zap, Quote } from 'lucide-react';
+import CardSwap, { Card } from '../components/CardSwap';
+import BlurText from '../components/BlurText';
+import TrueFocus from '../components/TrueFocus';
 
 // A lightweight reveal wrapper that doesn't use 'key' as a prop
-const ScrollReveal = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => {
+const ScrollReveal = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string, key?: any }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -153,14 +156,44 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
               <span className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">{t.hero.badge}</span>
             </div>
 
-            <h1 className="text-7xl lg:text-[8rem] font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-tight font-sans">
-              {t.hero.title.split('your')[0]}<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500">YOUR</span> <br />
-              {t.hero.title.split('your')[1]}
-            </h1>
+            <div>
+              <TrueFocus
+                sentence="Expert Care"
+                separator=" "
+                manualMode={false}
+                blurAmount={5}
+                borderColor="#0ea5e9"
+                glowColor="rgba(14, 165, 233, 0.6)"
+                animationDuration={0.5}
+                pauseBetweenAnimations={1}
+                className="text-7xl lg:text-[8rem] font-bold text-slate-900 dark:text-white leading-tight tracking-normal font-sans"
+                wordStyles={{
+                  'Care': 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500'
+                }}
+              />
+              <BlurText
+                text="for YOUR healthy future."
+                delay={200}
+                animateBy="words"
+                direction="top"
+                className="text-7xl lg:text-[8rem] font-bold text-slate-900 dark:text-white leading-tight tracking-normal font-sans"
+                wordStyles={{
+                  'for': 'text-slate-900 dark:text-white',
+                  'YOUR': 'text-white',
+                  'healthy': 'text-white',
+                  'future.': 'text-white'
+                }}
+              />
+            </div>
 
-            <p className="text-2xl text-slate-500 dark:text-slate-400 max-w-xl font-bold leading-relaxed">
-              {t.hero.desc}
-            </p>
+            <BlurText
+              text={t.hero.desc}
+              delay={100}
+              animateBy="words"
+              direction="top"
+              align="left"
+              className="text-2xl text-slate-500 dark:text-slate-400 max-w-xl font-bold leading-relaxed"
+            />
 
             <div className="flex flex-wrap gap-8">
               <button
@@ -181,41 +214,72 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
               </button>
             </div>
           </div>
-          {/* Right column: Dr. Sarah Mitchell Profile */}
-          <div className="hidden lg:flex justify-center items-center animate-slide-up [animation-delay:400ms]">
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-emerald-500/20 rounded-[2.5rem] blur-2xl group-hover:bg-indigo-500/30 transition-all duration-700"></div>
-              <div className="relative w-80 h-80 rounded-[2.5rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl bg-slate-100">
-                <img
-                  src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=800"
-                  alt="Dr. Sarah Mitchell"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent backdrop-blur-[2px]">
-                  <h4 className="text-white text-lg font-black tracking-tight leading-none mb-1">Dr. Sarah Mitchell</h4>
-                  <p className="text-indigo-400 text-[10px] font-black uppercase tracking-widest">Chief Cardiologist</p>
+          {/* Right column: Dynamic Card Swap */}
+          <div className="hidden lg:flex justify-center items-center min-h-[600px] relative animate-slide-up [animation-delay:400ms]">
+            <CardSwap
+              width={450}
+              height={550}
+              cardDistance={40}
+              verticalDistance={50}
+              delay={5000}
+              pauseOnHover={true}
+              skewAmount={4}
+            >
+              <Card>
+                <img src="/card-1.jpg" alt="Specialized Care" />
+                <div className="card-overlay">
+                  <h3 className="card-title">Expert Consultation</h3>
+                  <p className="card-desc">Personalized care from world-class specialists.</p>
                 </div>
-              </div>
-              <div className="absolute -top-4 -right-4 w-12 h-12 bg-white dark:bg-slate-900 rounded-2xl shadow-xl flex items-center justify-center border-2 border-indigo-500/20 z-10">
-                <Shield className="w-6 h-6 text-indigo-500" />
-              </div>
-            </div>
+              </Card>
+              <Card>
+                <img src="/card-2.jpg" alt="Modern Facilities" />
+                <div className="card-overlay">
+                  <h3 className="card-title">Advanced Tech</h3>
+                  <p className="card-desc">State-of-the-art diagnostic and treatment facilities.</p>
+                </div>
+              </Card>
+              <Card>
+                <img src="/card-3.jpg" alt="Medical Team" />
+                <div className="card-overlay">
+                  <h3 className="card-title">Patient First</h3>
+                  <p className="card-desc">Every recovery is a milestone for our team.</p>
+                </div>
+              </Card>
+              <Card>
+                <img src="/card-4.jpg" alt="Supportive Care" />
+                <div className="card-overlay">
+                  <h3 className="card-title">Future of Health</h3>
+                  <p className="card-desc">Embracing innovation for better outcomes.</p>
+                </div>
+              </Card>
+            </CardSwap>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-40 bg-transparent transition-colors">
+      <section id="services" className="py-40 bg-transparent transition-colors relative overflow-hidden">
         <div className="w-full px-12">
           <div className="max-w-6xl mx-auto text-center mb-32">
             <ScrollReveal delay={100}>
-              <h2 className="text-5xl lg:text-8xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-12 font-sans">
-                {t.services.title.split(' ')[0]} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500">{t.services.title.split(' ')[1]}</span>
-              </h2>
+              <BlurText
+                text={t.services.title}
+                delay={150}
+                animateBy="words"
+                direction="top"
+                align="center"
+                className="text-5xl lg:text-8xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-12 font-sans"
+              />
               <div className="w-48 h-3 bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 rounded-full mb-12 mx-auto"></div>
-              <p className="text-2xl text-slate-500 dark:text-slate-400 font-bold leading-relaxed max-w-2xl mx-auto">
-                {t.services.desc}
-              </p>
+              <BlurText
+                text={t.services.desc}
+                delay={100}
+                animateBy="words"
+                direction="top"
+                align="center"
+                className="text-2xl text-slate-500 dark:text-slate-400 font-bold leading-relaxed max-w-2xl mx-auto"
+              />
             </ScrollReveal>
           </div>
 
@@ -375,14 +439,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
                   </div>
 
                   {/* Corner Accent */}
-                  <div className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-br from-transparent to-${f.color}-500/5 rounded-br-[4rem] -z-10 group-hover:to-${f.color}-500/10 transition-colors duration-700`}></div>
                 </div>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
-
     </div>
   );
 };

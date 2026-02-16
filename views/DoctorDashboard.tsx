@@ -5,6 +5,8 @@ import {
   Thermometer, MoreHorizontal, Search, Bell, ShieldAlert, Brain, FileSignature, Stethoscope,
   Calendar, PieChart, ChevronRight, Settings, LogOut, Phone
 } from 'lucide-react';
+import MagicBento, { ParticleCard } from '../components/MagicBento';
+import { useRef } from 'react';
 
 interface DoctorDashboardProps {
   onLogout: () => void;
@@ -117,24 +119,39 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout }) => {
     );
   };
 
-  const StatCard = ({ icon: Icon, label, value, trend, color, bg }: any) => (
-    <div className="bg-white dark:bg-slate-900/40 backdrop-blur-xl p-8 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group overflow-hidden relative">
-      <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity duration-500 ${bg}`}></div>
-      <div className="relative z-10">
+  const StatCard = ({ icon: Icon, label, value, trend, color, bg, glowColor = "79, 70, 229" }: any) => (
+    <ParticleCard
+      className="magic-bento-card group h-full"
+      glowColor={glowColor}
+      enableTilt={true}
+      enableMagnetism={true}
+      clickEffect={true}
+      particleCount={8}
+      style={{
+        background: 'rgba(15, 23, 42, 0.4)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 255, 255, 0.05)',
+        '--glow-color': glowColor
+      }}
+    >
+      <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-br ${bg}`}></div>
+      <div className="relative z-10 h-full flex flex-col justify-between">
         <div className="flex items-center justify-between mb-8">
-          <div className={`p-4 rounded-[1.5rem] ${bg} dark:bg-opacity-20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner`}>
-            <Icon className={`w-7 h-7 ${color} dark:text-opacity-90`} />
+          <div className={`p-4 rounded-[1.5rem] bg-gradient-to-br ${bg} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl`}>
+            <Icon className={`w-7 h-7 text-white`} />
           </div>
           {trend && (
-            <div className="px-3 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black rounded-full border border-emerald-500/20 uppercase tracking-widest flex items-center gap-1">
+            <div className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-black rounded-full border border-emerald-500/20 uppercase tracking-widest flex items-center gap-1 backdrop-blur-md">
               <TrendingUp className="w-3 h-3" /> {trend}
             </div>
           )}
         </div>
-        <p className="text-slate-400 dark:text-slate-500 text-xs font-black uppercase tracking-[0.15em] mb-2">{label}</p>
-        <h3 className="text-4xl font-black text-slate-800 dark:text-white tracking-tighter">{value}</h3>
+        <div>
+          <p className="text-slate-400 dark:text-slate-500 text-xs font-black uppercase tracking-[0.15em] mb-2">{label}</p>
+          <h3 className="text-4xl font-black text-white tracking-tighter">{value}</h3>
+        </div>
       </div>
-    </div>
+    </ParticleCard>
   );
 
   const PatientList = ({ patients, title, showViewAll = false }: { patients: PatientCase[], title: string, showViewAll?: boolean }) => (
@@ -187,75 +204,85 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout }) => {
     </div>
   );
 
-  const Overview = () => (
-    <div className="space-y-8 animate-fade-in pb-12">
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <StatCard icon={Users} label="Total Patients" value="128" trend="+12%" color="text-white" bg="from-indigo-600 to-purple-600 shadow-indigo-500/30" />
-        <StatCard icon={MessageSquare} label="Pending Reviews" value="8" color="text-white" bg="from-cyan-500 to-blue-600 shadow-blue-500/30" />
-        <StatCard icon={ShieldAlert} label="High Risk Cases" value="3" trend="Urgent" color="text-white" bg="from-rose-600 to-red-700 shadow-red-500/30" />
-        <StatCard icon={Video} label="Consultations" value="24" color="text-white" bg="from-emerald-600 to-teal-700 shadow-emerald-500/30" />
-      </div>
+  const Overview = () => {
+    const gridRef = useRef<HTMLDivElement>(null);
+    return (
+      <div className="space-y-8 animate-fade-in pb-12">
+        {/* Global Spotlight for Stats Grid */}
+        <MagicBento
+          enableSpotlight={true}
+          enableStars={false} // We handle stars in StatCard individually
+          glowColor="132, 0, 255"
+        />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content: Patient List (Top 2) */}
-        <div className="lg:col-span-2 space-y-6">
-          <PatientList patients={filteredPatients.slice(0, 2)} title="Priority Actions Needed" showViewAll />
+        {/* Stats Grid */}
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-4 gap-6 bento-section">
+          <StatCard icon={Users} label="Total Patients" value="128" trend="+12%" bg="from-indigo-600 to-purple-600 shadow-indigo-500/30" glowColor="79, 70, 229" />
+          <StatCard icon={MessageSquare} label="Pending Reviews" value="8" bg="from-cyan-500 to-blue-600 shadow-blue-500/30" glowColor="6, 182, 212" />
+          <StatCard icon={ShieldAlert} label="High Risk Cases" value="3" trend="Urgent" bg="from-rose-600 to-red-700 shadow-red-500/30" glowColor="225, 29, 72" />
+          <StatCard icon={Video} label="Consultations" value="24" bg="from-emerald-600 to-teal-700 shadow-emerald-500/30" glowColor="16, 185, 129" />
         </div>
 
-        {/* Sidebar: Alerts & Cost Transparency */}
-        <div className="space-y-6">
-          <div className="relative overflow-hidden bg-gradient-to-br from-red-600 via-rose-600 to-red-700 p-10 rounded-[3rem] text-white shadow-2xl shadow-red-600/30 group">
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content: Patient List (Top 2) */}
+          <div className="lg:col-span-2 space-y-6">
+            <PatientList patients={filteredPatients.slice(0, 2)} title="Priority Actions Needed" showViewAll />
+          </div>
 
-            <h4 className="font-black mb-8 flex items-center gap-4 relative z-10 text-xl tracking-tight">
-              <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30"><AlertTriangle className="w-7 h-7 text-white animate-bounce" /></div>
-              Critical Risk Intel
-            </h4>
+          {/* Sidebar: Alerts & Cost Transparency */}
+          <div className="space-y-6">
+            <div className="relative overflow-hidden bg-gradient-to-br from-red-600 via-rose-600 to-red-700 p-10 rounded-[3rem] text-white shadow-2xl shadow-red-600/30 group">
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
 
-            <div className="space-y-6 relative z-10">
-              <div className="p-6 bg-white/10 backdrop-blur-xl rounded-[2.5rem] border border-white/20 shadow-xl group/alert hover:bg-white/15 transition-all">
-                <div className="flex justify-between items-start mb-3">
-                  <span className="font-extrabold text-lg">Suresh K.</span>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
-                    <span className="text-[10px] font-black bg-white text-red-600 px-3 py-1 rounded-full uppercase tracking-widest">CRITICAL</span>
+              <h4 className="font-black mb-8 flex items-center gap-4 relative z-10 text-xl tracking-tight">
+                <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30"><AlertTriangle className="w-7 h-7 text-white animate-bounce" /></div>
+                Critical Risk Intel
+              </h4>
+
+              <div className="space-y-6 relative z-10">
+                <div className="p-6 bg-white/10 backdrop-blur-xl rounded-[2.5rem] border border-white/20 shadow-xl group/alert hover:bg-white/15 transition-all">
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="font-extrabold text-lg">Suresh K.</span>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
+                      <span className="text-[10px] font-black bg-white text-red-600 px-3 py-1 rounded-full uppercase tracking-widest">CRITICAL</span>
+                    </div>
                   </div>
+                  <p className="text-sm text-white/80 leading-relaxed mb-6 font-medium">
+                    Sudden BP spike <span className="text-white font-black">(180/110)</span>. AI predicts <span className="underline decoration-white/50 underline-offset-4 font-black">72% risk</span> of cardiac origin within 24h.
+                  </p>
+                  <button
+                    onClick={handleEscalate}
+                    className="w-full py-4 bg-white text-red-600 text-sm font-black rounded-2xl hover:bg-red-50 active:scale-95 transition-all shadow-xl flex items-center justify-center gap-3 group/btn"
+                  >
+                    <Phone className="w-4 h-4 group-hover/btn:rotate-12 transition-transform" /> Initiate Emergency Protocol
+                  </button>
                 </div>
-                <p className="text-sm text-white/80 leading-relaxed mb-6 font-medium">
-                  Sudden BP spike <span className="text-white font-black">(180/110)</span>. AI predicts <span className="underline decoration-white/50 underline-offset-4 font-black">72% risk</span> of cardiac origin within 24h.
-                </p>
-                <button
-                  onClick={handleEscalate}
-                  className="w-full py-4 bg-white text-red-600 text-sm font-black rounded-2xl hover:bg-red-50 active:scale-95 transition-all shadow-xl flex items-center justify-center gap-3 group/btn"
-                >
-                  <Phone className="w-4 h-4 group-hover/btn:rotate-12 transition-transform" /> Initiate Emergency Protocol
-                </button>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl"></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 bg-indigo-500/20 backdrop-blur-md rounded-2xl border border-indigo-500/30 text-indigo-400 group-hover:scale-110 transition-transform"><Activity className="w-6 h-6" /></div>
+                <h4 className="font-black text-xl tracking-tight">Rural Precision Mode</h4>
+              </div>
+              <p className="text-sm text-slate-400 mb-8 leading-relaxed font-medium">
+                Intelligence engine optimized for <span className="text-indigo-400 font-bold">low-bandwidth bandwidth synchronization</span>. Critical data retains 100% resolution.
+              </p>
+              <div className="flex items-center gap-3 bg-indigo-500/10 backdrop-blur-md px-5 py-2.5 rounded-full w-fit border border-indigo-500/20 shadow-inner">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Secure Sync Active</span>
               </div>
             </div>
           </div>
-
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl"></div>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 bg-indigo-500/20 backdrop-blur-md rounded-2xl border border-indigo-500/30 text-indigo-400 group-hover:scale-110 transition-transform"><Activity className="w-6 h-6" /></div>
-              <h4 className="font-black text-xl tracking-tight">Rural Precision Mode</h4>
-            </div>
-            <p className="text-sm text-slate-400 mb-8 leading-relaxed font-medium">
-              Intelligence engine optimized for <span className="text-indigo-400 font-bold">low-bandwidth bandwidth synchronization</span>. Critical data retains 100% resolution.
-            </p>
-            <div className="flex items-center gap-3 bg-indigo-500/10 backdrop-blur-md px-5 py-2.5 rounded-full w-fit border border-indigo-500/20 shadow-inner">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span>
-              <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Secure Sync Active</span>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const MyCases = () => (
     <div className="space-y-6 animate-fade-in pb-12">

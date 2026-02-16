@@ -184,7 +184,7 @@ const App: React.FC = () => {
             className="flex items-center gap-3 cursor-pointer transition-transform hover:scale-105 animate-bounce-down"
             onClick={navigateToHome}
           >
-            <div className="w-14 h-14 bg-sky-600 rounded-2xl flex items-center justify-center text-white shadow-xl">
+            <div className="w-14 h-14 bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-xl">
               <Activity className="w-8 h-8" />
             </div>
             <span className="text-4xl font-black tracking-tighter text-slate-900 dark:text-white">CURE</span>
