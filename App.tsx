@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import LandingPage from './views/LandingPage';
 import BookingInfo from './views/BookingInfo';
@@ -11,22 +10,25 @@ import ServiceDetail from './views/ServiceDetail';
 import Emergency from './views/Emergency';
 import AIAssistant from './components/AIAssistant';
 import { UserRole } from './types';
-import { Activity, LogOut, Globe, ChevronDown, PhoneCall, Sun, Moon } from 'lucide-react';
+import { Activity, LogOut, Globe, ChevronDown, PhoneCall } from 'lucide-react';
+import MedicineSideEffects from './components/MedicineSideEffects';
+import PreventiveCare from './components/PreventiveCare';
+import GovernmentSchemes from './components/GovernmentSchemes';
+import Mediclaim from './components/Mediclaim';
 import { auth } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { translations } from './translations';
+import ChromaGrid from './components/ChromaGrid';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
-
-
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<UserRole>(UserRole.NONE);
-  const [currentView, setCurrentView] = useState<'landing' | 'booking' | 'login' | 'signup' | 'onboarding' | 'dashboard' | 'service' | 'emergency'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'booking' | 'login' | 'signup' | 'onboarding' | 'dashboard' | 'service' | 'emergency' | 'medicine-finder' | 'preventive-care' | 'government-schemes' | 'mediclaim'>('landing');
   const [selectedService, setSelectedService] = useState<any>(null);
   const [language, setLanguage] = useState<'english' | 'hindi' | 'marathi'>('english');
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -36,104 +38,73 @@ const App: React.FC = () => {
         setCurrentView('dashboard');
       } else {
         setUserRole(UserRole.NONE);
-        // Using a functional update or checking current view state indirectly
-        // is safer if we want to avoid depending on currentView directly.
-        // However, for simplicity and correct behavior, we only redirect if 
-        // the user was previously in a protected view.
         setCurrentView(prev => {
-          if (prev === 'dashboard' || prev === 'onboarding') {
-            return 'landing';
-          }
+          if (prev === 'dashboard' || prev === 'onboarding') return 'landing';
           return prev;
         });
       }
     });
-
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
-
-
 
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      // State updates handled by onAuthStateChanged
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error("Logout Error:", error);
     }
   };
 
-  const handleOnboardingComplete = (role: UserRole) => {
-    setUserRole(role);
-    setCurrentView('dashboard');
-  };
-
-  const navigateToBooking = () => {
-    setCurrentView('booking');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navigateToHome = () => {
-    setCurrentView('landing');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navigateToLogin = () => {
-    setCurrentView('login');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navigateToSignup = () => {
-    setCurrentView('signup');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navigateToOnboarding = () => {
-    setCurrentView('onboarding');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const navigateToHome = () => { setCurrentView('landing'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const navigateToBooking = () => { setCurrentView('booking'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const navigateToLogin = () => { setCurrentView('login'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const navigateToSignup = () => { setCurrentView('signup'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const navigateToEmergency = () => { setCurrentView('emergency'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   const handleServiceClick = (service: any) => {
+    if (service.title === "Medicines Side Effect Finder") {
+      setCurrentView('medicine-finder');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (service.title === "Emergency Services") {
+      setCurrentView('emergency');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (service.title === "Preventive Care") {
+      setCurrentView('preventive-care');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (service.title.includes("Government Health Schemes") || service.title.includes("Health Schemes")) {
+      setCurrentView('government-schemes');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (service.title === "Mediclaim") {
+      setCurrentView('mediclaim');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setSelectedService(service);
     setCurrentView('service');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const navigateToEmergency = () => {
-    setCurrentView('emergency');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const t = translations[language];
-
-  const handleAuthSuccess = (role: UserRole) => {
-    setUserRole(role);
-    setCurrentView('dashboard');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const renderContent = () => {
     if (currentView === 'dashboard') {
@@ -144,46 +115,32 @@ const App: React.FC = () => {
         default: return <LandingPage onBookClick={navigateToBooking} onServiceClick={handleServiceClick} t={t.landing} />;
       }
     }
-
     switch (currentView) {
-      case 'booking':
-        return <BookingInfo onBack={navigateToHome} />;
-      case 'login':
-        return <Auth key="login-view" mode="login" onBack={navigateToHome} onToggleMode={navigateToSignup} t={t.auth} onAuthSuccess={handleAuthSuccess} />;
-      case 'signup':
-        return <Auth key="signup-view" mode="signup" onBack={navigateToHome} onToggleMode={navigateToLogin} t={t.auth} onAuthSuccess={handleAuthSuccess} />;
-      case 'onboarding':
-        return <Onboarding onComplete={handleOnboardingComplete} />;
-      case 'service':
-        return <ServiceDetail service={selectedService} onBack={navigateToHome} />;
-      case 'emergency':
-        return <Emergency onBack={navigateToHome} t={t.emergency} />;
-      default:
-        return <LandingPage onBookClick={navigateToBooking} onServiceClick={handleServiceClick} t={t.landing} />;
+      case 'booking': return <BookingInfo onBack={navigateToHome} />;
+      case 'login': return <Auth mode="login" onBack={navigateToHome} onToggleMode={navigateToSignup} t={t.auth} onAuthSuccess={role => { setUserRole(role); setCurrentView('dashboard'); }} />;
+      case 'signup': return <Auth mode="signup" onBack={navigateToHome} onToggleMode={navigateToLogin} t={t.auth} onAuthSuccess={role => { setUserRole(role); setCurrentView('dashboard'); }} />;
+      case 'onboarding': return <Onboarding onComplete={role => { setUserRole(role); setCurrentView('dashboard'); }} />;
+      case 'service': return <ServiceDetail service={selectedService} onBack={navigateToHome} />;
+      case 'emergency': return <Emergency onBack={navigateToHome} t={t.emergency} />;
+      case 'medicine-finder': return <MedicineSideEffects onBack={navigateToHome} />;
+      case 'preventive-care': return <PreventiveCare onBack={navigateToHome} />;
+      case 'government-schemes': return <GovernmentSchemes onBack={navigateToHome} />;
+      case 'mediclaim': return <Mediclaim onBack={navigateToHome} />;
+      default: return <LandingPage onBookClick={navigateToBooking} onServiceClick={handleServiceClick} t={t.landing} />;
     }
   };
 
-  const isAuthOrDashboard = currentView === 'login' || currentView === 'signup' || currentView === 'dashboard' || currentView === 'onboarding';
-
   return (
     <div className="relative min-h-screen transition-colors duration-300">
-      {/* Global Background Image */}
       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-        <img
-          src="/bg-ai.jpg"
-          alt="Healthcare Background"
-          className="w-full h-full object-cover opacity-80 transition-opacity duration-700 brightness-[0.7] dark:brightness-[0.4]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-white/30 dark:from-slate-950/50 dark:via-transparent dark:to-slate-950/50 backdrop-blur-[2px]"></div>
+        <ChromaGrid className="z-0 opacity-50" />
+        <img src="/bg-custom.jpg" alt="Healthcare Background" className="absolute inset-0 w-full h-full object-cover opacity-50 transition-opacity duration-700 brightness-[0.7] dark:brightness-[0.4]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-white/30 dark:from-slate-950/80 dark:via-transparent dark:to-slate-950/80 backdrop-blur-[1px]"></div>
       </div>
 
-      {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || currentView !== 'landing' ? 'glass py-3' : 'bg-transparent py-6'}`}>
         <div className="w-full px-12 flex justify-between items-center">
-          <div
-            className="flex items-center gap-3 cursor-pointer transition-transform hover:scale-105 animate-bounce-down"
-            onClick={navigateToHome}
-          >
+          <div className="flex items-center gap-3 cursor-pointer transition-transform hover:scale-105" onClick={navigateToHome}>
             <div className="w-14 h-14 bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-xl">
               <Activity className="w-8 h-8" />
             </div>
@@ -191,161 +148,184 @@ const App: React.FC = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <div className="flex items-center gap-10 text-xl font-bold text-slate-700 dark:text-slate-300 mr-4">
-              <button onClick={navigateToHome} className={`hover:text-sky-600 dark:hover:text-sky-400 transition-colors animate-bounce-down [animation-delay:100ms] opacity-0 [animation-fill-mode:forwards] ${currentView === 'landing' ? 'text-sky-600 dark:text-sky-400' : ''}`}>{t.nav.home}</button>
-              <a href="#services" onClick={(e) => { if (currentView !== 'landing') { e.preventDefault(); navigateToHome(); setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100); } }} className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors animate-bounce-down [animation-delay:150ms] opacity-0 [animation-fill-mode:forwards]">{t.nav.services}</a>
-              <a href="#about" onClick={(e) => { if (currentView !== 'landing') { e.preventDefault(); navigateToHome(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); } }} className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors animate-bounce-down [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]">{t.nav.about}</a>
-              <a href="#contact" onClick={(e) => { if (currentView !== 'landing') { e.preventDefault(); navigateToHome(); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100); } }} className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors animate-bounce-down [animation-delay:250ms] opacity-0 [animation-fill-mode:forwards]">{t.nav.contact}</a>
+            <div className="flex items-center gap-6 mr-4">
+              <button
+                onClick={navigateToHome}
+                className={`relative px-6 py-3 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 ${currentView === 'landing'
+                  ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/30'
+                  : 'bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-lg'
+                  }`}
+              >
+                {t.nav.home}
+              </button>
+              <a
+                href="#services"
+                onClick={(e) => {
+                  if (currentView !== 'landing') {
+                    e.preventDefault();
+                    navigateToHome();
+                    setTimeout(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                  }
+                }}
+                className={`px-6 py-3 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 hover:scale-105 ${currentView === 'preventive-care' || currentView === 'service'
+                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                  : 'bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-lg'
+                  }`}
+              >
+                {t.nav.services}
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  if (currentView !== 'landing') {
+                    e.preventDefault();
+                    navigateToHome();
+                    setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                  }
+                }}
+                className="px-6 py-3 text-lg font-black uppercase tracking-wide rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 hover:border-violet-400 dark:hover:border-violet-500 hover:shadow-lg transition-all duration-300"
+              >
+                {t.nav.about}
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  if (currentView !== 'landing') {
+                    e.preventDefault();
+                    navigateToHome();
+                    setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                  }
+                }}
+                className="px-6 py-3 text-lg font-black uppercase tracking-wide rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-lg transition-all duration-300"
+              >
+                {t.nav.contact}
+              </a>
             </div>
 
-            <div className="flex items-center gap-3">
-
-
+            <div className="flex items-center gap-4">
               {userRole === UserRole.NONE ? (
                 <>
                   <button
                     onClick={navigateToLogin}
-                    className="text-lg font-bold text-sky-600 dark:text-sky-400 px-8 py-3 rounded-full border-2 border-sky-100 dark:border-sky-900/30 hover:border-sky-200 dark:hover:border-sky-800 hover:bg-sky-50 dark:hover:bg-sky-950 transition-all animate-bounce-down [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards] btn-3d"
+                    className={`relative overflow-hidden group px-8 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 ${currentView === 'login'
+                      ? 'bg-indigo-600 text-white shadow-lg'
+                      : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 border-2 border-transparent hover:border-indigo-200 dark:hover:border-indigo-700'
+                      }`}
                   >
-                    {t.nav.login}
+                    <span>{t.nav.login}</span>
                   </button>
                   <button
                     onClick={navigateToSignup}
-                    className="text-lg font-bold text-sky-600 dark:text-sky-400 px-8 py-3 rounded-full border-2 border-sky-100 dark:border-sky-900/30 hover:border-sky-200 dark:hover:border-sky-800 hover:bg-sky-50 dark:hover:bg-sky-950 transition-all animate-bounce-down [animation-delay:350ms] opacity-0 [animation-fill-mode:forwards] btn-3d"
+                    className={`relative overflow-hidden group px-8 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 ${currentView === 'signup'
+                      ? 'bg-teal-600 text-white shadow-lg'
+                      : 'bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300 border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700'
+                      }`}
                   >
-                    {t.nav.signup}
+                    <span>{t.nav.signup}</span>
                   </button>
                 </>
               ) : (
                 <button
                   onClick={handleLogout}
-                  className="text-sm font-bold text-red-500 px-5 py-2.5 rounded-full border-2 border-red-50 hover:bg-red-50 transition-all flex items-center gap-2"
+                  className="relative overflow-hidden group px-7 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-300 border-2 border-transparent hover:border-rose-200 dark:hover:border-rose-700 transition-all duration-300 flex items-center gap-2"
                 >
-                  <LogOut className="w-4 h-4" /> {t.nav.logout}
+                  <LogOut className="w-5 h-5" />
+                  <span>{t.nav.logout}</span>
                 </button>
               )}
 
               <div className="relative">
                 <button
                   onClick={() => setShowLangMenu(!showLangMenu)}
-                  className="flex items-center gap-1.5 p-2.5 rounded-full border-2 border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 transition-all animate-bounce-down [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
+                  className="flex items-center gap-2 px-5 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-2 border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-300"
                   title="Change Language"
                 >
                   <Globe className="w-5 h-5" />
-                  <span className="text-lg font-bold uppercase hidden lg:inline">{language.substring(0, 3)}</span>
-                  <ChevronDown className={`w-3 h-3 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+                  <span className="hidden lg:inline">{language.substring(0, 3)}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showLangMenu && (
-                  <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl z-[60] py-2 overflow-hidden animate-in fade-in zoom-in duration-200">
-                    {[
-                      { id: 'english', label: 'English' },
-                      { id: 'hindi', label: 'Hindi' },
-                      { id: 'marathi', label: 'Marathi' }
-                    ].map((lang) => (
+                  <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-[60] py-2 overflow-hidden animate-in fade-in zoom-in duration-200">
+                    {['english', 'hindi', 'marathi'].map((lang) => (
                       <button
-                        key={lang.id}
+                        key={lang}
                         onClick={() => {
-                          setLanguage(lang.id as any);
+                          setLanguage(lang as any);
                           setShowLangMenu(false);
                         }}
-                        className={`w-full text-left px-4 py-2 text-sm font-bold transition-colors ${language === lang.id ? 'text-sky-600 bg-sky-50 dark:bg-sky-900/30' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
+                        className={`w-full text-left px-5 py-3 text-base font-black uppercase tracking-wide transition-all duration-200 ${language === lang
+                          ? 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30'
+                          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+                          }`}
                       >
-                        {lang.label}
+                        {lang}
                       </button>
                     ))}
                   </div>
                 )}
               </div>
 
-
-
               <button
-                className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-lg hover:shadow-red-500/30 animate-pulse active:scale-95 animate-bounce-down [animation-delay:450ms] opacity-0 [animation-fill-mode:forwards] btn-3d"
+                className={`relative overflow-hidden group flex items-center gap-3 px-8 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 ${currentView === 'emergency'
+                  ? 'bg-red-700 text-white scale-105 shadow-2xl shadow-red-600/50'
+                  : 'bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 text-white shadow-2xl shadow-red-600/40 hover:scale-110'
+                  } active:scale-95 animate-pulse`}
                 onClick={navigateToEmergency}
               >
+                <PhoneCall className="w-6 h-6 animate-bounce" />
                 <span className="hidden lg:inline">Emergency SOS</span>
               </button>
-
-
             </div>
-          </div>
-
-          {/* Mobile Actions */}
-          <div className="md:hidden flex items-center gap-3">
-
-
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className={`transition-all duration-500 ${currentView !== 'landing' ? 'pt-24 min-h-[80vh]' : ''}`}>
-        <div className={isAuthOrDashboard ? 'w-full px-12 pb-20' : ''}>
+        <div className={currentView === 'login' || currentView === 'signup' || currentView === 'dashboard' || currentView === 'onboarding' ? 'w-full px-12 pb-20' : ''}>
           {renderContent()}
         </div>
       </main>
 
-      {/* AI Assistant Floating Component */}
       <AIAssistant />
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-b from-slate-900 to-black border-t-2 border-slate-800 py-24 relative overflow-hidden transition-colors mt-auto">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/5 rounded-full blur-[100px]"></div>
+      <footer className="bg-gradient-to-b from-slate-900 to-black border-t-2 border-slate-800 py-24 relative overflow-hidden mt-auto">
         <div className="w-full px-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
             <div className="space-y-8">
-              <div className="flex items-center gap-4 cursor-pointer group" onClick={navigateToHome}>
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-500 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-500/20 group-hover:rotate-12 transition-transform">
+              <div className="flex items-center gap-4 cursor-pointer" onClick={navigateToHome}>
+                <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-500 rounded-2xl flex items-center justify-center shadow-xl">
                   <Activity className="w-10 h-10 text-white" />
                 </div>
-                <span className="text-4xl font-black tracking-tighter text-white">CURE</span>
+                <span className="text-4xl font-black text-white tracking-tighter">CURE</span>
               </div>
-              <p className="text-slate-400 text-base font-bold leading-relaxed max-w-xs">
-                {t.footer.desc}
-              </p>
-              <div className="flex gap-4">
-                {['fb', 'tw', 'ln', 'ig'].map(s => (
-                  <div key={s} className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all cursor-pointer shadow-lg">
-                    <div className="text-[10px] font-black uppercase tracking-tighter">{s}</div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-slate-400 text-base font-bold leading-relaxed">{t.footer.desc}</p>
             </div>
             <div>
               <h4 className="text-xl font-black mb-8 text-white uppercase tracking-widest">{t.footer.services}</h4>
-              <ul className="text-slate-500 dark:text-slate-400 text-base space-y-4 font-bold">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full scale-0 group-hover:scale-100 transition-transform"></div> {t.landing.services.list.general.title}</a></li>
-                <li><a href="#" className="hover:text-rose-400 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-rose-500 rounded-full scale-0 group-hover:scale-100 transition-transform"></div> {t.landing.services.list.cardio.title}</a></li>
-                <li><a href="#" className="hover:text-sky-400 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-sky-500 rounded-full scale-0 group-hover:scale-100 transition-transform"></div> {t.landing.services.list.pedia.title}</a></li>
-                <li><a href="#" className="hover:text-amber-400 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-amber-500 rounded-full scale-0 group-hover:scale-100 transition-transform"></div> {t.landing.services.list.diag.title}</a></li>
+              <ul className="text-slate-500 text-base space-y-4 font-bold">
+                <li>{t.landing.services.list.general.title}</li>
+                <li>{t.landing.services.list.cardio.title}</li>
+                <li>{t.landing.services.list.pedia.title}</li>
               </ul>
             </div>
             <div>
               <h4 className="text-xl font-black mb-8 text-white uppercase tracking-widest">{t.footer.clinic}</h4>
-              <ul className="text-slate-500 dark:text-slate-400 text-base space-y-4 font-bold">
-                <li><a href="#" className="hover:text-indigo-400 transition-colors">{t.footer.links.doctors}</a></li>
-                <li><a href="#" className="hover:text-indigo-400 transition-colors">{t.footer.links.testimonials}</a></li>
-                <li><a href="#" className="hover:text-indigo-400 transition-colors">{t.landing.services.list.pharma.title}</a></li>
-                <li><a href="#" className="hover:text-indigo-400 transition-colors">{t.footer.links.faq}</a></li>
+              <ul className="text-slate-500 text-base space-y-4 font-bold">
+                <li>{t.footer.links.doctors}</li>
+                <li>{t.footer.links.faq}</li>
               </ul>
             </div>
             <div>
               <h4 className="text-xl font-black mb-8 text-white uppercase tracking-widest">{t.footer.newsletter}</h4>
-              <p className="text-slate-400 text-sm mb-6 font-bold">{t.footer.newsDesc}</p>
               <div className="space-y-4">
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-[1.5rem] blur opacity-25 group-focus-within:opacity-75 transition duration-500"></div>
-                  <input type="email" placeholder={t.footer.email} className="relative bg-slate-900 border-2 border-slate-800 px-6 py-4 rounded-[1.5rem] text-base w-full outline-none focus:border-indigo-500 text-white font-bold" />
-                </div>
-                <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[1.5rem] py-4 font-black text-lg hover:shadow-[0_10px_30px_rgba(79,70,229,0.3)] hover:scale-[1.02] transition-all active:scale-95 shadow-xl">
-                  {t.footer.go.toUpperCase()}
-                </button>
+                <input type="email" placeholder={t.footer.email} className="bg-slate-900 border-2 border-slate-800 px-6 py-4 rounded-xl text-white w-full outline-none" />
+                <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl py-4 font-black transition-all">SUBSCRIBE</button>
               </div>
             </div>
           </div>
           <div className="mt-20 pt-10 border-t border-slate-800 text-center text-slate-500 text-sm font-black tracking-widest uppercase">
-            {t.rights || t.footer.rights}
+            {t.footer.rights}
           </div>
         </div>
       </footer>

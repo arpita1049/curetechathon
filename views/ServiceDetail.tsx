@@ -25,25 +25,31 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onBack }) => {
                 features: ['Annual Physical Exams', 'Chronic Disease Management', 'Vaccinations and Immunizations', 'Common Illness Treatment'],
                 image: 'https://images.unsplash.com/photo-1576091160550-217359f49f4c?auto=format&fit=crop&q=80&w=800'
             },
-            'Pediatrics': {
-                longDesc: 'Our pediatric specialists are dedicated to the health and well-on-being of infants, children, and adolescents. We provide a friendly and comforting environment for our young patients.',
-                features: ['Well-child Checkups', 'Developmental Screenings', 'Childhood Immunizations', 'Pediatric Acute Care'],
-                image: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&q=80&w=800'
+            'Preventive Care': {
+                longDesc: 'Stay ahead of health issues with our comprehensive preventive care services. Regular check-ups and screenings are vital for early detection and maintaining long-term wellness.',
+                features: ['Full Body Checkups', 'Cancer Screenings', 'Lifestyle Counseling', 'Vaccination Programs'],
+                image: 'https://images.unsplash.com/photo-1579684385180-164e742e870e?auto=format&fit=crop&q=80&w=800'
             },
-            'Diagnostics': {
-                longDesc: 'Our diagnostics center is equipped with the latest laboratory and imaging technology to provide fast and accurate results for a wide range of medical conditions.',
-                features: ['Full Laboratory Testing', 'Digital X-Rays', 'Ultrasound Imaging', 'Specialized Screenings'],
-                image: 'https://images.unsplash.com/photo-1579152276503-3467499f57f5?auto=format&fit=crop&q=80&w=800'
+            'Government Health Schemes': {
+                longDesc: 'We assist patients in accessing various government health schemes like Ayushman Bharat to ensure affordable and high-quality treatment for everyone.',
+                features: ['Ayushman Bharat PM-JAY', 'Documentation Assistance', 'Eligibility Check', 'Cashless Treatment Support'],
+                image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800'
             },
-            'Pharmacy': {
-                longDesc: 'Our in-house pharmacy offers a wide selection of prescription and over-the-counter medications. Our pharmacists are available to provide counseling and answer any medication-related questions.',
-                features: ['Prescription Fulfillment', 'Expert Pharmacist Counseling', 'Chronic Medication Management', 'Daily Health Supplements'],
-                image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?auto=format&fit=crop&q=80&w=800'
+            'Mediclaim': {
+                longDesc: 'Our dedicated insurance desk simplifies the claims process. We partner with major insurance providers to offer hassle-free cashless hospitalization.',
+                features: ['Cashless Hospitalization', 'Claim Filing Assistance', 'Network Hospital Benefits', 'Policy Guidance'],
+                image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800'
             },
-            'Emergency': {
+            'Emergency Services': {
                 longDesc: 'Our 24/7 Emergency department is prepared to handle any urgent medical situation with speed and professionalism. We are equipped with advanced life-support systems.',
                 features: ['24/7 Trauma Care', 'Rapid Response Team', 'Critical Care Support', 'Emergency Surgery Facility'],
-                image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800'
+                image: 'https://images.unsplash.com/photo-1516574187841-69301976e499?auto=format&fit=crop&q=80&w=800'
+            },
+            'Pharmacy': {
+                longDesc: 'Buy genuine medicines online with quick home delivery. We ensure authentic pharmaceutical products delivered right to your doorstep.',
+                features: [], // Hidden as requested
+                hideCTA: true, // Hidden as requested
+                image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=800'
             }
         };
         return contents[title] || contents['General Medicine'];
@@ -75,29 +81,33 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onBack }) => {
                         {content.longDesc}
                     </p>
 
-                    <div className="space-y-4 pt-4">
-                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Our Specialties</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {content.features.map((feature: string, i: number) => (
-                                <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                                    <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
-                                    <span className="font-bold text-slate-700 dark:text-slate-300">{feature}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="pt-8">
-                        <div className="flex items-center gap-8 p-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[2.5rem] shadow-xl">
-                            <div className="space-y-1">
-                                <p className="text-sm font-bold opacity-70 uppercase tracking-widest">Available 24/7</p>
-                                <p className="text-xl font-black italic tracking-tight">Need Urgent Consultation?</p>
+                    {content.features && content.features.length > 0 && (
+                        <div className="space-y-4 pt-4">
+                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Our Specialties</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {content.features.map((feature: string, i: number) => (
+                                    <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                                        <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
+                                        <span className="font-bold text-slate-700 dark:text-slate-300">{feature}</span>
+                                    </div>
+                                ))}
                             </div>
-                            <button className="bg-sky-500 text-white px-8 py-4 rounded-2xl font-black hover:bg-sky-400 transition-all shadow-lg shadow-sky-500/20 active:scale-95 ml-auto">
-                                Call Now
-                            </button>
                         </div>
-                    </div>
+                    )}
+
+                    {!content.hideCTA && (
+                        <div className="pt-8">
+                            <div className="flex items-center gap-8 p-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[2.5rem] shadow-xl">
+                                <div className="space-y-1">
+                                    <p className="text-sm font-bold opacity-70 uppercase tracking-widest">Available 24/7</p>
+                                    <p className="text-xl font-black italic tracking-tight">Need Urgent Consultation?</p>
+                                </div>
+                                <button className="bg-sky-500 text-white px-8 py-4 rounded-2xl font-black hover:bg-sky-400 transition-all shadow-lg shadow-sky-500/20 active:scale-95 ml-auto">
+                                    Call Now
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="lg:w-1/2 w-full">

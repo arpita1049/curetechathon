@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Shield, Users, Clock, Heart, ArrowRight, Star, Stethoscope, Microscope, Baby, Pill, Activity, PhoneCall, Zap, Quote } from 'lucide-react';
+import { Shield, Users, Clock, Heart, ArrowRight, Star, Stethoscope, Microscope, Baby, Pill, Activity, PhoneCall, Zap, Quote, Search, CheckCircle2 } from 'lucide-react';
 import CardSwap, { Card } from '../components/CardSwap';
 import BlurText from '../components/BlurText';
 import TrueFocus from '../components/TrueFocus';
+import ChromaCards from '../components/ChromaCards';
 
 // A lightweight reveal wrapper that doesn't use 'key' as a prop
 const ScrollReveal = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string, key?: any }) => {
@@ -283,19 +284,74 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {services.map((s, idx) => (
-              <ServiceCard
-                key={idx}
-                s={s}
-                idx={idx}
-                onServiceClick={onServiceClick}
-                getButtonClasses={getButtonClasses}
-                getColorClasses={getColorClasses}
-                getBorderClasses={getBorderClasses}
-                t={t}
-              />
-            ))}
+          <div style={{ minHeight: '800px', height: 'auto', position: 'relative' }} className="w-full">
+            <ChromaCards
+              items={[
+                {
+                  image: "https://images.unsplash.com/photo-1579684385180-164e742e870e?auto=format&fit=crop&w=800&q=80",
+                  title: "Preventive Care",
+                  subtitle: "Stay healthy with regular check-ups and early detection screenings.",
+                  borderColor: "#10B981",
+                  gradient: "linear-gradient(145deg, #10B981, #000)",
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+                  title: "Government Health Schemes",
+                  subtitle: "Access affordable healthcare benefits and Ayushman Bharat programs.",
+                  borderColor: "#F59E0B",
+                  gradient: "linear-gradient(145deg, #F59E0B, #000)",
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+                  title: "Mediclaim",
+                  subtitle: "Cashless hospitalization support and insurance claim assistance.",
+                  borderColor: "#3B82F6",
+                  gradient: "linear-gradient(145deg, #3B82F6, #000)",
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1516574187841-69301976e499?auto=format&fit=crop&w=800&q=80",
+                  title: "Emergency Services",
+                  subtitle: "24/7 rapid response ambulance and critical care support.",
+                  borderColor: "#EF4444",
+                  gradient: "linear-gradient(145deg, #EF4444, #450a0a)",
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+                  title: "Medicines Side Effect Finder",
+                  subtitle: "Check potential side effects and interactions before use.",
+                  borderColor: "#8B5CF6",
+                  gradient: "linear-gradient(145deg, #8B5CF6, #000)",
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+                  title: "Pharmacy",
+                  subtitle: "Buy genuine medicines online with quick home delivery.",
+                  borderColor: "#06B6D4",
+                  gradient: "linear-gradient(145deg, #06B6D4, #000)",
+                }
+              ]}
+              radius={300}
+              columns={3}
+              damping={0.45}
+              fadeOut={0.6}
+              onItemClick={(item, index) => {
+                let Icon = Heart;
+                if (item.title === "Diagnostics") Icon = Microscope;
+                if (item.title === "Pharmacy") Icon = Pill;
+                if (item.title === "Emergency Services") Icon = PhoneCall;
+                if (item.title === "Medicines Side Effect Finder") Icon = Search;
+                if (item.title === "Preventive Care") Icon = Shield;
+                if (item.title === "Government Health Schemes") Icon = Activity;
+                if (item.title === "Mediclaim") Icon = CheckCircle2;
+
+                onServiceClick({
+                  title: item.title,
+                  desc: item.subtitle,
+                  icon: <Icon />,
+                  color: item.borderColor // Optional, might need mapping to color name string for styling if used
+                });
+              }}
+            />
           </div>
         </div>
       </section>

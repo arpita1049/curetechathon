@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Vitals, DiagnosisResult, RiskPredictionResult } from "./types";
 
-const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || "";
+const apiKey = (import.meta as any).env.VITE_GEMINI_API_KEY || "";
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export const checkAI = () => {
