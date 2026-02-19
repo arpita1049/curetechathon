@@ -15,6 +15,7 @@ import MedicineSideEffects from './components/MedicineSideEffects';
 import PreventiveCare from './components/PreventiveCare';
 import GovernmentSchemes from './components/GovernmentSchemes';
 import Mediclaim from './components/Mediclaim';
+import Pharmacy from './components/Pharmacy';
 import { auth } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { translations } from './translations';
@@ -24,7 +25,7 @@ const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<UserRole>(UserRole.NONE);
-  const [currentView, setCurrentView] = useState<'landing' | 'booking' | 'login' | 'signup' | 'onboarding' | 'dashboard' | 'service' | 'emergency' | 'medicine-finder' | 'preventive-care' | 'government-schemes' | 'mediclaim'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'booking' | 'login' | 'signup' | 'onboarding' | 'dashboard' | 'service' | 'emergency' | 'medicine-finder' | 'preventive-care' | 'government-schemes' | 'mediclaim' | 'pharmacy'>('landing');
   const [selectedService, setSelectedService] = useState<any>(null);
   const [language, setLanguage] = useState<'english' | 'hindi' | 'marathi'>('english');
   const [showLangMenu, setShowLangMenu] = useState(false);
@@ -74,28 +75,33 @@ const App: React.FC = () => {
   const navigateToEmergency = () => { setCurrentView('emergency'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   const handleServiceClick = (service: any) => {
-    if (service.title === "Medicines Side Effect Finder") {
+    if (service.title === "Bio-Interaction Scan") {
       setCurrentView('medicine-finder');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (service.title === "Emergency Services") {
+    if (service.title === "Neural SOS Protocols") {
       setCurrentView('emergency');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (service.title === "Preventive Care") {
+    if (service.title === "Predictive Wellness") {
       setCurrentView('preventive-care');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (service.title.includes("Government Health Schemes") || service.title.includes("Health Schemes")) {
+    if (service.title === "Public Health Assets") {
       setCurrentView('government-schemes');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (service.title === "Mediclaim") {
+    if (service.title === "Insurance Vault (HQ)") {
       setCurrentView('mediclaim');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (service.title === "Neural Pharmacy") {
+      setCurrentView('pharmacy');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -126,6 +132,7 @@ const App: React.FC = () => {
       case 'preventive-care': return <PreventiveCare onBack={navigateToHome} />;
       case 'government-schemes': return <GovernmentSchemes onBack={navigateToHome} />;
       case 'mediclaim': return <Mediclaim onBack={navigateToHome} />;
+      case 'pharmacy': return <Pharmacy onBack={navigateToHome} />;
       default: return <LandingPage onBookClick={navigateToBooking} onServiceClick={handleServiceClick} t={t.landing} />;
     }
   };
@@ -200,6 +207,22 @@ const App: React.FC = () => {
               >
                 {t.nav.contact}
               </a>
+
+              {/* Hackathon Demo Role Switcher */}
+              <div className="flex bg-slate-200 dark:bg-slate-800/80 p-1.5 rounded-2xl border-2 border-white/20 shadow-inner">
+                <button
+                  onClick={() => { setUserRole(UserRole.PATIENT); setCurrentView('dashboard'); }}
+                  className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${userRole === UserRole.PATIENT ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+                >
+                  Patient View
+                </button>
+                <button
+                  onClick={() => { setUserRole(UserRole.DOCTOR); setCurrentView('dashboard'); }}
+                  className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${userRole === UserRole.DOCTOR ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+                >
+                  Doctor View
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center gap-4">

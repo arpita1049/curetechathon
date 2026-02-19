@@ -41,7 +41,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     const itemVariants = {
         hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }
+        visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 100 } }
     };
 
     return (
@@ -248,6 +248,66 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </motion.section>
+
+                        {/* Interactive Document Checklist */}
+                        <motion.section variants={itemVariants} className="bg-white dark:bg-slate-900 rounded-[4rem] p-12 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500"></div>
+                            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
+                                <div>
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full mb-4">
+                                        <ClipboardList className="w-4 h-4" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Pre-Claim Audit</span>
+                                    </div>
+                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Smart Document Checklist</h3>
+                                    <p className="text-slate-500 font-bold mt-2">Ensure 100% claim success rate by verifying these essentials.</p>
+                                </div>
+                                <div className="text-right hidden md:block">
+                                    <div className="text-5xl font-black text-slate-900 dark:text-white">
+                                        {Object.values(uploadedDocs).filter(Boolean).length}<span className="text-slate-300 text-3xl">/6</span>
+                                    </div>
+                                    <p className="text-xs font-black uppercase tracking-widest text-emerald-500">Ready for Submisson</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {[
+                                    { id: 'id_proof', label: 'Govt. ID Proof', sub: 'Aadhar / PAN Card / Passport', i: ShieldCheck },
+                                    { id: 'doc_report', label: 'Consultation Papers', sub: 'Doctor\'s initial diagnosis report', i: Stethoscope },
+                                    { id: 'bills', label: 'Original Bills', sub: 'Pharmacy & Lab (GST Invoice)', i: Receipt },
+                                    { id: 'discharge', label: 'Discharge Summary', sub: 'Hospital admission details', i: FileText },
+                                    { id: 'policy', label: 'Policy Document', sub: 'Digital or Physical Copy', i: Shield },
+                                    { id: 'bank', label: 'Cancelled Cheque', sub: 'For claim reimbursement', i: Landmark }
+                                ].map((doc) => (
+                                    <motion.button
+                                        key={doc.id}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={() => toggleDoc(doc.id)}
+                                        className={`group p-6 rounded-3xl border-2 text-left transition-all duration-300 relative overflow-hidden ${uploadedDocs[doc.id]
+                                            ? 'bg-slate-900 dark:bg-white border-transparent shadow-lg'
+                                            : 'bg-slate-50 dark:bg-slate-800/50 border-transparent hover:border-slate-300 dark:hover:border-slate-700'
+                                            }`}
+                                    >
+                                        <div className="flex items-start justify-between relative z-10">
+                                            <div className="flex items-center gap-4">
+                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${uploadedDocs[doc.id]
+                                                    ? 'bg-emerald-500 text-white'
+                                                    : 'bg-white dark:bg-slate-700 text-slate-400'
+                                                    }`}>
+                                                    {uploadedDocs[doc.id] ? <CheckCircle2 className="w-6 h-6" /> : <doc.i className="w-6 h-6" />}
+                                                </div>
+                                                <div>
+                                                    <h4 className={`text-lg font-black ${uploadedDocs[doc.id] ? 'text-white dark:text-slate-900' : 'text-slate-900 dark:text-white'
+                                                        }`}>{doc.label}</h4>
+                                                    <p className={`text-xs font-bold ${uploadedDocs[doc.id] ? 'text-slate-400 dark:text-slate-500' : 'text-slate-500 dark:text-slate-400'
+                                                        }`}>{doc.sub}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.button>
+                                ))}
                             </div>
                         </motion.section>
                     </motion.div>

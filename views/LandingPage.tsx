@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
 import { Shield, Users, Clock, Heart, ArrowRight, Star, Stethoscope, Microscope, Baby, Pill, Activity, PhoneCall, Zap, Quote, Search, CheckCircle2 } from 'lucide-react';
 import CardSwap, { Card } from '../components/CardSwap';
 import BlurText from '../components/BlurText';
@@ -289,42 +290,42 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
               items={[
                 {
                   image: "https://images.unsplash.com/photo-1579684385180-164e742e870e?auto=format&fit=crop&w=800&q=80",
-                  title: "Preventive Care",
+                  title: "Predictive Wellness",
                   subtitle: "Stay healthy with regular check-ups and early detection screenings.",
                   borderColor: "#10B981",
                   gradient: "linear-gradient(145deg, #10B981, #000)",
                 },
                 {
                   image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
-                  title: "Government Health Schemes",
+                  title: "Public Health Assets",
                   subtitle: "Access affordable healthcare benefits and Ayushman Bharat programs.",
                   borderColor: "#F59E0B",
                   gradient: "linear-gradient(145deg, #F59E0B, #000)",
                 },
                 {
                   image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-                  title: "Mediclaim",
+                  title: "Insurance Vault (HQ)",
                   subtitle: "Cashless hospitalization support and insurance claim assistance.",
                   borderColor: "#3B82F6",
                   gradient: "linear-gradient(145deg, #3B82F6, #000)",
                 },
                 {
                   image: "https://images.unsplash.com/photo-1516574187841-69301976e499?auto=format&fit=crop&w=800&q=80",
-                  title: "Emergency Services",
+                  title: "Neural SOS Protocols",
                   subtitle: "24/7 rapid response ambulance and critical care support.",
                   borderColor: "#EF4444",
                   gradient: "linear-gradient(145deg, #EF4444, #450a0a)",
                 },
                 {
                   image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
-                  title: "Medicines Side Effect Finder",
+                  title: "Bio-Interaction Scan",
                   subtitle: "Check potential side effects and interactions before use.",
                   borderColor: "#8B5CF6",
                   gradient: "linear-gradient(145deg, #8B5CF6, #000)",
                 },
                 {
                   image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
-                  title: "Pharmacy",
+                  title: "Neural Pharmacy",
                   subtitle: "Buy genuine medicines online with quick home delivery.",
                   borderColor: "#06B6D4",
                   gradient: "linear-gradient(145deg, #06B6D4, #000)",
@@ -448,60 +449,96 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
                 name: "Sneha Kapoor",
                 role: "Regular Patient",
                 feedback: "The ease of booking and the clarity of digital reports is what makes CURE stand out. Truly a modern experience.",
-                color: "blue",
-                avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha"
+                accent: "sky",
+                gradient: "from-sky-400 to-blue-500",
+                avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
                 name: "Rahul Mehta",
                 role: "Cardiology Patient",
                 feedback: "Dr. Mitchell and her team provided exceptional care. The technology they use for diagnosis is world-class.",
-                color: "indigo",
-                avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul"
+                accent: "indigo",
+                gradient: "from-indigo-400 to-violet-500",
+                avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200"
               },
               {
                 name: "Anita Desai",
                 role: "Parent",
                 feedback: "The pediatric section is so welcoming for kids. My daughter actually looks forward to her checkups now!",
-                color: "purple",
-                avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Anita"
+                accent: "rose",
+                gradient: "from-rose-400 to-pink-500",
+                avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200"
               }
             ].map((f, i) => (
-              <ScrollReveal key={i} delay={i * 200}>
-                <div className={`group relative p-12 rounded-[4rem] bg-white dark:bg-slate-900/40 backdrop-blur-xl border-2 border-slate-100 dark:border-slate-800/50 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-all duration-700 hover:-translate-y-4`}>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
+                className="group relative h-full"
+              >
+                {/* Background Glow Effect */}
+                <div className={`absolute -inset-4 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700 rounded-[4rem]`} />
 
-                  {/* Decorative Quote Icon */}
-                  <div className={`absolute top-10 right-12 opacity-10 group-hover:opacity-20 transition-opacity duration-700`}>
-                    <Quote className={`w-20 h-20 fill-current text-${f.color}-500`} />
-                  </div>
+                <div className="relative h-full bg-white/70 dark:bg-slate-900/40 backdrop-blur-3xl border border-slate-200/50 dark:border-slate-700/50 rounded-[3.5rem] p-10 flex flex-col transition-all duration-500 group-hover:border-transparent group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
 
-                  <div className="flex gap-1 text-amber-400 mb-10">
-                    {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} className="w-5 h-5 fill-current" />
-                    ))}
-                  </div>
-
-                  <p className="text-2xl font-bold text-slate-800 dark:text-slate-200 leading-relaxed mb-12 relative z-10">
-                    "{f.feedback}"
-                  </p>
-
-                  <div className="flex items-center gap-6 pt-10 border-t border-slate-100 dark:border-slate-800/50">
-                    <div className={`w-16 h-16 rounded-[1.5rem] overflow-hidden ring-4 ring-slate-50 dark:ring-slate-800 group-hover:ring-${f.color}-500/20 transition-all duration-700 shadow-lg`}>
-                      <img src={f.avatar} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  {/* Quote & Stars */}
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="flex gap-1">
+                      {[1, 2, 3, 4, 5].map(star => (
+                        <Star key={star} className={`w-4 h-4 fill-current text-${f.accent}-500`} />
+                      ))}
                     </div>
-                    <div>
-                      <h4 className="text-xl font-black text-slate-900 dark:text-white mb-1">{f.name}</h4>
-                      <p className={`text-xs font-black uppercase tracking-[0.2em] text-${f.color}-500`}>{f.role}</p>
-                    </div>
+                    <Quote className="w-10 h-10 text-slate-100 dark:text-slate-800 rotate-180 mb-4" />
                   </div>
 
-                  {/* Corner Accent */}
+                  {/* Feedback Text */}
+                  <div className="flex-1">
+                    <p className="text-xl md:text-2xl font-semibold text-slate-800 dark:text-slate-100 leading-relaxed italic mb-10 tracking-tight">
+                      "{f.feedback}"
+                    </p>
+                  </div>
+
+                  {/* User Profile */}
+                  <div className="flex items-center gap-5 pt-8 border-t border-slate-100 dark:border-slate-800/60">
+                    <div className="relative shrink-0">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${f.gradient} rounded-2xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                      <img
+                        src={f.avatar}
+                        alt={f.name}
+                        className="relative w-16 h-16 rounded-2xl object-cover ring-4 ring-white dark:ring-slate-800 shadow-xl group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute -bottom-1 -right-1 bg-emerald-500 text-white rounded-full p-1 shadow-lg ring-2 ring-white dark:ring-slate-900"
+                      >
+                        <CheckCircle2 className="w-3 h-3 fill-current" />
+                      </motion.div>
+                    </div>
+
+                    <div className="flex flex-col">
+                      <h4 className="text-lg font-black text-slate-900 dark:text-white tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-600 dark:group-hover:from-white dark:group-hover:to-slate-400 transition-all">
+                        {f.name}
+                      </h4>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[10px] font-black uppercase tracking-[0.2em] text-${f.accent}-500 border border-${f.accent}-500/30 px-2 py-0.5 rounded-full`}>
+                          {f.role}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                          Verified Patient
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </ScrollReveal>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 

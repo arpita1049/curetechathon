@@ -3,14 +3,27 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Vitals, DiagnosisResult, RiskPredictionResult } from "./types";
 
 const apiKey = (import.meta as any).env.VITE_GEMINI_API_KEY || "";
-const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+
+// Creating a standard generic client for basic text generation
+const genAI = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export const checkAI = () => {
-  if (!ai) {
+  if (!genAI) {
     throw new Error("Gemini API Key is missing. Please add GEMINI_API_KEY to your .env file.");
   }
-  return ai;
+  return genAI;
 };
+
+// Define the Medicine interface for the AI response
+export interface MedicineInfo {
+  name: string;
+  genericName: string;
+  uses: string[];
+  dosage: string;
+  warnings: string[];
+  contraindications: string[];
+  price: { branded: number; generic: number };
+}
 
 export const getAIdiagnosis = async (vitals: Vitals, symptoms: string): Promise<DiagnosisResult> => {
   const prompt = `Analyze patient vitals and symptoms for a primary healthcare worker.
@@ -20,7 +33,7 @@ export const getAIdiagnosis = async (vitals: Vitals, symptoms: string): Promise<
   Provide likely conditions with probabilities, a risk level (LOW, MODERATE, HIGH), and a suggested treatment protocol.`;
 
   const response = await checkAI().models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.0-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -46,7 +59,10 @@ export const getAIdiagnosis = async (vitals: Vitals, symptoms: string): Promise<
     }
   });
 
-  return JSON.parse(response.text) as DiagnosisResult;
+  if (response.text) {
+    return JSON.parse(response.text) as DiagnosisResult;
+  }
+  throw new Error("Failed to get diagnosis from AI");
 };
 
 export const getHealthRiskPrediction = async (vitals: Vitals, lifestyle: string): Promise<RiskPredictionResult[]> => {
@@ -57,7 +73,7 @@ export const getHealthRiskPrediction = async (vitals: Vitals, lifestyle: string)
   Predict risk for Diabetes, Hypertension, and Heart Disease.`;
 
   const response = await checkAI().models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.0-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -77,16 +93,66 @@ export const getHealthRiskPrediction = async (vitals: Vitals, lifestyle: string)
     }
   });
 
-  return JSON.parse(response.text) as RiskPredictionResult[];
+  if (response.text) {
+    return JSON.parse(response.text) as RiskPredictionResult[];
+  }
+  return [];
 };
 
 export const chatWithAI = async (message: string): Promise<string> => {
   const response = await checkAI().models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.0-flash',
     contents: message,
     config: {
       systemInstruction: "You are CURE AI, a professional medical assistant for CURE Clinic. Your tone is professional, caring, and informative. Always provide helpful health advice but remind users to consult with our real doctors for definitive diagnosis. Keep responses concise.",
     }
   });
   return response.text || "I'm sorry, I couldn't process that.";
+};
+
+export const getMedicineInfo = async (medicineName: string): Promise<MedicineInfo> => {
+  const prompt = `Provide detailed medical information for the medicine "${medicineName}".
+  Include:
+  - Official Name
+  - Generic Name
+  - Common Uses (array of strings)
+  - General Dosage Information (string)
+  - Warnings (array of strings)
+  - Contraindications (array of strings)
+  - Approximate Price in INR (Indian Rupees) for both Branded and Generic versions (number).
+  
+  Ensure the information is accurate and medically sound.`;
+
+  const response = await checkAI().models.generateContent({
+    model: 'gemini-2.0-flash',
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          name: { type: Type.STRING },
+          genericName: { type: Type.STRING },
+          uses: { type: Type.ARRAY, items: { type: Type.STRING } },
+          dosage: { type: Type.STRING },
+          warnings: { type: Type.ARRAY, items: { type: Type.STRING } },
+          contraindications: { type: Type.ARRAY, items: { type: Type.STRING } },
+          price: {
+            type: Type.OBJECT,
+            properties: {
+              branded: { type: Type.NUMBER },
+              generic: { type: Type.NUMBER }
+            },
+            required: ["branded", "generic"]
+          }
+        },
+        required: ["name", "genericName", "uses", "dosage", "warnings", "contraindications", "price"]
+      }
+    }
+  });
+
+  if (response.text) {
+    return JSON.parse(response.text) as MedicineInfo;
+  }
+  throw new Error("Failed to fetch medicine info");
 };

@@ -20,43 +20,43 @@ export const translations = {
                 vitals: 'Check Vitals'
             },
             services: {
-                title: 'Comprehensive Healthcare',
-                desc: 'We offer a wide range of specialized medical services to ensure you receive the most effective care.',
-                explore: 'Explore Details',
+                title: 'Nexus of Care',
+                desc: 'Accessing the frontiers of medical excellence through an integrated neural network.',
+                explore: 'Consult Neural View',
                 list: {
-                    cardio: { title: 'Cardiology', desc: 'Expert heart care using latest technologies.' },
-                    general: { title: 'General Medicine', desc: 'Primary healthcare for your entire family.' },
-                    pedia: { title: 'Pediatrics', desc: 'Specialized care for infants and children.' },
-                    diag: { title: 'Diagnostics', desc: 'Precise and accurate testing facilities.' },
-                    pharma: { title: 'Pharmacy', desc: 'Quick access to essential medications.' },
-                    emergency: { title: 'Emergency', desc: '24/7 emergency response and care.' }
+                    cardio: { title: 'Vital Heart Intel', desc: 'Advanced cardiovascular engineering.' },
+                    general: { title: 'Family Wellness Core', desc: 'Primary health architecture for families.' },
+                    pedia: { title: 'Bright Youth Lab', desc: 'Precision care for the next generation.' },
+                    diag: { title: 'Biometric Scanning', desc: 'High-fidelity diagnostic imaging.' },
+                    pharma: { title: 'Neural Pharmacy', desc: 'Accelerated access to clinical grade meds.' },
+                    emergency: { title: 'Neural SOS', desc: 'Instantaneous critical response protocols.' }
                 }
             },
             about: {
-                title: 'Why Choose CURE?',
-                item1: { title: 'Experienced Specialists', desc: 'Our doctors are leaders in their fields with decades of experience.' },
-                item2: { title: 'Modern Technology', desc: 'We utilize latest medical advancements for diagnosis.' },
-                item3: { title: 'Patient-First', desc: 'Your comfort and health are our top priorities.' },
-                item4: { title: '24/7 Availability', desc: 'Round-the-clock medical assistance for your peace of mind.' },
-                item5: { title: 'Secure Data', desc: 'Your health records are protected by advanced encryption.' },
-                item6: { title: 'Affordable Pricing', desc: 'Quality healthcare made accessible for everyone.' },
-                testimonial: "\"CURE Clinic has completely changed my perspective on healthcare. The staff is professional, the facility is clean, and the care is genuinely personal.\"",
-                patient: 'David Thompson',
-                since: 'Patient since 2021'
+                title: 'Scientific Sovereignty',
+                item1: { title: 'Elite Specialists', desc: 'Heads of clinical intelligence with global expertise.' },
+                item2: { title: 'Quantum Tech', desc: 'Utilizing next-gen diagnostics and robotics.' },
+                item3: { title: 'Patient Centricity', desc: 'Absolute priority for your biological well-being.' },
+                item4: { title: '24/7 Connectivity', desc: 'Continuous health monitoring and assistance.' },
+                item5: { title: 'Sovereign Data', desc: 'Biological records secured by neural encryption.' },
+                item6: { title: 'Economic Value', desc: 'Premium healthcare engineered for accessibility.' },
+                testimonial: "\"CURE has fundamentally redefined my relationship with biological health. The integration of technology and empathy is unmatched.\"",
+                patient: 'Arun Patel',
+                since: 'Verified VIP since 2024'
             },
             cta: {
-                title: 'Ready to start your healthy journey?',
-                desc: 'Schedule your consultation today and experience the future of professional, world-class healthcare tailored to your needs.',
-                open: 'Open 24/7',
-                secure: 'Secure Data'
+                title: 'Accelerate your wellness journey?',
+                desc: 'Deploy the future of personalized, world-class healthcare protocols tailored to your unique bio-signature.',
+                open: 'Neural Link: 24/7',
+                secure: 'Encrypted Vault'
             },
             doctors: {
-                title: 'EXPERT PERSPECTIVES',
-                subtitle: 'What Our Specialists Say',
+                title: 'CLINICAL INTELLIGENCE',
+                subtitle: 'Neural Insights from our Leads',
                 list: [
-                    { name: 'Dr. Sarah Mitchell', role: 'Chief Cardiologist', feedback: 'At CURE, we combine elite medical expertise with a human touch that is rare in modern healthcare.' },
-                    { name: 'Dr. James Wilson', role: 'Senior Neurologist', feedback: 'The integration of AI diagnostics with personalized care plans sets a new standard for local medicine.' },
-                    { name: 'Dr. Elena Rodriguez', role: 'Lead Pediatrician', feedback: 'Seeing our young patients thrive through early, technology-driven intervention is why we do what we do.' }
+                    { name: 'Dr. Sarah Wilson', role: 'Head of Vital Intel', feedback: 'At CURE, we fuse elite biological data with the human touch that defines the modern era.' },
+                    { name: 'Dr. James Miller', role: 'Senior Neural Architect', feedback: 'Integrating AI-driven diagnostics with bespoke care plans sets the gold standard for clinical wisdom.' },
+                    { name: 'Dr. Elena Vance', role: 'Lead Bio-Pediatrics', feedback: 'Watching our youth thrive through precision intervention is the cornerstone of our mission.' }
                 ]
             }
         },

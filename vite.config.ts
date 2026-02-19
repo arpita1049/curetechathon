@@ -8,8 +8,7 @@ export default defineConfig(({ mode }) => {
   console.log('Loaded GEMINI_API_KEY:', env.GEMINI_API_KEY ? 'Set' : 'Missing');
   return {
     server: {
-      port: 3000,
-      host: '0.0.0.0',
+      port: 5173,
     },
     plugins: [react()],
     define: {
