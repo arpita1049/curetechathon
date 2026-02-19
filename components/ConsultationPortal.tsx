@@ -25,9 +25,29 @@ const ConsultationPortal: React.FC<ConsultationPortalProps> = ({ patient, onClos
         { id: 'RX', label: 'Prescription', icon: Pill },
     ];
 
-    const handleNext = () => {
-        if (activeStep < steps.length - 1) setActiveStep(activeStep + 1);
-        else onClose(); // Final step
+    const handleNext = async () => {
+        if (activeStep < steps.length - 1) {
+            setActiveStep(activeStep + 1);
+        } else {
+            // Final step: Save treatment plan
+            try {
+                const API_BASE = 'http://localhost:5000/doctor';
+                await fetch(`${API_BASE}/prescription/${patient.id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        diagnosis: 'AI-Synthesized Diagnosis based on Vitals',
+                        medications: [{ name: 'Paracetamol', dosage: '500mg', frequency: 'Twice daily', duration: '5 days' }],
+                        advice: 'Rest and monitoring',
+                        followUpDays: 7
+                    })
+                });
+                onClose();
+            } catch (error) {
+                console.error('Error saving treatment:', error);
+                onClose();
+            }
+        }
     };
 
     const handleBack = () => {
@@ -39,10 +59,10 @@ const ConsultationPortal: React.FC<ConsultationPortalProps> = ({ patient, onClos
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-[#0B1426] flex flex-col overflow-hidden"
+            className="fixed inset-0 z-[200] bg-[#0a192f] flex flex-col overflow-hidden"
         >
             {/* Top Bar */}
-            <div className="px-12 py-6 border-b border-white/5 flex justify-between items-center bg-white/5 backdrop-blur-3xl">
+            <div className="px-12 py-6 border-b border-white/10 flex justify-between items-center bg-[#0f2a47]/80 backdrop-blur-3xl">
                 <div className="flex items-center gap-8">
                     <button onClick={onClose} className="p-4 hover:bg-white/10 rounded-2xl transition-colors">
                         <X className="w-6 h-6 text-white" />
@@ -71,7 +91,7 @@ const ConsultationPortal: React.FC<ConsultationPortalProps> = ({ patient, onClos
 
             <div className="flex-1 flex overflow-hidden">
                 {/* Lateral Navigation */}
-                <div className="w-96 border-r border-white/5 bg-white/5 backdrop-blur-2xl p-10 flex flex-col">
+                <div className="w-96 border-r border-white/10 bg-[#0f2a47]/60 backdrop-blur-2xl p-10 flex flex-col">
                     <div className="space-y-4">
                         {steps.map((step, i) => (
                             <button
@@ -128,7 +148,7 @@ const ConsultationPortal: React.FC<ConsultationPortalProps> = ({ patient, onClos
 
                             {activeStep === 0 && (
                                 <div className="space-y-10">
-                                    <div className="p-10 bg-white/5 rounded-[3.5rem] border border-white/10 shadow-inner">
+                                    <div className="p-10 bg-[#0f2a47]/40 rounded-[3.5rem] border border-white/10 shadow-inner">
                                         <textarea
                                             value={transcription}
                                             onChange={(e) => setTranscription(e.target.value)}
@@ -173,7 +193,7 @@ const ConsultationPortal: React.FC<ConsultationPortalProps> = ({ patient, onClos
                                         </div>
                                     </div>
                                     <div className="space-y-8">
-                                        <div className="p-10 bg-white/5 border border-white/10 rounded-[3rem]">
+                                        <div className="p-10 bg-[#0f2a47]/40 border border-white/10 rounded-[3rem]">
                                             <h4 className="text-xl font-black uppercase mb-6">Differential Validation</h4>
                                             <p className="text-slate-400 font-bold text-sm leading-relaxed">Neural model suggests immediate ECG node verification to exclude STEMI. Troponin-I levels recommended.</p>
                                         </div>

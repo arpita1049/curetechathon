@@ -21,7 +21,7 @@ const EmergencyMode: React.FC<EmergencyModeProps> = ({ onExit }) => {
     ];
 
     return (
-        <div className="fixed inset-0 z-[500] bg-red-600 flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-[500] bg-red-600/90 backdrop-blur-3xl flex flex-col overflow-hidden">
             {/* Background Warning Animation */}
             <motion.div
                 animate={{ opacity: [0.1, 0.3, 0.1] }}
@@ -30,7 +30,7 @@ const EmergencyMode: React.FC<EmergencyModeProps> = ({ onExit }) => {
             />
 
             {/* Header */}
-            <div className="relative z-10 p-10 flex justify-between items-center bg-black/20 backdrop-blur-md border-b border-white/10">
+            <div className="relative z-10 p-10 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-white/20">
                 <div className="flex items-center gap-6">
                     <motion.div
                         animate={{ scale: [1, 1.1, 1] }}
@@ -68,7 +68,7 @@ const EmergencyMode: React.FC<EmergencyModeProps> = ({ onExit }) => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: i * 0.1 }}
                                 onClick={() => setActiveStep(i)}
-                                className={`p-8 rounded-[3rem] border-2 transition-all cursor-pointer relative group overflow-hidden ${activeStep === i ? 'bg-white border-white shadow-4xl' : 'bg-red-700/40 border-white/10 hover:border-white/30 text-white'}`}
+                                className={`p-8 rounded-[3rem] border-2 transition-all cursor-pointer relative group overflow-hidden ${activeStep === i ? 'bg-white border-white shadow-4xl' : 'bg-[#0f2a47]/60 backdrop-blur-md border-white/10 hover:border-white/30 text-white'}`}
                             >
                                 <div className="flex justify-between items-start">
                                     <div className="flex items-center gap-6">

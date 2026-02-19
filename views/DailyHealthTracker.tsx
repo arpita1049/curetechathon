@@ -32,7 +32,7 @@ const DailyHealthTracker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+        <div className="min-h-screen bg-transparent p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -57,7 +57,7 @@ const DailyHealthTracker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 {/* Main Score & Chart Area */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2 p-10 rounded-[4rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-sm space-y-8">
+                    <div className="lg:col-span-2 p-10 rounded-[4rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 shadow-sm space-y-8">
                         <div className="flex justify-between items-center">
                             <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Active Burn Timeline</h3>
                             <div className="flex gap-2">
@@ -142,7 +142,7 @@ const DailyHealthTracker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1 }}
-                            className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 hover:border-blue-500/30 transition-all group relative overflow-hidden"
+                            className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] p-8 border-2 border-slate-100 dark:border-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden"
                         >
                             <div className="flex justify-between items-start mb-10">
                                 <div className={`p-4 rounded-2xl bg-${stat.color}-500 text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-transform`}>
@@ -179,7 +179,7 @@ const DailyHealthTracker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 {/* Footer Insight */}
                 <div className="p-10 rounded-[3.5rem] bg-indigo-50 dark:bg-indigo-900/20 border-2 border-indigo-100 dark:border-indigo-900/30 flex flex-col md:flex-row items-center gap-10">
-                    <div className="w-24 h-24 bg-white dark:bg-slate-900 rounded-3xl flex items-center justify-center text-indigo-600 shadow-sm flex-shrink-0 animate-bounce">
+                    <div className="w-24 h-24 bg-white/70 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-3xl flex items-center justify-center text-indigo-600 shadow-sm flex-shrink-0 animate-bounce">
                         <Zap className="w-12 h-12" />
                     </div>
                     <div className="flex-1 space-y-2">

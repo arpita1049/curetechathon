@@ -100,7 +100,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 </select>
                 <button
                     onClick={() => setVoiceActive(!voiceActive)}
-                    className={`p-4 rounded-2xl transition-all ${voiceActive ? 'bg-indigo-600 text-white animate-pulse shadow-lg shadow-indigo-500/30' : 'bg-slate-100 dark:bg-slate-900 text-slate-500 border-2 border-transparent'}`}
+                    className={`p-4 rounded-2xl transition-all ${voiceActive ? 'bg-indigo-600 text-white animate-pulse shadow-lg shadow-indigo-500/30' : 'bg-slate-100 dark:bg-[#0f2a47]/60 text-slate-500 border-2 border-transparent border-white/10 dark:backdrop-blur-md'}`}
                 >
                     <Volume2 className="w-6 h-6" />
                 </button>
@@ -146,7 +146,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     ))}
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3rem] overflow-hidden">
+                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3rem] overflow-hidden">
                     <div className="p-8 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 flex flex-col md:flex-row justify-between items-center gap-4">
                         <div>
                             <h3 className="text-2xl font-black text-slate-900 dark:text-white capitalize">{vaccineAgeGroup} Schedule</h3>
@@ -179,7 +179,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     </div>
                 </div>
 
-                <div className="p-8 rounded-[3rem] bg-rose-50 dark:bg-rose-900/10 border-2 border-rose-100 dark:border-rose-900/30 flex items-center gap-8">
+                <div className="p-8 rounded-[3rem] bg-rose-50 dark:bg-rose-900/10 backdrop-blur-md border-2 border-rose-100 dark:border-white/10 flex items-center gap-8">
                     <AlertCircle className="w-12 h-12 text-rose-500 flex-shrink-0 animate-pulse" />
                     <div>
                         <h4 className="text-xl font-black text-rose-600">Smart Alert: Missed Booster</h4>
@@ -202,7 +202,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     { n: "Hemoglobin", v: "14.2 g/dL", s: "Optimal", i: <Droplet />, c: "rose" },
                     { n: "BMI Index", v: bmi, s: "Healthy", i: <Calculator />, c: "indigo" }
                 ].map((stat, i) => (
-                    <div key={i} className="p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-sm text-center space-y-4">
+                    <div key={i} className="p-8 rounded-[2.5rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 shadow-sm text-center space-y-4">
                         <div className={`w-14 h-14 rounded-2xl bg-${stat.c}-500/10 text-${stat.c}-500 mx-auto flex items-center justify-center`}>
                             {React.isValidElement(stat.i) ? React.cloneElement(stat.i as React.ReactElement<any>, { className: 'w-7 h-7' }) : stat.i}
                         </div>
@@ -218,7 +218,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-6">
                     <h3 className="text-3xl font-black text-slate-900 dark:text-white px-2">National Screening Protocols</h3>
-                    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3rem] divide-y divide-slate-100 dark:divide-slate-800 overflow-hidden">
+                    <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3rem] divide-y divide-slate-100 dark:divide-slate-800/10 overflow-hidden">
                         {[
                             { n: "Cervical Cancer (HPV/Pap)", t: "Women 30-65", r: "Every 3-5 Years", s: "Not Scheduled" },
                             { n: "Breast Self-Exam", t: "Women 20+", r: "Monthly", s: "Reminder Set" },
@@ -313,7 +313,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     { t: "Sugar Control", d: "Key to preventing Type-2 Diabetes.", i: <Coffee className="text-violet-500" />, c: "violet" },
                     { t: "Daily HIIT/Yoga", d: "15 min of cardio or Surya Namaskar.", i: <Dumbbell className="text-emerald-500" />, c: "emerald" }
                 ].map((item, i) => (
-                    <div key={i} className="p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 space-y-4 group hover:border-emerald-500/30 transition-all">
+                    <div key={i} className="p-8 rounded-[2.5rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 space-y-4 group hover:border-emerald-500/30 transition-all">
                         <div className={`w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform`}>
                             {item.i}
                         </div>
@@ -353,7 +353,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     </button>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3.5rem] p-10 space-y-8 overflow-hidden relative">
+                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3.5rem] p-10 space-y-8 overflow-hidden relative">
                     <h3 className="text-3xl font-black text-slate-900 dark:text-white">Nutrition & Supplementation</h3>
                     <div className="space-y-6">
                         {[
@@ -382,7 +382,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3.5rem] p-10 space-y-10">
+            <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3.5rem] p-10 space-y-10">
                 <div className="flex justify-between items-center">
                     <h3 className="text-3xl font-black text-slate-900 dark:text-white">Child Growth Monitoring</h3>
                     <div className="flex gap-4">
@@ -429,7 +429,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         </button>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3rem] p-10 space-y-6">
+                    <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3rem] p-10 space-y-6">
                         <h4 className="text-xl font-black text-slate-900 dark:text-white">Sleep Efficiency</h4>
                         <div className="flex items-end justify-between h-32 gap-2">
                             {[6.5, 7.2, 5.8, 8, 7.5, 6.2, 7].map((s, i) => (
@@ -447,7 +447,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 </div>
 
                 <div className="lg:col-span-2 space-y-8">
-                    <div className="p-12 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[4rem] relative overflow-hidden">
+                    <div className="p-12 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[4rem] relative overflow-hidden">
                         <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">Systematic Mind Care</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-6">
@@ -555,7 +555,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     { t: "Air Quality Alert", d: "AQI &gt; 250. Avoid morning runs. Wear N95.", r: "Health Hazard Alert", c: "rose" },
                     { t: "Polio NID Sync", d: "National Immunization Day coming up. Set alert.", r: "Immunization Event", c: "emerald" }
                 ].map((a, i) => (
-                    <div key={i} className="group p-8 rounded-[3rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 hover:shadow-2xl transition-all duration-500 overflow-hidden relative">
+                    <div key={i} className="group p-8 rounded-[3rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 hover:shadow-2xl transition-all duration-500 overflow-hidden relative">
                         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-${a.c}-500 to-${a.c}-600 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rounded-bl-full`}></div>
                         <span className={`text-[10px] font-black uppercase tracking-[0.2em] text-${a.c}-500 mb-4 block`}>{a.r}</span>
                         <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">{a.t}</h4>
@@ -571,7 +571,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     const ProgressView = () => (
         <div className="space-y-12">
-            <div className="p-12 rounded-[4rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-2xl relative overflow-hidden">
+            <div className="p-12 rounded-[4rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 shadow-2xl relative overflow-hidden">
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
                     <div className="lg:w-1/3 text-center space-y-6">
                         <div className="w-56 h-56 mx-auto relative group">
@@ -740,7 +740,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
                             onClick={() => navigateToModule(m)}
-                            className="group relative p-8 rounded-[3rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800/50 hover:border-indigo-500/30 hover:shadow-2xl transition-all duration-500 text-left overflow-hidden"
+                            className="group relative p-8 rounded-[3rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 hover:border-indigo-500/30 hover:shadow-2xl transition-all duration-500 text-left overflow-hidden"
                         >
                             <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${moduleColors[m]} opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rounded-bl-full`}></div>
                             <div className="flex justify-between items-start mb-10">
@@ -786,7 +786,7 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="max-w-4xl mx-auto bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3.5rem] p-12 shadow-2xl space-y-10"
+            className="max-w-4xl mx-auto bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[3.5rem] p-12 shadow-2xl space-y-10"
         >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-4">

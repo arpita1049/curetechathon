@@ -8,10 +8,40 @@ import {
     Activity, ShieldCheck
 } from 'lucide-react';
 
+const API_BASE = 'http://localhost:5000/doctor';
+
 const PatientsView: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [patientsData, setPatientsData] = React.useState<any[]>([]);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    const patients = [
+    React.useEffect(() => {
+        const fetchPatients = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/patients`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setPatientsData(data.data);
+                }
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchPatients();
+    }, []);
+
+    const patients = patientsData.length > 0 ? patientsData.map(p => ({
+        id: p._id.substring(0, 8).toUpperCase(),
+        name: p.name,
+        age: p.age || 30,
+        gender: p.gender || 'Other',
+        status: p.status || 'Active',
+        risk: p.riskScore || 20,
+        color: (p.riskScore || 20) > 80 ? 'rose' : (p.riskScore || 20) > 50 ? 'amber' : 'emerald',
+        lastVisit: 'Recent'
+    })) : [
         { id: 'P-902', name: 'Arpita Sharma', age: 28, gender: 'Female', status: 'Active', risk: 85, color: 'rose', lastVisit: '2 days ago' },
         { id: 'P-903', name: 'Rahul Verma', age: 45, gender: 'Male', status: 'Stable', risk: 62, color: 'amber', lastVisit: '1 week ago' },
         { id: 'P-904', name: 'Priya Das', age: 34, gender: 'Female', status: 'Monitoring', risk: 15, color: 'teal', lastVisit: 'Developing' },
@@ -36,10 +66,10 @@ const PatientsView: React.FC = () => {
                             placeholder="Search Subject ID or Name..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-14 pr-6 py-4 bg-white/70 dark:bg-slate-800/20 backdrop-blur-xl border border-white/20 rounded-2xl outline-none font-bold text-xs"
+                            className="w-full pl-14 pr-6 py-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl outline-none font-bold text-xs"
                         />
                     </div>
-                    <button className="p-4 bg-white/70 dark:bg-slate-800/20 rounded-2xl border border-white/20 shadow-xl hover:scale-110 transition-transform">
+                    <button className="p-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-2xl border border-white/20 dark:border-white/10 shadow-xl hover:scale-110 transition-transform">
                         <Filter className="w-5 h-5 text-slate-500" />
                     </button>
                     <button className="flex items-center gap-3 px-8 py-4 bg-indigo-600 rounded-2xl text-white font-black uppercase text-[10px] tracking-widest shadow-2xl shadow-indigo-500/20 hover:scale-105 transition-all">
@@ -56,7 +86,7 @@ const PatientsView: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className="group p-8 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl relative overflow-hidden flex flex-col"
+                        className="group p-8 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl relative overflow-hidden flex flex-col"
                     >
                         <div className={`absolute top-0 right-0 w-32 h-32 bg-${p.color}-500/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700`} />
 

@@ -110,8 +110,8 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             />
 
             {/* Vignette Overlay to fade edges */}
-            <div className="absolute inset-0 bg-radial-gradient from-transparent to-white dark:to-slate-950 opacity-80" style={{ background: 'radial-gradient(circle, transparent 40%, white 100%)' }} />
-            <div className="absolute inset-0 hidden dark:block" style={{ background: 'radial-gradient(circle, transparent 40%, #020617 100%)' }} />
+            <div className="absolute inset-0 dark:hidden" style={{ background: 'radial-gradient(circle, transparent 40%, white 100%)' }} />
+            <div className="absolute inset-0 hidden dark:block" style={{ background: 'radial-gradient(circle, transparent 20%, #000000 100%)' }} />
         </div>
     );
 };

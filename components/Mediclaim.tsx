@@ -45,7 +45,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     };
 
     return (
-        <div className="min-h-screen pb-32 pt-24 bg-slate-50 dark:bg-[#020617] font-sans transition-colors duration-500 overflow-hidden">
+        <div className="min-h-screen pb-32 pt-24 bg-transparent font-sans transition-colors duration-500 overflow-hidden">
             {/* Ambient Background Elements */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
                 <div className="absolute -top-[10%] -right-[10%] w-[60%] h-[60%] bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-[120px] animate-pulse"></div>
@@ -62,7 +62,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 >
                     <button
                         onClick={onBack}
-                        className="group flex items-center gap-4 text-slate-500 hover:text-sky-600 font-bold uppercase tracking-widest text-[10px] transition-all bg-white dark:bg-slate-900 px-6 py-3 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md"
+                        className="group flex items-center gap-4 text-slate-500 hover:text-sky-600 font-bold uppercase tracking-widest text-[10px] transition-all bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl px-6 py-3 rounded-full border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                         Back to Services
@@ -96,7 +96,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.4 }}
-                            className="relative w-full p-8 bg-white dark:bg-slate-900 rounded-[3.5rem] border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden group"
+                            className="relative w-full p-8 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3.5rem] border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden group"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-3xl group-hover:bg-sky-500/20 transition-colors"></div>
                             <div className="relative z-10 flex flex-col gap-4">
@@ -131,7 +131,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     >
                         {/* Interactive What is Mediclaim Section */}
                         <motion.section variants={itemVariants} className="relative">
-                            <div className="bg-white dark:bg-slate-900/40 backdrop-blur-3xl p-12 rounded-[4rem] border border-slate-200 dark:border-slate-800 shadow-2xl relative overflow-hidden group">
+                            <div className="bg-white/70 dark:bg-[#0f2a47]/40 backdrop-blur-3xl p-12 rounded-[4rem] border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 rounded-full blur-[60px] translate-x-12 -translate-y-12"></div>
                                 <div className="relative space-y-12">
                                     <div className="flex items-center gap-6">
@@ -159,7 +159,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                                 className="p-8 bg-slate-50 dark:bg-slate-800/40 rounded-[3rem] border border-transparent hover:border-sky-500/20 transition-all flex flex-col gap-6 group/card"
                                             >
                                                 <div className={`w-14 h-14 bg-sky-50 dark:bg-sky-900/30 text-sky-600 rounded-2xl flex items-center justify-center group-hover/card:scale-110 transition-transform`}>
-                                                    {React.cloneElement(plan.i as React.ReactElement, { className: 'w-7 h-7' })}
+                                                    {React.cloneElement(plan.i as React.ReactElement<any>, { className: 'w-7 h-7' })}
                                                 </div>
                                                 <div className="space-y-2">
                                                     <h3 className="font-black text-lg text-slate-900 dark:text-white">{plan.t}</h3>
@@ -188,7 +188,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     <motion.div
                                         key={idx}
                                         whileHover={{ y: -5 }}
-                                        className="p-10 rounded-[3.5rem] bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-xl group text-center space-y-6 relative overflow-hidden transition-colors"
+                                        className="p-10 rounded-[3.5rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-xl group text-center space-y-6 relative overflow-hidden transition-colors"
                                     >
                                         <div className="w-20 h-20 mx-auto bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-[2rem] flex items-center justify-center group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 relative z-10 shadow-lg">
                                             <item.i className="w-10 h-10" />
@@ -203,7 +203,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         </motion.section>
 
                         {/* Interactive Settlement Flow */}
-                        <motion.section variants={itemVariants} className="bg-slate-900 dark:bg-black rounded-[5rem] p-16 shadow-3xl relative overflow-hidden border border-white/5">
+                        <motion.section variants={itemVariants} className="bg-[#0a192f]/90 dark:bg-[#0a192f]/90 rounded-[5rem] p-16 shadow-3xl relative overflow-hidden border border-white/10 backdrop-blur-3xl">
                             <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.1),transparent_50%)]"></div>
                             <div className="relative z-10 flex flex-col items-center gap-16">
                                 <div className="text-center space-y-4">
@@ -252,7 +252,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         </motion.section>
 
                         {/* Interactive Document Checklist */}
-                        <motion.section variants={itemVariants} className="bg-white dark:bg-slate-900 rounded-[4rem] p-12 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+                        <motion.section variants={itemVariants} className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[4rem] p-12 border border-slate-200 dark:border-white/10 shadow-xl relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500"></div>
                             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12">
                                 <div>
@@ -321,7 +321,7 @@ const Mediclaim: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             className="sticky top-32 space-y-12"
                         >
                             {/* AI Premium Estimator Widget */}
-                            <div className="bg-white dark:bg-slate-900 p-10 rounded-[4rem] border border-slate-200 dark:border-slate-800 shadow-3xl relative overflow-hidden group/est">
+                            <div className="bg-white/70 dark:bg-[#0f2a47]/80 backdrop-blur-3xl p-10 rounded-[4rem] border border-slate-200 dark:border-white/10 shadow-3xl relative overflow-hidden group/est">
                                 <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-sky-500/[0.02] to-transparent pointer-events-none"></div>
                                 <div className="relative space-y-10">
                                     <div className="flex items-center gap-5">

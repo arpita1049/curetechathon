@@ -78,7 +78,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     );
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+        <div className="min-h-screen bg-transparent p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -114,7 +114,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         placeholder="Search by name, specialty or clinic..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-lg outline-none focus:border-teal-500 transition-all shadow-sm"
+                                        className="w-full pl-14 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-lg outline-none focus:border-teal-500 transition-all shadow-sm"
                                     />
                                 </div>
                                 <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -122,7 +122,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         <button
                                             key={spec}
                                             onClick={() => setSelectedSpecialty(spec)}
-                                            className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedSpecialty === spec ? 'bg-teal-600 text-white shadow-lg shadow-teal-500/30' : 'bg-white dark:bg-slate-900 text-slate-500 border-2 border-slate-100 dark:border-slate-800'}`}
+                                            className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedSpecialty === spec ? 'bg-teal-600 text-white shadow-lg shadow-teal-500/30' : 'bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl text-slate-500 border-2 border-slate-100 dark:border-white/10'}`}
                                         >
                                             {spec}
                                         </button>
@@ -138,7 +138,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 hover:border-teal-500/30 transition-all group relative overflow-hidden"
+                                        className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] p-8 border-2 border-slate-100 dark:border-white/10 hover:border-teal-500/30 transition-all group relative overflow-hidden"
                                     >
                                         <div className="flex items-start gap-6 mb-8">
                                             <div className="relative">
@@ -200,7 +200,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.95 }}
-                            className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-[4rem] p-10 border-2 border-slate-100 dark:border-slate-800 shadow-2xl space-y-10"
+                            className="max-w-4xl mx-auto bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[4rem] p-10 border-2 border-slate-100 dark:border-white/10 shadow-2xl space-y-10"
                         >
                             <div className="flex flex-col md:flex-row gap-10 items-start">
                                 <img src={selectedDoctor.image} alt={selectedDoctor.name} className="w-32 h-32 rounded-3xl bg-teal-50 dark:bg-teal-900/30" />
@@ -303,7 +303,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                 <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">Booking Confirmed!</h2>
                                 <p className="text-slate-500 font-bold text-lg">Your appointment with {selectedDoctor?.name} has been successfully scheduled.</p>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 space-y-6 text-left">
+                            <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] p-8 border-2 border-slate-100 dark:border-white/10 space-y-6 text-left">
                                 <div className="flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-400">
                                     <span>Token Number</span>
                                     <span className="text-teal-600 text-lg">#CURE-0248</span>
@@ -337,7 +337,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     Home Dashboard
                                 </button>
                                 <div className="flex gap-4">
-                                    <button className="flex-1 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-2xl font-black flex items-center justify-center gap-2 text-xs uppercase tracking-widest">
+                                    <button className="flex-1 py-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-2xl font-black flex items-center justify-center gap-2 text-xs uppercase tracking-widest">
                                         <Download className="w-4 h-4" /> Receipt
                                     </button>
                                     <button className="flex-1 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-2xl font-black flex items-center justify-center gap-2 text-xs uppercase tracking-widest">

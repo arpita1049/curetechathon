@@ -71,7 +71,7 @@ const ServiceCard = ({ s, idx, onServiceClick, getButtonClasses, getColorClasses
   return (
     <div
       ref={cardRef}
-      className={`group p-10 rounded-[3rem] bg-white dark:bg-slate-900/40 backdrop-blur-xl border-2 border-slate-100 dark:border-slate-800/50 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-90'
+      className={`group p-10 rounded-[3rem] bg-white/80 dark:bg-[#0f2a47]/40 backdrop-blur-xl border-2 border-slate-100 dark:border-white/10 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-90'
         } hover:shadow-[0_45px_100px_-20px_rgba(0,0,0,0.1)] card-hover ${getBorderClasses(s.color)}`}
       style={{ transitionDelay: `${idx * 100}ms` }}
     >
@@ -144,7 +144,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-transparent transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center pt-24 pb-32 overflow-hidden bg-transparent transition-colors">
         {/* Animated Background Elements */}
@@ -153,7 +153,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
 
         <div className="w-full px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-12 animate-slide-up">
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white dark:bg-slate-900 shadow-2xl rounded-full border border-slate-200 dark:border-slate-800">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 dark:bg-[#0f2a47]/40 shadow-2xl rounded-full border border-slate-200 dark:border-white/10">
               <div className="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
               <span className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">{t.hero.badge}</span>
             </div>
@@ -209,7 +209,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
 
               <button
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-6 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-[2rem] font-black text-xl transition-all hover:bg-slate-50 dark:hover:bg-slate-800 border-4 border-slate-900/5 dark:border-white/5 flex items-center gap-4"
+                className="px-10 py-6 bg-white dark:bg-[#0f2a47]/60 text-slate-900 dark:text-white rounded-[2rem] font-black text-xl transition-all hover:bg-slate-50 dark:hover:bg-slate-800/80 border-4 border-slate-900/5 dark:border-white/5 flex items-center gap-4"
               >
                 <Zap className="w-6 h-6 text-amber-500" />
                 {t.hero.vitals}
@@ -391,7 +391,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
           </div>
 
           <ScrollReveal delay={200} className="flex-1 w-full">
-            <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-16 rounded-[4rem] shadow-2xl relative overflow-hidden group border border-white/5">
+            <div className="bg-gradient-to-br from-[#0a192f]/90 via-[#0f2a47]/90 to-[#0a192f]/90 p-16 rounded-[4rem] shadow-2xl relative overflow-hidden group border border-white/10 backdrop-blur-3xl">
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px]"></div>
 
               <div className="flex gap-2 text-amber-400 mb-10">
@@ -481,7 +481,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
                 {/* Background Glow Effect */}
                 <div className={`absolute -inset-4 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700 rounded-[4rem]`} />
 
-                <div className="relative h-full bg-white/70 dark:bg-slate-900/40 backdrop-blur-3xl border border-slate-200/50 dark:border-slate-700/50 rounded-[3.5rem] p-10 flex flex-col transition-all duration-500 group-hover:border-transparent group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
+                <div className="relative h-full bg-white/70 dark:bg-[#0f2a47]/40 backdrop-blur-3xl border border-slate-200/50 dark:border-white/10 rounded-[3.5rem] p-10 flex flex-col transition-all duration-500 group-hover:border-transparent group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
 
                   {/* Quote & Stars */}
                   <div className="flex justify-between items-start mb-8">

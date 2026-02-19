@@ -51,7 +51,7 @@ const MyPrescriptions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+        <div className="min-h-screen bg-transparent p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -68,7 +68,7 @@ const MyPrescriptions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         </h1>
                     </div>
                     <div className="flex gap-4">
-                        <button className="px-6 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-2xl font-black flex items-center gap-2 text-xs uppercase tracking-widest text-slate-500 shadow-sm">
+                        <button className="px-6 py-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-2xl font-black flex items-center gap-2 text-xs uppercase tracking-widest text-slate-500 shadow-sm">
                             <Plus className="w-5 h-5" /> Manual Entry
                         </button>
                         <button className="px-6 py-4 bg-emerald-600 text-white rounded-2xl font-black flex items-center gap-2 text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/20 shadow-sm">
@@ -87,7 +87,7 @@ const MyPrescriptions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id as any)}
-                            className={`px-8 py-4 rounded-[2rem] font-black text-sm uppercase tracking-widest flex items-center gap-3 transition-all ${activeTab === tab.id ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-500/20' : 'bg-white dark:bg-slate-900 text-slate-500 border-2 border-slate-100 dark:border-slate-800'}`}
+                            className={`px-8 py-4 rounded-[2rem] font-black text-sm uppercase tracking-widest flex items-center gap-3 transition-all ${activeTab === tab.id ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-500/20' : 'bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl text-slate-500 border-2 border-slate-100 dark:border-white/10'}`}
                         >
                             <tab.icon className="w-5 h-5" />
                             {tab.label}
@@ -135,7 +135,7 @@ const MyPrescriptions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: idx * 0.1 }}
-                            className="bg-white dark:bg-slate-900 rounded-[3.5rem] border-2 border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm"
+                            className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3.5rem] border-2 border-slate-100 dark:border-white/10 overflow-hidden shadow-sm"
                         >
                             <div className="p-8 border-b-2 border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/10 flex flex-col md:flex-row justify-between items-center gap-6">
                                 <div className="flex items-center gap-6">
@@ -194,7 +194,7 @@ const MyPrescriptions: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 {/* Footer Info */}
                 <div className="p-10 rounded-[3rem] bg-indigo-50 dark:bg-indigo-900/20 border-2 border-indigo-100 dark:border-indigo-900/30 flex flex-col md:flex-row items-center gap-8">
-                    <div className="w-20 h-20 bg-white dark:bg-slate-900 rounded-full flex items-center justify-center flex-shrink-0 text-indigo-600">
+                    <div className="w-20 h-20 bg-white/70 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-full flex items-center justify-center flex-shrink-0 text-indigo-600">
                         <Info className="w-10 h-10" />
                     </div>
                     <div className="flex-1 space-y-2 text-center md:text-left">

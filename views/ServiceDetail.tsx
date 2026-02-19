@@ -61,7 +61,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onBack }) => {
         <div className="container mx-auto px-6 max-w-7xl animate-fade mt-10 mb-20">
             <button
                 onClick={onBack}
-                className="flex items-center gap-2 text-slate-500 hover:text-sky-600 font-bold mb-10 transition-colors group"
+                className="flex items-center gap-2 text-slate-500 hover:text-sky-600 font-bold mb-10 transition-colors group px-4 py-2 bg-white/30 dark:bg-[#0f2a47]/60 backdrop-blur-md border border-slate-200/50 dark:border-white/10 rounded-2xl"
             >
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 Back to Home
@@ -86,7 +86,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onBack }) => {
                             <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Our Specialties</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {content.features.map((feature: string, i: number) => (
-                                    <div key={i} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                                    <div key={i} className="flex items-center gap-3 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-4 rounded-2xl border border-slate-100 dark:border-white/10 shadow-sm">
                                         <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
                                         <span className="font-bold text-slate-700 dark:text-slate-300">{feature}</span>
                                     </div>
@@ -120,7 +120,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ service, onBack }) => {
                             />
                         </div>
 
-                        <div className="absolute -bottom-10 -left-10 bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] shadow-2xl border border-slate-100 dark:border-slate-800 flex items-center gap-6 max-w-xs animate-fade delay-300">
+                        <div className="absolute -bottom-10 -left-10 bg-white/70 dark:bg-[#0f2a47]/80 backdrop-blur-3xl p-8 rounded-[2.5rem] shadow-2xl border border-slate-100 dark:border-white/10 flex items-center gap-6 max-w-xs animate-fade delay-300">
                             <div className="w-16 h-16 bg-sky-100 dark:bg-sky-900/40 rounded-full flex items-center justify-center text-sky-600">
                                 <Clock className="w-8 h-8" />
                             </div>

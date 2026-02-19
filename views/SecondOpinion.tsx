@@ -59,7 +59,7 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+        <div className="min-h-screen bg-transparent p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -145,7 +145,7 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     <motion.div
                                         key={i}
                                         whileHover={{ y: -12 }}
-                                        className="bg-white dark:bg-slate-900 p-12 rounded-[3.5rem] border-2 border-slate-100 dark:border-slate-800 space-y-8 shadow-xl relative overflow-hidden group"
+                                        className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-12 rounded-[3.5rem] border-2 border-slate-100 dark:border-white/10 space-y-8 shadow-xl relative overflow-hidden group"
                                     >
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-orange-500/10 transition-all" />
                                         <div className="w-16 h-16 bg-orange-50 dark:bg-orange-950/30 rounded-2xl flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
@@ -178,10 +178,10 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     <input
                                         type="text"
                                         placeholder="Search by specialty (Oncology, Neurology...)"
-                                        className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-lg outline-none focus:border-orange-500 transition-all shadow-sm"
+                                        className="w-full pl-14 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-lg outline-none focus:border-orange-500 transition-all shadow-sm"
                                     />
                                 </div>
-                                <button className="p-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] text-slate-500">
+                                <button className="p-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] text-slate-500">
                                     <Plus className="w-6 h-6" />
                                 </button>
                             </div>
@@ -193,7 +193,7 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="bg-white dark:bg-slate-900 rounded-[3.5rem] p-8 border-2 border-slate-100 dark:border-slate-800 hover:border-orange-500/30 transition-all group relative overflow-hidden shadow-sm"
+                                        className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3.5rem] p-8 border-2 border-slate-100 dark:border-white/10 hover:border-orange-500/30 transition-all group relative overflow-hidden shadow-sm"
                                     >
                                         <div className="flex items-start gap-6 mb-8">
                                             <div className="relative">
@@ -242,7 +242,7 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             key="chat"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-white dark:bg-slate-900 rounded-[4rem] border-2 border-slate-100 dark:border-slate-800 overflow-hidden shadow-2xl h-[70vh] flex flex-col"
+                            className="bg-white/70 dark:bg-[#0f2a47]/90 backdrop-blur-3xl rounded-[4rem] border-2 border-slate-100 dark:border-white/10 overflow-hidden shadow-2xl h-[70vh] flex flex-col"
                         >
                             <div className="p-8 border-b-2 border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/10 flex justify-between items-center">
                                 <div className="flex items-center gap-4">
@@ -297,7 +297,7 @@ const SecondOpinion: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 {/* Info Card */}
                 <div className="p-10 rounded-[3.5rem] bg-amber-50 dark:bg-amber-900/10 border-2 border-amber-100 dark:border-amber-900/30 flex flex-col md:flex-row items-center gap-8">
-                    <div className="w-20 h-20 bg-white dark:bg-slate-900 rounded-full flex items-center justify-center flex-shrink-0 text-amber-600 shadow-sm">
+                    <div className="w-20 h-20 bg-white/70 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-full flex items-center justify-center flex-shrink-0 text-amber-600 shadow-sm">
                         <Info className="w-10 h-10" />
                     </div>
                     <div className="flex-1 space-y-2 text-center md:text-left">

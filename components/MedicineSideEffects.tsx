@@ -449,7 +449,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
     };
 
     return (
-        <div className="min-h-screen pt-24 px-4 pb-12 flex flex-col items-center relative overflow-hidden bg-white dark:bg-[#020617] font-sans selection:bg-indigo-500/30">
+        <div className="min-h-screen pt-24 px-4 pb-12 flex flex-col items-center relative overflow-hidden bg-transparent font-sans selection:bg-indigo-500/30">
             {/* National Level 3D Background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none perspective-[1200px]">
                 {/* 3D Medical Nebula */}
@@ -477,7 +477,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
                 <div className="flex justify-between items-center mb-12">
                     <button
                         onClick={onBack}
-                        className="group flex items-center text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-black transition-all bg-white/50 dark:bg-slate-900/50 px-6 py-3 rounded-2xl backdrop-blur-xl shadow-sm hover:shadow-xl border border-white/40 dark:border-slate-800/50 ring-1 ring-black/5"
+                        className="group flex items-center text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-black transition-all bg-white/50 dark:bg-[#0f2a47]/60 px-6 py-3 rounded-2xl backdrop-blur-xl shadow-sm hover:shadow-xl border border-white/40 dark:border-white/10 ring-1 ring-black/5"
                     >
                         <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
                         Explore
@@ -497,7 +497,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
                         initial={{ scale: 0.8, opacity: 0, rotateY: -30 }}
                         animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                         transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                        className="inline-flex items-center justify-center p-8 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 rounded-[3rem] mb-10 shadow-[0_25px_50px_-12px_rgba(79,70,229,0.15)] border border-white/50 dark:border-slate-700 relative group"
+                        className="inline-flex items-center justify-center p-8 bg-gradient-to-br from-white to-slate-50 dark:from-[#0f2a47]/80 dark:to-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] mb-10 shadow-[0_25px_50px_-12px_rgba(79,70,229,0.15)] border border-white/50 dark:border-white/10 relative group"
                     >
                         <Pill className="w-20 h-20 text-indigo-600 dark:text-indigo-400 drop-shadow-[0_0_15px_rgba(79,70,229,0.4)]" />
                         <div className="absolute -inset-4 bg-indigo-500/5 blur-2xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -513,7 +513,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
 
                     <div className="max-w-3xl mx-auto relative px-4">
                         <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500/20 to-fuchsia-500/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                        <div className="relative flex items-center bg-white/70 dark:bg-slate-900/80 p-2 rounded-[2.2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] backdrop-blur-3xl border border-white dark:border-slate-800">
+                        <div className="relative flex items-center bg-white/70 dark:bg-[#0f2a47]/80 p-2 rounded-[2.2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] backdrop-blur-3xl border border-white dark:border-white/10">
                             <div className="pl-6 text-slate-400">
                                 <Search className="w-7 h-7" />
                             </div>
@@ -564,7 +564,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
                             className="grid grid-cols-1 lg:grid-cols-12 gap-6"
                         >
                             {/* Medicine Header Card */}
-                            <div className="lg:col-span-12 bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-100 dark:border-slate-800 shadow-xl relative overflow-hidden">
+                            <div className="lg:col-span-12 bg-white/80 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-100 dark:border-white/10 shadow-xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-50 dark:bg-indigo-900/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
                                 <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                                     <div>
@@ -593,7 +593,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
                                 transition={{ delay: 0.2 }}
                             >
                                 {/* Age */}
-                                <div className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-lg relative overflow-hidden group hover:border-blue-200 transition-colors">
+                                <div className="bg-white/80 dark:bg-[#0f2a47]/80 backdrop-blur-3xl p-8 rounded-[2rem] border border-slate-100 dark:border-white/10 shadow-lg relative overflow-hidden group hover:border-blue-200 transition-colors">
                                     <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
                                         <Baby className="w-24 h-24 text-blue-600" />
                                     </div>
@@ -621,7 +621,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
                                 </div>
 
                                 {/* Menstruation */}
-                                <div className={`p-8 rounded-[2rem] border shadow-lg relative overflow-hidden group transition-colors bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800`}>
+                                <div className={`p-8 rounded-[2rem] border shadow-lg relative overflow-hidden group transition-colors bg-white/80 dark:bg-[#0f2a47]/80 backdrop-blur-3xl border-slate-100 dark:border-white/10`}>
                                     <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-110 transition-transform">
                                         <Activity className="w-24 h-24 text-rose-500" />
                                     </div>
@@ -637,7 +637,7 @@ const MedicineSideEffects = ({ onBack }: { onBack: () => void }) => {
 
                             {/* Side Effects - Main Content */}
                             <motion.div
-                                className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-100 dark:border-slate-800 shadow-xl"
+                                className="lg:col-span-8 bg-white/80 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-[2.5rem] p-10 border border-slate-100 dark:border-white/10 shadow-xl"
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.1 }}

@@ -24,7 +24,7 @@ const PHWDashboard: React.FC<PHWDashboardProps> = () => {
   return (
     <div className="space-y-8 animate-slide-up">
       {/* User Greeting Section */}
-      <div className="flex justify-between items-center p-6 glass rounded-[2rem] neo-shadow">
+      <div className="flex justify-between items-center p-6 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[2rem] neo-shadow border border-white/10">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-teal-100 flex items-center justify-center text-teal-600 neo-shadow">
             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Meera" className="w-12 h-12 rounded-xl" alt="Worker" />
@@ -48,21 +48,21 @@ const PHWDashboard: React.FC<PHWDashboardProps> = () => {
           <button
             key={idx}
             onClick={() => setActiveTab(item.tab as any)}
-            className="flex flex-col items-start p-6 bg-white rounded-[2rem] neo-shadow border border-teal-50 hover:border-teal-200 transition-all group relative overflow-hidden text-left"
+            className="flex flex-col items-start p-6 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[2rem] neo-shadow border border-teal-50 dark:border-white/10 hover:border-teal-200 transition-all group relative overflow-hidden text-left"
           >
             <div className={`p-4 bg-gradient-to-br ${item.color} text-white rounded-2xl mb-4 group-hover:scale-110 transition-transform neo-shadow`}>
               {React.cloneElement(item.icon as React.ReactElement<any>, { className: 'w-7 h-7' })}
             </div>
             <span className="text-lg font-extrabold text-teal-950 leading-tight">{item.title}</span>
             <span className="text-[10px] text-teal-600/50 font-bold uppercase mt-1 tracking-wider">{item.desc}</span>
-            
+
             <div className="absolute bottom-0 right-0 w-16 h-16 bg-teal-50/50 rounded-tl-[3rem] -mb-4 -mr-4 group-hover:bg-teal-100 transition-colors"></div>
           </button>
         ))}
       </div>
 
       {/* Critical Alerts Section */}
-      <div className="bg-white p-6 rounded-[2.5rem] neo-shadow border border-teal-50">
+      <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-6 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-white/10">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-bold text-teal-950 flex items-center gap-3">
             <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
@@ -70,7 +70,7 @@ const PHWDashboard: React.FC<PHWDashboardProps> = () => {
           </h3>
           <button className="text-teal-600 text-xs font-extrabold uppercase tracking-widest hover:underline">View All</button>
         </div>
-        
+
         <div className="space-y-4">
           <div className="group flex items-center justify-between p-5 bg-gradient-to-r from-red-50 to-white rounded-3xl border border-red-100/50 hover:border-red-200 transition-all cursor-pointer">
             <div className="flex items-center gap-4">
@@ -116,11 +116,11 @@ const PHWDashboard: React.FC<PHWDashboardProps> = () => {
           <span className="text-3xl font-black">42</span>
           <span className="text-[9px] font-black uppercase tracking-widest opacity-80">Checkups</span>
         </div>
-        <div className="bg-white p-5 rounded-3xl neo-shadow border border-teal-50 flex flex-col items-center justify-center">
+        <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-5 rounded-3xl neo-shadow border border-teal-50 dark:border-white/10 flex flex-col items-center justify-center">
           <span className="text-3xl font-black text-teal-600">08</span>
           <span className="text-[9px] font-black uppercase tracking-widest text-teal-600/40">Visits</span>
         </div>
-        <div className="bg-white p-5 rounded-3xl neo-shadow border border-teal-50 flex flex-col items-center justify-center">
+        <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-5 rounded-3xl neo-shadow border border-teal-50 dark:border-white/10 flex flex-col items-center justify-center">
           <Calendar className="w-6 h-6 text-teal-400 mb-1" />
           <span className="text-[9px] font-black uppercase tracking-widest text-teal-600/40">Schedule</span>
         </div>

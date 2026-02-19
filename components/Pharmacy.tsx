@@ -149,13 +149,13 @@ const Pharmacy: React.FC<PharmacyProps> = ({ onBack }) => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-purple-900 py-12 px-6">
+        <div className="min-h-screen bg-transparent py-12 px-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-slate-200 dark:border-slate-700"
+                        className="flex items-center gap-2 px-6 py-3 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl text-slate-700 dark:text-slate-300 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-slate-200 dark:border-white/10"
                     >
                         <ArrowLeft className="w-5 h-5" />
                         <span className="font-bold">Back</span>
@@ -188,7 +188,7 @@ const Pharmacy: React.FC<PharmacyProps> = ({ onBack }) => {
                             onClick={() => setActiveTab(tab.id as any)}
                             className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all duration-300 ${activeTab === tab.id
                                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
-                                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:shadow-lg border-2 border-slate-200 dark:border-slate-700'
+                                : 'bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl text-slate-700 dark:text-slate-300 hover:shadow-lg border-2 border-slate-200 dark:border-white/10'
                                 }`}
                         >
                             <tab.icon className="w-5 h-5" />
@@ -198,7 +198,7 @@ const Pharmacy: React.FC<PharmacyProps> = ({ onBack }) => {
                 </div>
 
                 {/* Tab Content */}
-                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 border-2 border-slate-200 dark:border-slate-700">
+                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-3xl shadow-2xl p-8 border-2 border-slate-200 dark:border-white/10">
 
                     {/* Medicine Search Tab */}
                     {activeTab === 'search' && (

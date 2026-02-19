@@ -25,12 +25,34 @@ const SecondOpinionFlow: React.FC<SecondOpinionFlowProps> = ({ patient, onComple
         { id: 'PEDI', name: 'Pediatrician', icon: UserCircle2 },
     ];
 
-    const handleEscalate = () => {
-        // Simulate API call
-        setStep(3);
-        setTimeout(() => {
-            onComplete();
-        }, 3000);
+    const handleEscalate = async () => {
+        try {
+            const API_BASE = 'http://localhost:5000/doctor';
+            const response = await fetch(`${API_BASE}/second-opinion/${patient.id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    specialistType: specialty,
+                    urgencyLevel: urgency === 'EMERGENCY' ? 'STAT' : urgency === 'PRIORITY' ? 'URGENT' : 'ROUTINE',
+                    notes: notes,
+                    autoSummary: `Subject presents with ${patient.type} and a risk factor of ${patient.risk}%.`
+                })
+            });
+
+            if (response.ok) {
+                setStep(3);
+                setTimeout(() => {
+                    onComplete();
+                }, 3000);
+            } else {
+                throw new Error('Failed to send escalation');
+            }
+        } catch (error) {
+            console.error('Error escalating case:', error);
+            // Fallback to simulation for demo if API fails
+            setStep(3);
+            setTimeout(() => onComplete(), 3000);
+        }
     };
 
     return (

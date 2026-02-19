@@ -65,7 +65,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
             }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setCurrentView(view)}
-            className={`relative overflow-hidden p-8 rounded-[2.5rem] bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl border border-white/20 dark:border-slate-800 shadow-2xl group text-left transition-all preserve-3d`}
+            className={`relative overflow-hidden p-8 rounded-[2.5rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-2xl group text-left transition-all preserve-3d`}
         >
             {tag && <div className={`absolute top-4 right-8 px-3 py-1 bg-${color}-500/10 rounded-full text-[10px] font-black text-${color}-600 uppercase tracking-widest`}>{tag}</div>}
             <div className={`absolute top-0 right-0 w-40 h-40 bg-${color}-500/10 rounded-full blur-[60px] -mr-20 -mt-20 group-hover:bg-${color}-500/20 transition-all`} />
@@ -111,7 +111,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5 + (i * 0.1) }}
-                                className="px-6 py-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-white/20 dark:border-slate-800 rounded-2xl flex items-center gap-4 shadow-lg group hover:bg-white dark:hover:bg-slate-800 transition-all pointer-events-auto cursor-pointer"
+                                className="px-6 py-4 bg-white/40 dark:bg-[#0f2a47]/40 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl flex items-center gap-4 shadow-lg group hover:bg-white dark:hover:bg-slate-800 transition-all pointer-events-auto cursor-pointer"
                             >
                                 <div className={`p-2 bg-${stat.c}-500/10 text-${stat.c}-500 rounded-lg group-hover:scale-110 transition-transform`}>
                                     <stat.i className="w-5 h-5" />
@@ -183,7 +183,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                 <motion.button
                     whileHover={{ y: -10, scale: 1.02 }}
                     onClick={() => setCurrentView('PRESCRIPTIONS')}
-                    className="p-10 rounded-[3rem] bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl border border-white/20 dark:border-slate-800 shadow-xl group text-left relative overflow-hidden"
+                    className="p-10 rounded-[3rem] bg-white/40 dark:bg-[#0f2a47]/40 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-xl group text-left relative overflow-hidden"
                 >
                     <div className="absolute top-4 right-8 px-3 py-1 bg-emerald-500/10 rounded-full text-[10px] font-black text-emerald-600 uppercase tracking-widest">3 Active</div>
                     <Pill className="w-12 h-12 text-emerald-500 mb-6 group-hover:scale-110 transition-transform" />
@@ -212,7 +212,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                 <motion.button
                     whileHover={{ y: -10, scale: 1.02 }}
                     onClick={() => setCurrentView('OPINION')}
-                    className="p-10 rounded-[3rem] bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl border border-white/20 dark:border-slate-800 shadow-xl group text-left relative overflow-hidden"
+                    className="p-10 rounded-[3rem] bg-white/40 dark:bg-[#0f2a47]/40 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-xl group text-left relative overflow-hidden"
                 >
                     <div className="absolute top-4 right-8 px-3 py-1 bg-orange-500/10 rounded-full text-[10px] font-black text-orange-600 uppercase tracking-widest">50+ Experts</div>
                     <MessageSquare className="w-12 h-12 text-orange-500 mb-6 group-hover:scale-110 transition-transform" />
@@ -227,7 +227,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
     );
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-black font-sans transition-colors duration-500 relative perspective-1000">
+        <div className="min-h-screen bg-transparent font-sans transition-colors duration-500 relative perspective-1000">
             <Premium3DBG />
 
             {/* Main Surface */}
@@ -257,7 +257,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
 
             {/* Floating Glassmorphism Bottom Navigation Bar */}
             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-8">
-                <nav className="bg-white/40 dark:bg-slate-900/60 backdrop-blur-[40px] border border-white/20 dark:border-slate-800 px-10 py-6 rounded-[3rem] flex items-center gap-12 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)]">
+                <nav className="bg-white/40 dark:bg-[#0f2a47]/60 backdrop-blur-[40px] border border-white/20 dark:border-white/10 px-10 py-6 rounded-[3rem] flex items-center gap-12 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)]">
                     <NavButton icon={Home} label="Home" view="HOME" />
                     <NavButton icon={Calendar} label="Bookings" view="APPOINTMENTS" />
 

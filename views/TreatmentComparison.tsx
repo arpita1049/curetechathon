@@ -23,7 +23,7 @@ const TreatmentComparison: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     >
       <button
         onClick={onBack}
-        className="mb-10 group flex items-center gap-3 text-slate-500 font-bold hover:text-emerald-500 transition-all px-4 py-2 rounded-2xl bg-white/30 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50"
+        className="mb-10 group flex items-center gap-3 text-slate-500 font-bold hover:text-emerald-500 transition-all px-4 py-2 rounded-2xl bg-white/30 dark:bg-[#0f2a47]/60 backdrop-blur-md border border-slate-200/50 dark:border-white/10"
       >
         <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         <span className="text-sm font-black uppercase tracking-widest">Return to Lobby</span>
@@ -43,7 +43,7 @@ const TreatmentComparison: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               type="text"
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
-              className="w-full pl-20 pr-8 py-7 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-[2.5rem] focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/30 outline-none transition-all font-black text-xl text-slate-800 dark:text-white"
+              className="w-full pl-20 pr-8 py-7 bg-white/40 dark:bg-[#0f2a47]/60 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 rounded-[2.5rem] focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/30 outline-none transition-all font-black text-xl text-slate-800 dark:text-white"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@ const TreatmentComparison: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full pl-20 pr-8 py-7 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-[2.5rem] focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500/30 outline-none transition-all font-black text-xl text-slate-800 dark:text-white"
+              className="w-full pl-20 pr-8 py-7 bg-white/40 dark:bg-[#0f2a47]/60 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 rounded-[2.5rem] focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500/30 outline-none transition-all font-black text-xl text-slate-800 dark:text-white"
             />
           </div>
         </div>
@@ -84,7 +84,7 @@ const TreatmentComparison: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="bg-white/30 dark:bg-slate-900/30 backdrop-blur-md p-10 rounded-[3.5rem] border border-slate-200/50 dark:border-slate-800/50 shadow-sm hover:shadow-2xl hover:bg-white dark:hover:bg-slate-800 transition-all relative group overflow-hidden"
+            className="bg-white/30 dark:bg-[#0f2a47]/60 backdrop-blur-md p-10 rounded-[3.5rem] border border-slate-200/50 dark:border-white/10 shadow-sm hover:shadow-2xl hover:bg-white dark:hover:bg-[#0f2a47] transition-all relative group overflow-hidden"
           >
             <div className="flex justify-between items-start mb-8 relative z-10">
               <div>

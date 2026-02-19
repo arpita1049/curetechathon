@@ -23,7 +23,7 @@ const PracticeAnalytics: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-6 bg-white/40 dark:bg-slate-800/20 backdrop-blur-xl rounded-3xl border border-white/10"
+                        className="p-6 bg-white/40 dark:bg-[#0f2a47]/60 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-white/10"
                     >
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{m.label}</p>
                         <div className="flex justify-between items-end">
@@ -37,7 +37,7 @@ const PracticeAnalytics: React.FC = () => {
                 ))}
             </div>
 
-            <div className="p-8 bg-white/40 dark:bg-slate-800/20 backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-2xl">
+            <div className="p-8 bg-white/40 dark:bg-[#0f2a47]/60 backdrop-blur-xl rounded-[2.5rem] border border-white/10 dark:border-white/10 shadow-2xl">
                 <div className="flex justify-between items-center mb-10">
                     <div>
                         <h3 className="text-xl font-black uppercase tracking-tighter">Clinical Load Trend</h3>

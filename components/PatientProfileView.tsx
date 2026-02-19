@@ -21,24 +21,24 @@ const PatientProfileView: React.FC<PatientProfileViewProps> = ({
     onRequestOpinion
 }) => {
     return (
-        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-3xl flex items-center justify-center p-10">
+        <div className="fixed inset-0 z-[100] bg-[#0a192f]/60 backdrop-blur-3xl flex items-center justify-center p-10">
             <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-900 w-full max-w-6xl rounded-[4rem] overflow-hidden flex h-[85vh] shadow-4xl border border-white/10"
+                className="bg-white dark:bg-[#0f2a47]/90 backdrop-blur-3xl w-full max-w-6xl rounded-[4rem] overflow-hidden flex h-[85vh] shadow-4xl border border-white/20 dark:border-white/10"
             >
                 {/* Lateral Profile Info */}
-                <div className="w-96 bg-slate-50 dark:bg-slate-800/50 p-12 border-r border-slate-100 dark:border-slate-800 flex flex-col items-center gap-10">
+                <div className="w-96 bg-slate-50 dark:bg-[#0f2a47]/40 p-12 border-r border-slate-100 dark:border-white/10 flex flex-col items-center gap-10">
                     <div className="relative">
-                        <div className="w-40 h-40 bg-indigo-500 rounded-[3rem] overflow-hidden shadow-2xl ring-4 ring-white dark:ring-slate-800">
+                        <div className="w-40 h-40 bg-indigo-500 rounded-[3rem] overflow-hidden shadow-2xl ring-4 ring-white dark:ring-[#0f2a47]">
                             <img
                                 src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${patient.name}`}
                                 className="w-full h-full object-cover"
                                 alt={patient.name}
                             />
                         </div>
-                        <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-emerald-500 rounded-full border-4 border-white dark:border-slate-800 flex items-center justify-center">
+                        <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-emerald-500 rounded-full border-4 border-white dark:border-[#0f2a47] flex items-center justify-center">
                             <div className="w-2 h-2 bg-white rounded-full animate-ping" />
                         </div>
                     </div>
