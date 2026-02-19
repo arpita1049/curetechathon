@@ -74,7 +74,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     );
 
     return (
-        <div className="min-h-screen bg-transparent p-6">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -101,7 +101,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 {/* Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[3rem] border-2 border-slate-100 dark:border-white/10 flex items-center gap-6 shadow-sm">
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded-[3rem] border-2 border-slate-100 dark:border-slate-800 flex items-center gap-6 shadow-sm">
                         <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600">
                             <FileText className="w-8 h-8" />
                         </div>
@@ -110,7 +110,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Total Records</p>
                         </div>
                     </div>
-                    <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[3rem] border-2 border-slate-100 dark:border-white/10 flex items-center gap-6 shadow-sm">
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded-[3rem] border-2 border-slate-100 dark:border-slate-800 flex items-center gap-6 shadow-sm">
                         <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center text-emerald-600">
                             <Shield className="w-8 h-8" />
                         </div>
@@ -119,7 +119,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             <p className="text-xs font-black uppercase tracking-widest text-slate-400">Data Integrity</p>
                         </div>
                     </div>
-                    <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[3rem] border-2 border-slate-100 dark:border-white/10 flex items-center gap-6 shadow-sm">
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded-[3rem] border-2 border-slate-100 dark:border-slate-800 flex items-center gap-6 shadow-sm">
                         <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/30 rounded-2xl flex items-center justify-center text-amber-600">
                             <Clock className="w-8 h-8" />
                         </div>
@@ -139,7 +139,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             placeholder="Find by report name or doctor..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-14 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-lg outline-none focus:border-blue-500 transition-all shadow-sm"
+                            className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-lg outline-none focus:border-blue-500 transition-all shadow-sm"
                         />
                     </div>
                     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -147,7 +147,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             <button
                                 key={type}
                                 onClick={() => setSelectedType(type)}
-                                className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedType === type ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl text-slate-500 border-2 border-slate-100 dark:border-white/10'}`}
+                                className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedType === type ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white dark:bg-slate-900 text-slate-500 border-2 border-slate-100 dark:border-slate-800'}`}
                             >
                                 {type}
                             </button>
@@ -163,7 +163,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.1 }}
-                            className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-6 md:p-8 rounded-[2.5rem] border-2 border-slate-100 dark:border-white/10 hover:border-blue-500/30 transition-all group flex flex-col md:flex-row gap-6 items-center shadow-sm"
+                            className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[2.5rem] border-2 border-slate-100 dark:border-slate-800 hover:border-blue-500/30 transition-all group flex flex-col md:flex-row gap-6 items-center shadow-sm"
                         >
                             <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl flex items-center justify-center flex-shrink-0 ${rec.type === 'X-Ray' ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600'}`}>
                                 {rec.type === 'X-Ray' ? <ImageIcon className="w-8 h-8" /> : <FileText className="w-8 h-8" />}
@@ -208,7 +208,7 @@ const DigitalHealthLocker: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                 initial={{ scale: 0.9, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
                                 exit={{ scale: 0.9, y: 20 }}
-                                className="w-full max-w-2xl bg-white/70 dark:bg-[#0f2a47]/90 backdrop-blur-3xl rounded-[3.5rem] p-10 shadow-2xl space-y-8 border border-white/10"
+                                className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-[3.5rem] p-10 shadow-2xl space-y-8"
                             >
                                 <div className="flex justify-between items-center">
                                     <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">Secure Upload</h2>

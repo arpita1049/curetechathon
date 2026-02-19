@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@config "./tailwind.config.js";
 
 @layer base {
   :root {
@@ -31,10 +30,8 @@
   }
 
   .dark .glass {
-    background: rgba(15, 42, 71, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .card-hover {
@@ -305,7 +302,7 @@
 }
 
 .dark .neo-shadow {
-  box-shadow: 8px 8px 16px #000000, -8px -8px 16px #0a0a0a;
+  box-shadow: 8px 8px 16px #0f172a, -8px -8px 16px #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -314,198 +311,5 @@
 }
 
 .dark .neo-inner {
-  box-shadow: inset 5px 5px 10px #000000, inset -5px -5px 10px #0a0a0a;
-}
-
-/* ============================================================
-   GLOBAL BUTTON VISIBILITY SYSTEM
-   Fixes all buttons sitewide for dark blue mode readability.
-   Does NOT touch layout, containers, or other elements.
-   ============================================================ */
-
-@layer components {
-
-  /* ── Base reset for ALL buttons ─────────────────────────── */
-  button {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    min-height: 2.75rem;
-    /* 44px — comfortable tap target */
-    padding-left: 1.5rem;
-    /* 24px horizontal padding */
-    padding-right: 1.5rem;
-    padding-top: 0.65rem;
-    /* 10px vertical padding */
-    padding-bottom: 0.65rem;
-    font-size: 0.9rem;
-    /* slightly larger than default */
-    border-radius: 0.75rem;
-    /* consistent rounded corners */
-  }
-
-  button:active {
-    transform: scale(0.96);
-  }
-
-  button:focus-visible {
-    outline: 2px solid #38bdf8;
-    outline-offset: 3px;
-  }
-
-  /* ── PRIMARY: indigo/blue gradient buttons ───────────────── */
-  /* matches: bg-indigo-600, bg-indigo-500, bg-sky-500, bg-blue-600 */
-  button.bg-indigo-600,
-  button.bg-indigo-500,
-  button.bg-blue-600,
-  button.bg-sky-500,
-  button.bg-sky-600 {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0284c7 100%) !important;
-    color: #ffffff !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.45), 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  button.bg-indigo-600:hover,
-  button.bg-indigo-500:hover,
-  button.bg-blue-600:hover,
-  button.bg-sky-500:hover,
-  button.bg-sky-600:hover {
-    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0369a1 100%) !important;
-    box-shadow: 0 8px 25px rgba(29, 78, 216, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4) !important;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ── Gradient buttons (from-indigo, from-sky) ───────────── */
-  button[class*="from-indigo"],
-  button[class*="from-sky"],
-  button[class*="from-blue"] {
-    color: #ffffff !important;
-    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4), 0 1px 3px rgba(0, 0, 0, 0.25) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  }
-
-  button[class*="from-indigo"]:hover,
-  button[class*="from-sky"]:hover,
-  button[class*="from-blue"]:hover {
-    box-shadow: 0 8px 25px rgba(29, 78, 216, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ── DANGER: red/rose buttons ────────────────────────────── */
-  button.bg-red-600,
-  button.bg-rose-600,
-  button.bg-red-700,
-  button[class*="from-red"],
-  button[class*="from-rose"] {
-    background: linear-gradient(135deg, #991b1b 0%, #dc2626 60%, #e11d48 100%) !important;
-    color: #ffffff !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  }
-
-  button.bg-red-600:hover,
-  button.bg-rose-600:hover,
-  button.bg-red-700:hover,
-  button[class*="from-red"]:hover,
-  button[class*="from-rose"]:hover {
-    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6), 0 0 20px rgba(239, 68, 68, 0.3) !important;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ── SECONDARY / ghost buttons ───────────────────────────── */
-  button.bg-white,
-  button.bg-slate-100,
-  button.bg-slate-50,
-  button.bg-white\/70,
-  button.bg-white\/80 {
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(8px) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-  }
-
-  button.bg-white:hover,
-  button.bg-slate-100:hover,
-  button.bg-slate-50:hover,
-  button.bg-white\/70:hover,
-  button.bg-white\/80:hover {
-    background: rgba(255, 255, 255, 0.25) !important;
-    border-color: rgba(56, 189, 248, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25) !important;
-    transform: translateY(-1px) scale(1.01);
-  }
-
-  /* ── DARK MODE: boost all button visibility in .dark ─────── */
-  .dark button {
-    position: relative;
-  }
-
-  /* Transparent/ghost buttons in dark mode — make clearly visible */
-  .dark button.bg-transparent,
-  .dark button[class*="bg-slate-800"],
-  .dark button[class*="bg-slate-900"],
-  .dark button[class*="dark:bg-slate-800"] {
-    background: rgba(14, 42, 80, 0.85) !important;
-    color: #e2e8f0 !important;
-    border: 1px solid rgba(56, 189, 248, 0.25) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
-  }
-
-  .dark button.bg-transparent:hover,
-  .dark button[class*="bg-slate-800"]:hover,
-  .dark button[class*="bg-slate-900"]:hover {
-    background: rgba(14, 60, 110, 0.9) !important;
-    border-color: rgba(56, 189, 248, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2) !important;
-    transform: translateY(-1px);
-  }
-
-  /* ── EMERALD / success buttons ───────────────────────────── */
-  button.bg-emerald-600,
-  button.bg-emerald-500,
-  button.bg-teal-600,
-  button[class*="from-emerald"] {
-    color: #ffffff !important;
-    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4), 0 1px 3px rgba(0, 0, 0, 0.25) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  button.bg-emerald-600:hover,
-  button.bg-emerald-500:hover,
-  button.bg-teal-600:hover {
-    box-shadow: 0 8px 20px rgba(5, 150, 105, 0.55) !important;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ── AMBER / warning buttons ─────────────────────────────── */
-  button.bg-amber-600,
-  button.bg-amber-500,
-  button[class*="from-amber"] {
-    color: #1c1917 !important;
-    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4) !important;
-  }
-
-  button.bg-amber-600:hover,
-  button.bg-amber-500:hover {
-    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.55) !important;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ── Disabled state ──────────────────────────────────────── */
-  button:disabled {
-    opacity: 0.45 !important;
-    cursor: not-allowed !important;
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  /* ── Scrollbar dark theme ────────────────────────────────── */
-  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #1e3a5f;
-  }
+  box-shadow: inset 5px 5px 10px #0f172a, inset -5px -5px 10px #1e293b;
 }

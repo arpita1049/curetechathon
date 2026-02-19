@@ -172,7 +172,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     };
 
     return (
-        <div className="min-h-screen pb-32 pt-24 bg-transparent font-sans transition-colors duration-500">
+        <div className="min-h-screen pb-32 pt-24 bg-white dark:bg-slate-950 font-sans transition-colors duration-500">
             <div className="container mx-auto px-6 max-w-7xl relative">
                 {/* Background Blobs */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
@@ -202,7 +202,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                     <div className="relative group">
                         <div className="absolute inset-0 bg-amber-500/20 blur-2xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
-                        <div className="relative bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[3.5rem] border-2 border-slate-100 dark:border-white/10 shadow-2xl flex items-center gap-6">
+                        <div className="relative bg-white dark:bg-slate-900 p-8 rounded-[3.5rem] border-2 border-slate-100 dark:border-slate-800 shadow-2xl flex items-center gap-6">
                             <div className="p-4 bg-amber-500 rounded-3xl shadow-xl shadow-amber-500/20">
                                 <Flag className="w-10 h-10 text-white" />
                             </div>
@@ -222,7 +222,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Sticky Side Panel: Eligibility */}
                     <div className="lg:col-span-4 space-y-8 h-fit lg:sticky lg:top-32">
-                        <section className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-10 rounded-[4rem] border-2 border-slate-100 dark:border-white/10 shadow-2xl relative overflow-hidden">
+                        <section className="bg-white dark:bg-slate-900/50 backdrop-blur-3xl p-10 rounded-[4rem] border-2 border-slate-100 dark:border-slate-800 shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 rounded-full -translate-y-12 translate-x-12"></div>
 
                             <div className="relative z-10 space-y-10">
@@ -405,7 +405,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     initial={{ opacity: 0, scale: 0.98, y: 40 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.98, y: 40 }}
-                                    className="relative bg-white/80 dark:bg-[#0f2a47]/80 backdrop-blur-3xl rounded-[5rem] border-4 border-indigo-500/10 dark:border-white/5 p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden"
+                                    className="relative bg-white dark:bg-slate-900 rounded-[5rem] border-4 border-indigo-500/10 dark:border-white/5 p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden"
                                 >
                                     {/* Close Button Inside */}
                                     <button
@@ -526,7 +526,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         </AnimatePresence>
 
                         {/* FAQs Section */}
-                        <div className="space-y-12 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-16 rounded-[5rem] border-2 border-slate-100 dark:border-white/10 shadow-xl overflow-hidden relative">
+                        <div className="space-y-12 bg-white dark:bg-slate-900 p-16 rounded-[5rem] border-2 border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden relative">
                             <div className="absolute -left-12 -bottom-12 w-64 h-64 bg-indigo-500/5 rounded-full blur-[100px]"></div>
 
                             <div className="relative z-10 space-y-12">
@@ -558,7 +558,7 @@ const GovernmentSchemes: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 
@@ -602,7 +602,7 @@ const SchemeCard = ({ scheme, idx, isActive, onSelect, featured = false }: { sch
             whileHover={{ y: -8, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onSelect}
-            className={`group w-full p-10 rounded-[4rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 transition-all text-left overflow-hidden relative shadow-sm hover:shadow-2xl ${isActive ? `${colorClasses.border} ring-4 ${colorClasses.ring}` : 'border-slate-100 dark:border-white/10'}`}
+            className={`group w-full p-10 rounded-[4rem] bg-white dark:bg-slate-900 border-2 transition-all text-left overflow-hidden relative shadow-sm hover:shadow-2xl ${isActive ? `${colorClasses.border} ring-4 ${colorClasses.ring}` : 'border-slate-100 dark:border-slate-800'}`}
         >
             {/* Background Accent */}
             <div className={`absolute top-0 right-0 w-32 h-32 ${accentType === 'indigo' ? 'bg-indigo-500/5' : accentType === 'rose' ? 'bg-rose-500/5' : 'bg-amber-500/5'} group-hover:scale-150 transition-transform duration-700 rounded-bl-full`}></div>

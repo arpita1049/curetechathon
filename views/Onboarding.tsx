@@ -27,14 +27,14 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   return (
     <div className="animate-slide-up max-w-md mx-auto py-6">
       <div className="text-center mb-10">
-        <div className="inline-block p-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-3xl neo-shadow mb-4 border border-white/10">
+        <div className="inline-block p-4 bg-white rounded-3xl neo-shadow mb-4">
           <Activity className="w-10 h-10 text-teal-600" />
         </div>
         <h2 className="text-3xl font-extrabold text-teal-950 mb-2">SwasthyaSetu</h2>
         <p className="text-teal-700/60 font-medium">Your Health, Your Language, Your Life.</p>
       </div>
 
-      <div className="glass bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[2.5rem] neo-shadow border border-white/50 dark:border-white/10">
+      <div className="glass p-8 rounded-[2.5rem] neo-shadow border border-white/50">
         {step === 1 ? (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -56,7 +56,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => { setLang(l.name); setStep(2); }}
                   className={`p-5 flex items-center justify-between rounded-2xl border-2 transition-all group ${lang === l.name
                     ? 'border-teal-500 bg-teal-50/50 neo-shadow'
-                    : 'border-slate-100 dark:border-white/10 bg-white/70 dark:bg-[#0f2a47]/60 hover:border-teal-200'
+                    : 'border-slate-100 bg-white hover:border-teal-200'
                     }`}
                 >
                   <div className="flex items-center gap-4">
@@ -95,7 +95,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                       onComplete(r.id, lang);
                     }
                   }}
-                  className="w-full p-4 flex items-center gap-5 border-2 border-slate-50 dark:border-white/10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl hover:border-teal-400 hover:bg-teal-50/30 rounded-3xl transition-all group text-left neo-shadow"
+                  className="w-full p-4 flex items-center gap-5 border-2 border-slate-50 bg-white hover:border-teal-400 hover:bg-teal-50/30 rounded-3xl transition-all group text-left neo-shadow"
                 >
                   <div className={`p-4 ${r.color} text-white rounded-2xl neo-shadow group-hover:scale-105 transition-transform`}>
                     {React.cloneElement(r.icon as React.ReactElement<any>, { className: 'w-7 h-7' })}

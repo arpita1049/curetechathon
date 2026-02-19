@@ -48,7 +48,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center bg-transparent font-sans">
+      <div className="min-h-screen pt-24 pb-12 px-6 flex items-center justify-center bg-white dark:bg-slate-950 font-sans">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -84,7 +84,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-transparent font-sans transition-colors duration-500 relative overflow-hidden">
+    <div className="min-h-screen pt-24 pb-20 bg-white dark:bg-slate-950 font-sans transition-colors duration-500 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-sky-500/5 dark:bg-sky-500/10 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[100px] -z-10" />
@@ -131,7 +131,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                     <input
                       required
                       type="text"
-                      className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
+                      className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -148,7 +148,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                     <input
                       required
                       type="tel"
-                      className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
+                      className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
                       placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -166,7 +166,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                   <input
                     required
                     type="email"
-                    className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
+                    className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300"
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -184,7 +184,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                     <select
                       value={formData.specialty}
                       onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
-                      className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 cursor-pointer appearance-none"
+                      className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 cursor-pointer appearance-none"
                     >
                       <optgroup label="Consult a Doctor" className="dark:bg-slate-900 font-bold text-sky-600 dark:text-sky-400">
                         <option className="dark:bg-slate-900 text-slate-700 dark:text-slate-200">Family Physician</option>
@@ -218,7 +218,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                     <input
                       required
                       type="date"
-                      className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 cursor-pointer"
+                      className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 cursor-pointer"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     />
@@ -234,7 +234,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
                   </div>
                   <textarea
                     rows={4}
-                    className="w-full pl-20 pr-6 py-5 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300 resize-none"
+                    className="w-full pl-20 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-slate-900 dark:text-white outline-none focus:border-sky-500 transition-all shadow-sm focus:shadow-xl focus:shadow-sky-500/10 placeholder:text-slate-300 resize-none"
                     placeholder="Briefly describe your symptoms..."
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -290,7 +290,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({ onBack }) => {
             </div>
 
             {/* Why Book Online */}
-            <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-10 rounded-[3rem] border-2 border-slate-100 dark:border-white/10 shadow-xl space-y-8">
+            <div className="bg-white dark:bg-slate-900 p-10 rounded-[3rem] border-2 border-slate-100 dark:border-slate-800 shadow-xl space-y-8">
               <div className="space-y-4">
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white">Why book online?</h3>
                 <p className="text-slate-500 font-bold text-sm">Skip the queue and manage your health efficiently.</p>

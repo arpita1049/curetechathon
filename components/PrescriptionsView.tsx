@@ -7,38 +7,10 @@ import {
     ChevronRight, Brain, Info
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5000/doctor';
-
 const PrescriptionsView: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [prescriptionsData, setPrescriptionsData] = React.useState<any[]>([]);
-    const [isLoading, setIsLoading] = React.useState(true);
 
-    React.useEffect(() => {
-        const fetchPrescriptions = async () => {
-            try {
-                const res = await fetch(`${API_BASE}/prescriptions`);
-                if (res.ok) {
-                    const data = await res.json();
-                    setPrescriptionsData(data.data);
-                }
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchPrescriptions();
-    }, []);
-
-    const prescriptions = prescriptionsData.length > 0 ? prescriptionsData.map(p => ({
-        id: p._id.substring(0, 8).toUpperCase(),
-        patient: p.caseId?.patientId?.name || "Unknown",
-        date: new Date(p.createdAt).toLocaleDateString(),
-        drug: p.medications?.[0]?.name || "General Medicine",
-        status: 'VERIFIED',
-        risk: 'LOW'
-    })) : [
+    const prescriptions = [
         { id: 'RX-7201', patient: 'Arpita Sharma', date: 'Feb 18, 2026', drug: 'Amlodipine + Metformin', status: 'VERIFIED', risk: 'LOW' },
         { id: 'RX-7155', patient: 'Rahul Verma', date: 'Feb 15, 2026', drug: 'Atorvastatin Node Protocol', status: 'ACTIVE', risk: 'MEDIUM' },
         { id: 'RX-7092', patient: 'Priya Das', date: 'Feb 12, 2026', drug: 'Azithromycin (5 days)', status: 'COMPLETED', risk: 'LOW' },
@@ -73,7 +45,7 @@ const PrescriptionsView: React.FC = () => {
                             placeholder="Patient ID or Rx Ref..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-14 pr-6 py-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border border-white/20 dark:border-white/10 rounded-2xl outline-none font-bold text-xs"
+                            className="w-full pl-14 pr-6 py-4 bg-white/70 dark:bg-slate-900/40 backdrop-blur-3xl border border-white/20 rounded-2xl outline-none font-bold text-xs"
                         />
                     </div>
                     <button className="flex items-center gap-3 px-8 py-5 bg-indigo-600 rounded-2xl text-white font-black uppercase text-[10px] tracking-widest shadow-2xl shadow-indigo-500/20 hover:scale-105 transition-all">
@@ -98,7 +70,7 @@ const PrescriptionsView: React.FC = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className="p-8 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[2.5rem] border border-white/20 dark:border-white/10 hover:border-indigo-500/30 transition-all shadow-2xl flex items-center group"
+                            className="p-8 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[2.5rem] border border-white/20 dark:border-slate-800 hover:border-indigo-500/30 transition-all shadow-2xl flex items-center group"
                         >
                             <div className="col-span-1 flex-1 flex flex-col">
                                 <h4 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none mb-1">{rx.patient}</h4>
@@ -163,7 +135,7 @@ const PrescriptionsView: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="p-10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl">
+                    <div className="p-10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl">
                         <h4 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-8">Pharmacy Node Status</h4>
                         <div className="space-y-6">
                             {[

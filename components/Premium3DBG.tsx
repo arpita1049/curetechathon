@@ -75,7 +75,7 @@ const ECGWave = () => {
 
 const Premium3DBG: React.FC = () => {
     return (
-        <div className="fixed inset-0 z-[-1] bg-transparent transition-colors duration-700">
+        <div className="fixed inset-0 z-[-1] bg-slate-50 dark:bg-black transition-colors duration-700">
             {/* 3D Particle Layer */}
             <div className="absolute inset-0 z-0">
                 <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>

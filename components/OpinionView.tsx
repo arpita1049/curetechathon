@@ -62,21 +62,21 @@ const OpinionView: React.FC = () => {
 
             {/* Quick Consultation Hub */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div className="p-10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl flex flex-col items-center text-center">
+                <div className="p-10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl flex flex-col items-center text-center">
                     <MessageSquare className="w-12 h-12 text-indigo-500 mb-6" />
                     <h4 className="text-2xl font-black uppercase tracking-tighter mb-4">Direct Messaging</h4>
                     <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mb-8">Secure encrypted clinical communication with regional specialists.</p>
                     <button className="w-full py-4 bg-slate-100 dark:bg-slate-800 rounded-2xl font-black uppercase text-[10px] tracking-widest text-slate-500 hover:bg-indigo-600 hover:text-white transition-all">Open Terminal</button>
                 </div>
 
-                <div className="p-10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl flex flex-col items-center text-center">
+                <div className="p-10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl flex flex-col items-center text-center">
                     <Globe className="w-12 h-12 text-sky-500 mb-6" />
                     <h4 className="text-2xl font-black uppercase tracking-tighter mb-4">Regional Referrals</h4>
                     <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mb-8">Streamlined transfer protocols to tertiary healthcare centers.</p>
                     <button className="w-full py-4 bg-slate-100 dark:bg-slate-800 rounded-2xl font-black uppercase text-[10px] tracking-widest text-slate-500 hover:bg-sky-600 hover:text-white transition-all">Initiate Refer</button>
                 </div>
 
-                <div className="p-10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl flex flex-col items-center text-center">
+                <div className="p-10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl flex flex-col items-center text-center">
                     <ShieldCheck className="w-12 h-12 text-emerald-500 mb-6" />
                     <h4 className="text-2xl font-black uppercase tracking-tighter mb-4">Compliance Node</h4>
                     <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mb-8">Audit and verification of external clinical decisions.</p>

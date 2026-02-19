@@ -82,7 +82,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t, onAuthSucces
 
   return (
     <div className="container mx-auto px-6 py-12 flex items-center justify-center min-h-[70vh] animate-bounce-down transition-colors perspective-1000">
-      <div className={`w-full max-w-5xl flex flex-col md:flex-row bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100 dark:border-white/10 transition-all duration-500 ${isDoctor ? 'shadow-indigo-500/20' : 'shadow-teal-500/20'}`}>
+      <div className={`w-full max-w-5xl flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all duration-500 ${isDoctor ? 'shadow-indigo-500/20' : 'shadow-teal-500/20'}`}>
 
         {/* Visual Panel */}
         <div className={`hidden md:flex md:w-1/2 ${isDoctor ? 'bg-indigo-900' : 'bg-teal-900'} p-12 text-white flex-col justify-between relative overflow-hidden transition-colors duration-500`}>
@@ -111,7 +111,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t, onAuthSucces
         {/* Form Panel */}
         <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
           <div className="mb-8">
-            <div className="flex p-1 bg-slate-100 dark:bg-[#0a192f]/60 rounded-2xl mb-8">
+            <div className="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl mb-8">
               <button
                 type="button"
                 onClick={() => setRole(UserRole.PATIENT)}

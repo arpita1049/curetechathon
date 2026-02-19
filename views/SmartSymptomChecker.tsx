@@ -138,9 +138,9 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
     // Render Chat Interface
     if (stage === 'CHAT') {
         return (
-            <div className="flex flex-col h-[calc(100vh-100px)] bg-slate-50/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[2.5rem] overflow-hidden neo-shadow border border-white dark:border-white/10 relative shadow-2xl">
+            <div className="flex flex-col h-[calc(100vh-100px)] bg-slate-50 dark:bg-slate-950 rounded-[2.5rem] overflow-hidden neo-shadow border border-white dark:border-slate-800 relative shadow-2xl">
                 {/* Header */}
-                <div className="bg-white/90 dark:bg-[#0f2a47]/80 p-6 flex justify-between items-center backdrop-blur-md border-b border-teal-50 dark:border-white/10 z-10 sticky top-0 shadow-sm">
+                <div className="bg-white/90 dark:bg-slate-900/90 p-6 flex justify-between items-center backdrop-blur-md border-b border-teal-50 dark:border-slate-800 z-10 sticky top-0 shadow-sm">
                     <button onClick={onBack} className="p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors text-slate-500 dark:text-slate-400">
                         <ChevronRight className="w-8 h-8 rotate-180" />
                     </button>
@@ -152,7 +152,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
                 </div>
 
                 {/* Chat Area */}
-                <div className="flex-grow overflow-y-auto p-8 space-y-8 custom-scrollbar bg-transparent relative">
+                <div className="flex-grow overflow-y-auto p-8 space-y-8 custom-scrollbar bg-white dark:bg-slate-950 relative">
                     {/* Background Glows for Color Density */}
                     <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-500/5 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-rose-500/5 rounded-full blur-[100px]"></div>
@@ -192,7 +192,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
                 </div>
 
                 {/* Input Area */}
-                <div className="p-8 bg-white/70 dark:bg-[#0f2a47]/60 border-t-2 border-slate-100 dark:border-white/10">
+                <div className="p-8 bg-white dark:bg-slate-900 border-t-2 border-slate-100 dark:border-slate-800">
                     <div className="flex items-center bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] p-3 focus-within:ring-8 focus-within:ring-fuchsia-500/10 focus-within:border-fuchsia-500/40 transition-all border-2 border-transparent shadow-inner group">
                         <button
                             onClick={() => {
@@ -247,7 +247,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
     // Analyzing State
     if (stage === 'ANALYSING') {
         return (
-            <div className="flex flex-col items-center justify-center h-[600px] text-center p-8 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-white/10 relative overflow-hidden">
+            <div className="flex flex-col items-center justify-center h-[600px] text-center p-8 bg-white dark:bg-slate-900 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-slate-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-tr from-teal-50/50 to-indigo-50/50 dark:from-teal-950/30 dark:to-indigo-950/30 animate-pulse"></div>
                 <div className="relative z-10 scale-125">
                     <div className="w-32 h-32 mb-8 mx-auto relative">
@@ -321,7 +321,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
 
             {/* 2. Action Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-white/10 hover:border-teal-200 dark:hover:border-teal-700 transition-colors group shadow-lg">
+                <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-slate-800 hover:border-teal-200 dark:hover:border-teal-700 transition-colors group shadow-lg">
                     <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/50 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
                         <Stethoscope className="w-8 h-8" />
                     </div>
@@ -334,7 +334,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
                     </button>
                 </div>
 
-                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-white/10 hover:border-teal-200 dark:hover:border-teal-700 transition-colors group shadow-lg">
+                <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-slate-800 hover:border-teal-200 dark:hover:border-teal-700 transition-colors group shadow-lg">
                     <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/50 rounded-2xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
                         <Shield className="w-8 h-8" />
                     </div>
@@ -351,7 +351,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
             {/* Remedies Modal */}
             {showRemedies && analysisResult && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white dark:bg-[#0f2a47]/90 backdrop-blur-3xl w-full max-w-lg rounded-[2.5rem] p-8 relative shadow-2xl animate-in zoom-in-95 duration-200 border border-teal-50 dark:border-white/10">
+                    <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-[2.5rem] p-8 relative shadow-2xl animate-in zoom-in-95 duration-200 border border-teal-50 dark:border-slate-800">
                         <button
                             onClick={() => setShowRemedies(false)}
                             className="absolute top-6 right-6 p-2 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
@@ -416,7 +416,7 @@ export default function SmartSymptomChecker({ onBack, onConsultDoctor }: SmartSy
 
             {/* 3. Cost & Info Section */}
             <div className="space-y-6">
-                <div className="bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-white/10 shadow-lg">
+                <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] neo-shadow border border-teal-50 dark:border-slate-800 shadow-lg">
                     <h4 className="text-xl font-black text-teal-950 dark:text-white flex items-center gap-3 mb-6">
                         <DollarSign className="w-6 h-6 text-amber-500 dark:text-amber-400" />
                         Estimated Treatment Cost

@@ -37,7 +37,7 @@ const EmergencyPortal: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-transparent p-6">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
             <div className="max-w-6xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -57,7 +57,7 @@ const EmergencyPortal: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     {/* SOS Trigger */}
-                    <div className="flex flex-col items-center justify-center p-12 rounded-[4rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 shadow-sm space-y-10 relative overflow-hidden">
+                    <div className="flex flex-col items-center justify-center p-12 rounded-[4rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-sm space-y-10 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/5 rounded-full -translate-y-12 translate-x-12 blur-3xl"></div>
 
                         <div className="text-center space-y-4">
@@ -139,7 +139,7 @@ const EmergencyPortal: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="p-6 rounded-[2.5rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border-2 border-slate-100 dark:border-white/10 flex items-center gap-6 shadow-sm group hover:border-rose-500/30 transition-all"
+                                    className="p-6 rounded-[2.5rem] bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 flex items-center gap-6 shadow-sm group hover:border-rose-500/30 transition-all"
                                 >
                                     <div className="w-16 h-16 bg-rose-50 dark:bg-rose-900/20 rounded-2xl flex items-center justify-center text-rose-600 group-hover:scale-110 transition-transform">
                                         <Activity className="w-8 h-8" />

@@ -31,7 +31,7 @@ const Emergency: React.FC<EmergencyProps> = ({ onBack, t }) => {
                     {contacts.map((contact, i) => (
                         <button
                             key={i}
-                            className="group p-8 rounded-[3rem] bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl border border-slate-100 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 text-left relative overflow-hidden"
+                            className="group p-8 rounded-[3rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 text-left relative overflow-hidden"
                             onClick={() => window.open(`tel:${contact.number}`)}
                         >
                             <div className={`${contact.color} w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
@@ -48,7 +48,7 @@ const Emergency: React.FC<EmergencyProps> = ({ onBack, t }) => {
 
                 {/* Live Location & Actions */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="glass p-10 rounded-[3.5rem] space-y-8 border border-white/40 dark:border-white/10">
+                    <div className="glass p-10 rounded-[3.5rem] space-y-8 border border-white/40 dark:border-slate-800/50">
                         <h2 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
                             <MapPin className="text-red-600" /> {t.location}
                         </h2>
@@ -71,7 +71,7 @@ const Emergency: React.FC<EmergencyProps> = ({ onBack, t }) => {
                     </div>
 
                     <div className="space-y-8">
-                        <div className="p-8 bg-emerald-500/10 dark:bg-emerald-900/30 backdrop-blur-3xl rounded-[3rem] border border-emerald-100 dark:border-white/10 flex gap-6">
+                        <div className="p-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-[3rem] border border-emerald-100 dark:border-emerald-800/30 flex gap-6">
                             <div className="w-16 h-16 shrink-0 bg-emerald-500 text-white rounded-2xl flex items-center justify-center shadow-lg">
                                 <Heart className="w-8 h-8" />
                             </div>
@@ -84,7 +84,7 @@ const Emergency: React.FC<EmergencyProps> = ({ onBack, t }) => {
                             </div>
                         </div>
 
-                        <div className="p-8 bg-[#0a192f]/90 text-white rounded-[3rem] shadow-2xl space-y-6 backdrop-blur-3xl border border-white/10">
+                        <div className="p-8 bg-slate-900 text-white rounded-[3rem] shadow-2xl space-y-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-xl font-black">CURE Nearest Hubs</h3>
                                 <span className="px-4 py-1.5 bg-sky-500/20 text-sky-400 rounded-full text-xs font-black uppercase tracking-widest">Live Status</span>

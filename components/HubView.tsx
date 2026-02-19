@@ -8,36 +8,8 @@ import {
     Zap, Activity
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5000/doctor';
-
 const HubView: React.FC = () => {
-    const [hubCases, setHubCases] = React.useState<any[]>([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-
-    React.useEffect(() => {
-        const fetchHub = async () => {
-            try {
-                const res = await fetch(`${API_BASE}/clinical-hub`);
-                if (res.ok) {
-                    const data = await res.json();
-                    setHubCases(data.data);
-                }
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchHub();
-    }, []);
-
-    const articles = hubCases.length > 0 ? hubCases.map(c => ({
-        t: `Resolved Case: ${c.chiefComplaint || 'Consultation'}`,
-        a: c.patientId?.name || "Anonymous",
-        d: new Date(c.updatedAt).toLocaleDateString(),
-        c: c.riskLevel === 'CRITICAL' ? 'rose' : 'indigo',
-        type: 'RESOLVED_CASE'
-    })) : [
+    const articles = [
         { t: "Updated ICU Protocol for Myocardial Infarction v2.4", a: "Clinical Board", d: "2h ago", c: "indigo", type: "PROTOCOL" },
         { t: "Predictive AI models in early stage Parkinson's detection", a: "Neural Research", d: "1d ago", c: "sky", type: "RESEARCH" },
         { t: "Management of resistant Tuberculosis in rural grids", a: "Public Health", d: "3d ago", c: "amber", type: "GUIDELINE" },

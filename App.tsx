@@ -10,7 +10,7 @@ import ServiceDetail from './views/ServiceDetail';
 import Emergency from './views/Emergency';
 import AIAssistant from './components/AIAssistant';
 import { UserRole } from './types';
-import { Activity, LogOut, Globe, ChevronDown, PhoneCall, Sun, Moon } from 'lucide-react';
+import { Activity, LogOut, Globe, ChevronDown, PhoneCall } from 'lucide-react';
 import MedicineSideEffects from './components/MedicineSideEffects';
 import PreventiveCare from './components/PreventiveCare';
 import GovernmentSchemes from './components/GovernmentSchemes';
@@ -19,6 +19,7 @@ import Pharmacy from './components/Pharmacy';
 import { auth } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { translations } from './translations';
+import ChromaGrid from './components/ChromaGrid';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -137,19 +138,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-transparent transition-colors duration-300">
+    <div className="relative min-h-screen transition-colors duration-300">
       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-        {/* AI Healthcare image — lightly visible behind dark blue */}
-        <img
-          src="/ai.jpeg.jpg"
-          alt="AI Healthcare Background"
-          className="absolute inset-0 w-full h-full object-cover object-center scale-105"
-          style={{ filter: 'brightness(0.65) saturate(1.3) blur(5px)' }}
-        />
-        {/* Deep dark navy blue overlay */}
-        <div className="absolute inset-0 bg-[#061120]/85" />
-        {/* Faint cyan core glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_50%,_rgba(56,189,248,0.07)_0%,_transparent_70%)]" />
+        <ChromaGrid className="z-0 opacity-50" />
+        <img src="/bg-custom.jpg" alt="Healthcare Background" className="absolute inset-0 w-full h-full object-cover opacity-50 transition-opacity duration-700 brightness-[0.7] dark:brightness-[0.4]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-white/30 dark:from-slate-950/80 dark:via-transparent dark:to-slate-950/80 backdrop-blur-[1px]"></div>
       </div>
 
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || currentView !== 'landing' ? 'glass py-3' : 'bg-transparent py-6'}`}>
@@ -267,7 +260,7 @@ const App: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setShowLangMenu(!showLangMenu)}
-                  className="flex items-center gap-2 px-5 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl bg-white/80 dark:bg-black/60 backdrop-blur-md text-slate-600 dark:text-slate-300 border-2 border-slate-200 dark:border-white/10 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-2 border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-300"
                   title="Change Language"
                 >
                   <Globe className="w-5 h-5" />
@@ -276,7 +269,7 @@ const App: React.FC = () => {
                 </button>
 
                 {showLangMenu && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-black border-2 border-slate-200 dark:border-white/10 rounded-2xl shadow-xl z-[60] py-2 overflow-hidden animate-in fade-in zoom-in duration-200">
+                  <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-[60] py-2 overflow-hidden animate-in fade-in zoom-in duration-200">
                     {['english', 'hindi', 'marathi'].map((lang) => (
                       <button
                         key={lang}
@@ -297,14 +290,6 @@ const App: React.FC = () => {
               </div>
 
               <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-3.5 rounded-2xl bg-white/80 dark:bg-black/60 backdrop-blur-md border-2 border-slate-200 dark:border-white/10 text-slate-600 dark:text-amber-400 transition-all hover:scale-110 active:scale-95"
-                title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Deep Black Mode"}
-              >
-                {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-              </button>
-
-              <button
                 className={`relative overflow-hidden group flex items-center gap-3 px-8 py-3.5 text-lg font-black uppercase tracking-wide rounded-2xl transition-all duration-300 ${currentView === 'emergency'
                   ? 'bg-red-700 text-white scale-105 shadow-2xl shadow-red-600/50'
                   : 'bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 text-white shadow-2xl shadow-red-600/40 hover:scale-110'
@@ -320,7 +305,7 @@ const App: React.FC = () => {
       </nav>
 
       <main className={`transition-all duration-500 ${currentView !== 'landing' ? 'pt-24 min-h-[80vh]' : ''}`}>
-        <div className={`bg-transparent ${currentView === 'login' || currentView === 'signup' || currentView === 'dashboard' || currentView === 'onboarding' ? 'w-full px-12 pb-20' : ''}`}>
+        <div className={currentView === 'login' || currentView === 'signup' || currentView === 'dashboard' || currentView === 'onboarding' ? 'w-full px-12 pb-20' : ''}>
           {renderContent()}
         </div>
       </main>

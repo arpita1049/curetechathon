@@ -7,38 +7,8 @@ import {
     ChevronLeft, Plus
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5000/doctor';
-
 const AppointmentsView: React.FC = () => {
-    const [appointments, setAppointments] = React.useState<any[]>([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-
-    React.useEffect(() => {
-        const fetchAppointments = async () => {
-            try {
-                const res = await fetch(`${API_BASE}/appointments`);
-                if (res.ok) {
-                    const data = await res.json();
-                    setAppointments(data.data);
-                }
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchAppointments();
-    }, []);
-
-    const timeSlots = appointments.length > 0 ? appointments.map(app => ({
-        time: new Date(app.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: app.status === 'COMPLETED' ? 'PAST' : app.status === 'SCHEDULED' ? 'PENDING' : 'CANCELLED',
-        patient: app.patientId?.name || "Unknown",
-        type: app.reason || "Consultation",
-        duration: '30m',
-        mode: app.notes?.includes('TELEHEALTH') ? 'TELEHEALTH' : 'IN-PERSON',
-        active: app.status === 'SCHEDULED' && new Date(app.date).getTime() < Date.now() + 3600000 && new Date(app.date).getTime() > Date.now() - 3600000
-    })) : [
+    const timeSlots = [
         { time: '09:00 AM', status: 'PAST', patient: 'Rahul Verma', type: 'Clinical Review', duration: '30m', mode: 'IN-PERSON' },
         { time: '10:00 AM', status: 'ACTIVE', patient: 'Arpita Sharma', type: 'Neural Scan Progress', duration: '45m', mode: 'TELEHEALTH', active: true },
         { time: '11:30 AM', status: 'PENDING', patient: 'Priya Das', type: 'Follow-up', duration: '20m', mode: 'IN-PERSON' },
@@ -65,7 +35,7 @@ const AppointmentsView: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-2xl p-2 rounded-[2rem] border border-white/20 dark:border-white/10 shadow-xl">
+                <div className="flex items-center gap-4 bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl p-2 rounded-[2rem] border border-white/20 shadow-xl">
                     <button className="p-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-2xl transition-all">
                         <ChevronLeft className="w-5 h-5 text-slate-500" />
                     </button>
@@ -92,7 +62,7 @@ const AppointmentsView: React.FC = () => {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`p-8 rounded-[3rem] border-2 transition-all group relative overflow-hidden flex items-center gap-10 ${slot.active ? 'bg-indigo-600 border-indigo-600 text-white shadow-3xl shadow-indigo-500/40' : (slot.status === 'LUNCH' ? 'bg-slate-100 dark:bg-[#0f2a47]/20 border-transparent opacity-60' : 'bg-white/70 dark:bg-[#0f2a47]/40 border-white/10 dark:border-white/10 hover:border-indigo-500/30 shadow-2xl')}`}
+                            className={`p-8 rounded-[3rem] border-2 transition-all group relative overflow-hidden flex items-center gap-10 ${slot.active ? 'bg-indigo-600 border-indigo-600 text-white shadow-3xl shadow-indigo-500/40' : (slot.status === 'LUNCH' ? 'bg-slate-100 dark:bg-slate-800/20 border-transparent opacity-60' : 'bg-white/70 dark:bg-slate-900/40 border-white/10 dark:border-slate-800 hover:border-indigo-500/30 shadow-2xl')}`}
                         >
                             {slot.active && (
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24 animate-pulse" />
@@ -153,7 +123,7 @@ const AppointmentsView: React.FC = () => {
                         <span className="text-[9px] font-black uppercase tracking-widest mt-4 block text-amber-200">85% Session Saturation</span>
                     </div>
 
-                    <div className="p-10 bg-white/70 dark:bg-[#0f2a47]/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-white/10 shadow-2xl">
+                    <div className="p-10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[3rem] border border-white/20 dark:border-slate-800 shadow-2xl">
                         <h4 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-8">Quick Actions</h4>
                         <div className="space-y-4">
                             {[
