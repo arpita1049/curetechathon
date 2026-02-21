@@ -45,9 +45,9 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
     const NavButton = ({ icon: Icon, label, view }: { icon: any, label: string, view: DashboardView }) => (
         <button
             onClick={() => setCurrentView(view)}
-            className={`flex flex-col items-center gap-1 transition-all duration-500 ${currentView === view ? 'text-teal-400 scale-125' : 'text-slate-400 hover:text-slate-200'}`}
+            className={`flex flex-col items-center gap-1 transition-all duration-500 ${currentView === view ? 'text-indigo-400 scale-125' : 'text-slate-400 hover:text-slate-200'}`}
         >
-            <Icon className={`w-6 h-6 ${currentView === view ? 'fill-current drop-shadow-[0_0_8px_rgba(45,212,191,0.6)]' : ''}`} />
+            <Icon className={`w-6 h-6 ${currentView === view ? 'fill-current drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]' : ''}`} />
             <span className="text-[10px] font-black uppercase tracking-widest">{label}</span>
         </button>
     );
@@ -74,7 +74,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
             </div>
             <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">{label}</h3>
             <p className="text-sm font-bold text-slate-500 dark:text-slate-400 leading-relaxed mb-6">{desc}</p>
-            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
                 INITIATE PROTOCOL <ChevronRight className="w-3 h-3 group-hover:translate-x-2 transition-transform" />
             </div>
         </motion.button>
@@ -85,13 +85,13 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
             {/* Ultra Premium Hero Section */}
             <header className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8">
                 <div className="lg:col-span-7 space-y-8 animate-fade-in-up">
-                    <div className="inline-flex items-center gap-3 px-6 py-2 bg-teal-500/10 border border-teal-500/20 rounded-full text-teal-600 dark:text-teal-400 text-xs font-black uppercase tracking-widest">
-                        <div className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" /> AI HEALTH SYSTEM v2.4
+                    <div className="inline-flex items-center gap-3 px-6 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-600 dark:text-indigo-400 text-xs font-black uppercase tracking-widest">
+                        <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" /> AI HEALTH SYSTEM v2.4
                     </div>
                     <div className="space-y-2">
                         <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]">
                             Welcome back, <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-500 to-blue-600">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-500 to-blue-600">
                                 {user?.displayName || 'Arpita'}
                             </span> 👋
                         </h1>
@@ -102,7 +102,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
 
                     <div className="flex gap-4">
                         {[
-                            { l: 'Steps', v: '8.4k', c: 'teal', i: Footprints },
+                            { l: 'Steps', v: '8.4k', c: 'indigo', i: Footprints },
                             { l: 'BPM', v: '72', c: 'red', i: Heart },
                             { l: 'O2', v: '99%', c: 'blue', i: Droplets }
                         ].map((stat, i) => (stat &&
@@ -126,7 +126,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                 </div>
 
                 <div className="lg:col-span-5 relative flex justify-center items-center h-[400px]">
-                    <div className="absolute inset-0 bg-teal-500/20 blur-[120px] rounded-full animate-pulse" />
+                    <div className="absolute inset-0 bg-indigo-500/20 blur-[120px] rounded-full animate-pulse" />
                     <div className="w-full h-full relative z-10 scale-125">
                         <HealthScore3D score={85} />
                     </div>
@@ -140,7 +140,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                     <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Active System Protocols</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <FeatureCard icon={Zap} label="AI Checkup" desc="Conversational triage engine with symptom deep-dive." color="teal" view="SYMPTOM" delay={0.1} tag="AI Powered" />
+                    <FeatureCard icon={Zap} label="AI Checkup" desc="Conversational triage engine with symptom deep-dive." color="indigo" view="SYMPTOM" delay={0.1} tag="AI Powered" />
                     <FeatureCard icon={Calendar} label="Book Doctor" desc="Secure clinical allocation with live slot verified." color="blue" view="APPOINTMENTS" delay={0.2} tag="Verified Slots" />
                     <FeatureCard icon={FileText} label="Health Locker" desc="Quantum-encrypted vault for medical artifacts." color="emerald" view="RECORDS" delay={0.3} tag="Encrypted" />
                     <FeatureCard icon={Shield} label="Preventive Care" desc="Risk topography & wellness trajectory prediction." color="indigo" view="PREVENTIVE" delay={0.4} tag="Proactive" />
@@ -156,7 +156,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                     {[
                         { t: 'Vitamin D Synthesis', d: 'Your current sleep pattern suggests a 15% increase in cortisol. Recommended morning sun exposure for 15 mins.', i: <Zap className="text-amber-500" />, b: 'from-amber-500/20 to-orange-500/20' },
                         { t: 'Hydration Recovery', d: 'Physical exertion detected. Increased hydration required by 800ml to maintain metabolic stability.', i: <Droplets className="text-blue-500" />, b: 'from-blue-500/20 to-indigo-500/20' },
-                        { t: 'Posture Correction', d: 'Extended desk time detected. Micro-stretch sequence suggested for cervical decompression.', i: <Activity className="text-emerald-500" />, b: 'from-emerald-500/20 to-teal-500/20' }
+                        { t: 'Posture Correction', d: 'Extended desk time detected. Micro-stretch sequence suggested for cervical decompression.', i: <Activity className="text-indigo-500" />, b: 'from-indigo-500/20 to-blue-500/20' }
                     ].map((insight, i) => (
                         <motion.div
                             key={i}
@@ -199,12 +199,12 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                     onClick={() => setCurrentView('COST')}
                     className="p-10 rounded-[3rem] bg-slate-900 text-white shadow-2xl relative overflow-hidden group text-left"
                 >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/20 rounded-full blur-[80px] -mr-32 -mt-32" />
-                    <div className="absolute top-4 right-8 px-3 py-1 bg-white/10 rounded-full text-[10px] font-black text-teal-400 uppercase tracking-widest">Global Tier</div>
-                    <DollarSign className="w-12 h-12 text-teal-400 mb-6 group-hover:scale-110 transition-transform" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-[80px] -mr-32 -mt-32" />
+                    <div className="absolute top-4 right-8 px-3 py-1 bg-white/10 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-widest">Global Tier</div>
+                    <DollarSign className="w-12 h-12 text-indigo-400 mb-6 group-hover:scale-110 transition-transform" />
                     <h3 className="text-3xl font-black mb-2 uppercase leading-none">Cost<br />Analytics</h3>
                     <p className="text-slate-400 font-bold mb-6 text-sm">Compare regional hospital yields, insurance coverage & out-of-pocket benchmarks.</p>
-                    <div className="flex items-center gap-2 text-[10px] font-black text-teal-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                         OPEN PRICE HUB <ArrowRight className="w-3 h-3" />
                     </div>
                 </motion.button>
@@ -227,7 +227,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
     );
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-black font-sans transition-colors duration-500 relative perspective-1000">
+        <div className="min-h-screen bg-slate-50 dark:bg-[#0B1426] font-sans transition-colors duration-500 relative perspective-1000">
             <Premium3DBG />
 
             {/* Main Surface */}
@@ -246,7 +246,7 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                     {currentView === 'TRACKER' && <DailyHealthTracker key="tracker" onBack={() => setCurrentView('HOME')} />}
                     {currentView === 'PROFILE' && (
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="pb-32 text-center p-20 bg-white/50 dark:bg-slate-900/50 backdrop-blur-3xl rounded-[4rem] border border-white/20 dark:border-slate-800">
-                            <User className="w-24 h-24 mx-auto text-teal-600 mb-10" />
+                            <User className="w-24 h-24 mx-auto text-indigo-600 mb-10" />
                             <h2 className="text-5xl font-black mb-6 tracking-tighter">Bio-Profile Management</h2>
                             <p className="text-slate-500 font-black mb-12 uppercase tracking-widest text-xs italic">Encrypted patient identity verified</p>
                             <button onClick={onLogout} className="px-12 py-5 bg-rose-600 text-white rounded-2xl font-black uppercase tracking-widest shadow-2xl shadow-rose-500/30 hover:scale-105 active:scale-95 transition-all">TERMINATE SESSION</button>
@@ -266,10 +266,10 @@ const PatientDashboard: React.FC<PatientDashboardProps> = ({ onLogout, user }) =
                         whileHover={{ scale: 1.1, y: -5 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => setCurrentView('SYMPTOM')}
-                        className="w-20 h-20 -mt-20 bg-gradient-to-br from-teal-400 via-emerald-500 to-blue-600 rounded-full flex items-center justify-center text-white shadow-[0_20px_40px_-10px_rgba(20,184,166,0.6)] border-4 border-white dark:border-slate-900 group relative"
+                        className="w-20 h-20 -mt-20 bg-gradient-to-br from-indigo-400 via-violet-500 to-blue-600 rounded-full flex items-center justify-center text-white shadow-[0_20px_40px_-10px_rgba(99,102,241,0.6)] border-4 border-white dark:border-slate-900 group relative"
                     >
                         <Zap className="w-8 h-8 group-hover:animate-pulse" />
-                        <div className="absolute -bottom-8 whitespace-nowrap text-[10px] font-black uppercase tracking-widest text-teal-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute -bottom-8 whitespace-nowrap text-[10px] font-black uppercase tracking-widest text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity">
                             Quick Check
                         </div>
                     </motion.button>

@@ -17,13 +17,28 @@ const Emergency: React.FC<EmergencyProps> = ({ onBack, t }) => {
     return (
         <div className="animate-in fade-in slide-in-from-bottom-5 duration-700">
             <div className="max-w-4xl mx-auto space-y-10">
-                {/* Header */}
-                <div className="text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-3xl animate-pulse">
-                        <ShieldAlert className="w-10 h-10" />
+                {/* Header with Image */}
+                <div className="relative rounded-[4rem] overflow-hidden group shadow-2xl border-4 border-white/10 h-[400px] mb-12">
+                    <img
+                        src="/bg-ai.jpg"
+                        alt="Emergency Response"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-red-950 via-red-900/40 to-transparent opacity-90"></div>
+
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-10 text-center space-y-4">
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-xl text-white rounded-3xl animate-pulse border border-white/30">
+                            <ShieldAlert className="w-10 h-10" />
+                        </div>
+                        <h1 className="text-6xl font-black text-white tracking-tight drop-shadow-2xl">{t.title}</h1>
+                        <p className="text-xl text-white/80 font-bold max-w-xl drop-shadow-lg">{t.desc}</p>
                     </div>
-                    <h1 className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">{t.title}</h1>
-                    <p className="text-xl text-slate-500 dark:text-slate-400 font-medium">{t.desc}</p>
+
+                    {/* Floating SOS Badge */}
+                    <div className="absolute top-8 right-8 px-6 py-2 bg-red-600/30 backdrop-blur-xl border border-red-500/30 rounded-full flex items-center gap-2">
+                        <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+                        <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Priority SOS Link</span>
+                    </div>
                 </div>
 
                 {/* Rapid Dial Grid */}

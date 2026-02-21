@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Shield, Users, Clock, Heart, ArrowRight, Star, Stethoscope, Microscope, Baby, Pill, Activity, PhoneCall, Zap, Quote, Search, CheckCircle2 } from 'lucide-react';
-import CardSwap, { Card } from '../components/CardSwap';
+
 import BlurText from '../components/BlurText';
 import TrueFocus from '../components/TrueFocus';
 import ChromaCards from '../components/ChromaCards';
@@ -216,46 +216,41 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
               </button>
             </div>
           </div>
-          {/* Right column: Dynamic Card Swap */}
-          <div className="hidden lg:flex justify-center items-center min-h-[600px] relative animate-slide-up [animation-delay:400ms]">
-            <CardSwap
-              width={450}
-              height={550}
-              cardDistance={40}
-              verticalDistance={50}
-              delay={5000}
-              pauseOnHover={true}
-              skewAmount={4}
-            >
-              <Card>
-                <img src="/card-1.jpg" alt="Specialized Care" />
-                <div className="card-overlay">
-                  <h3 className="card-title">Expert Consultation</h3>
-                  <p className="card-desc">Personalized care from world-class specialists.</p>
+          <div className="hidden lg:flex justify-center items-center relative animate-slide-up [animation-delay:400ms]">
+            <div className="relative group overflow-hidden rounded-[4rem] shadow-2xl border-4 border-white/10 max-w-[500px]">
+              <img
+                src="/doctor.jpg"
+                alt="Expert Care"
+                className="w-full h-[650px] object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent opacity-80"></div>
+
+              {/* Floating Badge */}
+              <div className="absolute top-8 right-8 px-6 py-2 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center gap-2">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Next-Gen Medical Hub</span>
+              </div>
+
+              <div className="absolute bottom-12 left-10 right-10 p-10 backdrop-blur-2xl bg-slate-900/40 rounded-[2.5rem] border border-white/10 shadow-2xl transform transition-transform duration-700 group-hover:-translate-y-2">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                    <Stethoscope className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-white tracking-tight leading-none">Expert Diagnostics</h3>
+                    <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-1">Available 24/7</p>
+                  </div>
                 </div>
-              </Card>
-              <Card>
-                <img src="/card-2.jpg" alt="Modern Facilities" />
-                <div className="card-overlay">
-                  <h3 className="card-title">Advanced Tech</h3>
-                  <p className="card-desc">State-of-the-art diagnostic and treatment facilities.</p>
+                <p className="text-slate-300 font-medium leading-relaxed mb-6">Experience world-class healthcare with our unified digital medicine ecosystem and expert medical practitioners.</p>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-3 h-3 text-amber-500 fill-current" />)}
+                  <span className="text-[10px] font-bold text-white/60 ml-2">4.9/5 Average Patient Rating</span>
                 </div>
-              </Card>
-              <Card>
-                <img src="/card-3.jpg" alt="Medical Team" />
-                <div className="card-overlay">
-                  <h3 className="card-title">Patient First</h3>
-                  <p className="card-desc">Every recovery is a milestone for our team.</p>
-                </div>
-              </Card>
-              <Card>
-                <img src="/card-4.jpg" alt="Supportive Care" />
-                <div className="card-overlay">
-                  <h3 className="card-title">Future of Health</h3>
-                  <p className="card-desc">Embracing innovation for better outcomes.</p>
-                </div>
-              </Card>
-            </CardSwap>
+              </div>
+
+              {/* Decorative Glow */}
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-[80px] pointer-events-none group-hover:bg-indigo-500/30 transition-colors"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -289,42 +284,42 @@ const LandingPage: React.FC<LandingPageProps> = ({ onBookClick, onServiceClick, 
             <ChromaCards
               items={[
                 {
-                  image: "https://images.unsplash.com/photo-1579684385180-164e742e870e?auto=format&fit=crop&w=800&q=80",
+                  image: "/card-1.jpg",
                   title: "Predictive Wellness",
                   subtitle: "Stay healthy with regular check-ups and early detection screenings.",
                   borderColor: "#10B981",
                   gradient: "linear-gradient(145deg, #10B981, #000)",
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+                  image: "/card-2.jpg",
                   title: "Public Health Assets",
                   subtitle: "Access affordable healthcare benefits and Ayushman Bharat programs.",
                   borderColor: "#F59E0B",
                   gradient: "linear-gradient(145deg, #F59E0B, #000)",
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+                  image: "/card-3.jpg",
                   title: "Insurance Vault (HQ)",
                   subtitle: "Cashless hospitalization support and insurance claim assistance.",
                   borderColor: "#3B82F6",
                   gradient: "linear-gradient(145deg, #3B82F6, #000)",
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1516574187841-69301976e499?auto=format&fit=crop&w=800&q=80",
+                  image: "/card-4.jpg",
                   title: "Neural SOS Protocols",
                   subtitle: "24/7 rapid response ambulance and critical care support.",
                   borderColor: "#EF4444",
                   gradient: "linear-gradient(145deg, #EF4444, #450a0a)",
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+                  image: "/doctor.jpg",
                   title: "Bio-Interaction Scan",
                   subtitle: "Check potential side effects and interactions before use.",
                   borderColor: "#8B5CF6",
                   gradient: "linear-gradient(145deg, #8B5CF6, #000)",
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+                  image: "/bg-ai.jpg",
                   title: "Neural Pharmacy",
                   subtitle: "Buy genuine medicines online with quick home delivery.",
                   borderColor: "#06B6D4",

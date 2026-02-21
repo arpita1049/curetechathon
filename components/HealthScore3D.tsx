@@ -26,11 +26,11 @@ const ScoreRing = ({ score }: { score: number }) => {
             <Float speed={2} rotationIntensity={1} floatIntensity={1}>
                 <Torus ref={meshRef} args={[2.05, 0.08, 16, 100, Math.PI * 2 * progress]} rotation={[Math.PI / 2, 0, 0]}>
                     <MeshDistortMaterial
-                        color="#2dd4bf"
+                        color="#6366f1"
                         speed={2}
                         distort={0.1}
                         radius={1}
-                        emissive="#14b8a6"
+                        emissive="#4f46e5"
                         emissiveIntensity={2}
                     />
                 </Torus>
@@ -63,7 +63,7 @@ const HealthScore3D: React.FC<HealthScore3DProps> = ({ score }) => {
                 <span className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter transition-transform group-hover:scale-110 duration-500">
                     {score}
                 </span>
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-600/80 mt-1">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600/80 mt-1">
                     Vitality Index
                 </span>
             </div>

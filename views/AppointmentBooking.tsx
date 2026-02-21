@@ -67,6 +67,32 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             fees: 500,
             image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anjali',
             type: 'In-Clinic'
+        },
+        {
+            id: '4',
+            name: 'Dr. Vikram Malhotra',
+            specialty: 'Neurologist',
+            rating: 4.8,
+            reviews: 156,
+            experience: '20 Years',
+            location: 'Brain & Spine Institute, Mumbai',
+            availability: ['09:30 AM', '12:00 PM', '03:00 PM', '06:30 PM'],
+            fees: 1200,
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram',
+            type: 'In-Clinic'
+        },
+        {
+            id: '5',
+            name: 'Dr. Sameer Joshi',
+            specialty: 'Orthopedic',
+            rating: 4.6,
+            reviews: 112,
+            experience: '10 Years',
+            location: 'Bone & Joint Center, Nagpur',
+            availability: ['11:30 AM', '01:30 PM', '04:00 PM', '07:00 PM'],
+            fees: 700,
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sameer',
+            type: 'Video Cons'
         }
     ];
 
@@ -85,7 +111,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     <div>
                         <button
                             onClick={onBack}
-                            className="flex items-center gap-2 text-slate-500 hover:text-teal-600 font-bold mb-4 transition-all"
+                            className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold mb-4 transition-all"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             Back to Dashboard
@@ -114,7 +140,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         placeholder="Search by name, specialty or clinic..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-lg outline-none focus:border-teal-500 transition-all shadow-sm"
+                                        className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] font-bold text-lg outline-none focus:border-indigo-500 transition-all shadow-sm"
                                     />
                                 </div>
                                 <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -122,7 +148,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         <button
                                             key={spec}
                                             onClick={() => setSelectedSpecialty(spec)}
-                                            className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedSpecialty === spec ? 'bg-teal-600 text-white shadow-lg shadow-teal-500/30' : 'bg-white dark:bg-slate-900 text-slate-500 border-2 border-slate-100 dark:border-slate-800'}`}
+                                            className={`px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest whitespace-nowrap transition-all ${selectedSpecialty === spec ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'bg-white dark:bg-slate-900 text-slate-500 border-2 border-slate-100 dark:border-slate-800'}`}
                                         >
                                             {spec}
                                         </button>
@@ -138,18 +164,18 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 hover:border-teal-500/30 transition-all group relative overflow-hidden"
+                                        className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 hover:border-indigo-500/30 transition-all group relative overflow-hidden"
                                     >
                                         <div className="flex items-start gap-6 mb-8">
                                             <div className="relative">
-                                                <img src={doc.image} alt={doc.name} className="w-20 h-20 rounded-2xl bg-teal-50 dark:bg-teal-900/30" />
-                                                <div className={`absolute -bottom-2 -right-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white ${doc.type === 'In-Clinic' ? 'bg-teal-600' : 'bg-blue-600'}`}>
+                                                <img src={doc.image} alt={doc.name} className="w-20 h-20 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30" />
+                                                <div className={`absolute -bottom-2 -right-2 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white ${doc.type === 'In-Clinic' ? 'bg-indigo-600' : 'bg-blue-600'}`}>
                                                     {doc.type}
                                                 </div>
                                             </div>
                                             <div>
                                                 <h3 className="text-xl font-black text-slate-900 dark:text-white leading-tight mb-1">{doc.name}</h3>
-                                                <p className="text-teal-600 font-bold text-sm mb-2">{doc.specialty}</p>
+                                                <p className="text-indigo-600 font-bold text-sm mb-2">{doc.specialty}</p>
                                                 <div className="flex items-center gap-1 text-amber-500">
                                                     <Star className="w-4 h-4 fill-current" />
                                                     <span className="text-sm font-black">{doc.rating}</span>
@@ -160,15 +186,15 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                                         <div className="space-y-4 mb-8">
                                             <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                                                <Zap className="w-4 h-4 text-teal-600" />
+                                                <Zap className="w-4 h-4 text-indigo-600" />
                                                 <span>{doc.experience} Experience</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                                                <MapPin className="w-4 h-4 text-teal-600" />
+                                                <MapPin className="w-4 h-4 text-indigo-600" />
                                                 <span className="line-clamp-1">{doc.location}</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                                                <Calendar className="w-4 h-4 text-teal-600" />
+                                                <Calendar className="w-4 h-4 text-indigo-600" />
                                                 <span>Next Available: Tomorrow</span>
                                             </div>
                                         </div>
@@ -183,7 +209,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                                     setSelectedDoctor(doc);
                                                     setBookingStep('details');
                                                 }}
-                                                className="px-6 py-3 bg-teal-600 text-white rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-teal-500/20 active:scale-95 transition-all"
+                                                className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-indigo-500/20 active:scale-95 transition-all"
                                             >
                                                 Reserve Slot
                                             </button>
@@ -203,12 +229,12 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-[4rem] p-10 border-2 border-slate-100 dark:border-slate-800 shadow-2xl space-y-10"
                         >
                             <div className="flex flex-col md:flex-row gap-10 items-start">
-                                <img src={selectedDoctor.image} alt={selectedDoctor.name} className="w-32 h-32 rounded-3xl bg-teal-50 dark:bg-teal-900/30" />
+                                <img src={selectedDoctor.image} alt={selectedDoctor.name} className="w-32 h-32 rounded-3xl bg-indigo-50 dark:bg-indigo-900/30" />
                                 <div className="space-y-4 flex-1">
                                     <div className="flex justify-between items-start">
                                         <div>
                                             <h2 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">{selectedDoctor.name}</h2>
-                                            <p className="text-xl text-teal-600 font-bold">{selectedDoctor.specialty}</p>
+                                            <p className="text-xl text-indigo-600 font-bold">{selectedDoctor.specialty}</p>
                                         </div>
                                         <div className="text-right">
                                             <div className="text-2xl font-black text-slate-900 dark:text-white">₹{selectedDoctor.fees}</div>
@@ -221,7 +247,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                             {selectedDoctor.rating} Rating
                                         </div>
                                         <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-xl text-slate-500 font-bold text-sm">
-                                            <Shield className="w-4 h-4 text-teal-600" />
+                                            <Shield className="w-4 h-4 text-indigo-600" />
                                             {selectedDoctor.experience} Exp
                                         </div>
                                     </div>
@@ -230,7 +256,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                             <div className="space-y-6">
                                 <h3 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-                                    <Calendar className="w-6 h-6 text-teal-600" />
+                                    <Calendar className="w-6 h-6 text-indigo-600" />
                                     Select Date
                                 </h3>
                                 <div className="grid grid-cols-4 md:grid-cols-7 gap-4">
@@ -238,7 +264,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         <button
                                             key={day}
                                             onClick={() => setSelectedDate(`${day} 1${i + 8}`)}
-                                            className={`p-4 rounded-2xl flex flex-col items-center gap-1 transition-all border-2 ${selectedDate?.includes(day) ? 'bg-teal-600 text-white border-teal-600 shadow-xl shadow-teal-500/20' : 'bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500'}`}
+                                            className={`p-4 rounded-2xl flex flex-col items-center gap-1 transition-all border-2 ${selectedDate?.includes(day) ? 'bg-indigo-600 text-white border-indigo-600 shadow-xl shadow-indigo-500/20' : 'bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500'}`}
                                         >
                                             <span className="text-[10px] font-black uppercase tracking-widest">{day}</span>
                                             <span className="text-xl font-black">1{i + 8}</span>
@@ -249,7 +275,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
                             <div className="space-y-6">
                                 <h3 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-                                    <Clock className="w-6 h-6 text-teal-600" />
+                                    <Clock className="w-6 h-6 text-indigo-600" />
                                     Select Slot
                                 </h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -257,7 +283,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                         <button
                                             key={slot}
                                             onClick={() => setSelectedSlot(slot)}
-                                            className={`p-5 rounded-2xl font-black text-center transition-all border-2 ${selectedSlot === slot ? 'bg-teal-600 text-white border-teal-600 shadow-xl shadow-teal-500/20' : 'bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500'}`}
+                                            className={`p-5 rounded-2xl font-black text-center transition-all border-2 ${selectedSlot === slot ? 'bg-indigo-600 text-white border-indigo-600 shadow-xl shadow-indigo-500/20' : 'bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500'}`}
                                         >
                                             {slot}
                                         </button>
@@ -275,7 +301,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                 <button
                                     disabled={!selectedDate || !selectedSlot}
                                     onClick={() => setBookingStep('confirm')}
-                                    className="flex-[2] py-5 bg-teal-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl shadow-teal-500/30 active:scale-95 transition-all disabled:opacity-50 disabled:grayscale"
+                                    className="flex-[2] py-5 bg-indigo-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl shadow-indigo-500/30 active:scale-95 transition-all disabled:opacity-50 disabled:grayscale"
                                 >
                                     Confirm Booking
                                 </button>
@@ -290,13 +316,13 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             animate={{ opacity: 1, scale: 1 }}
                             className="max-w-xl mx-auto text-center space-y-10 py-12"
                         >
-                            <div className="w-32 h-32 bg-teal-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center mx-auto relative">
-                                <CheckCircle2 className="w-16 h-16 text-teal-600" />
+                            <div className="w-32 h-32 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mx-auto relative">
+                                <CheckCircle2 className="w-16 h-16 text-indigo-600" />
                                 <motion.div
                                     initial={{ scale: 0 }}
                                     animate={{ scale: [1, 1.2, 1] }}
                                     transition={{ repeat: Infinity, duration: 2 }}
-                                    className="absolute inset-0 border-4 border-teal-500/20 rounded-full"
+                                    className="absolute inset-0 border-4 border-indigo-500/20 rounded-full"
                                 />
                             </div>
                             <div className="space-y-4">
@@ -306,7 +332,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-8 border-2 border-slate-100 dark:border-slate-800 space-y-6 text-left">
                                 <div className="flex justify-between items-center text-sm font-black uppercase tracking-widest text-slate-400">
                                     <span>Token Number</span>
-                                    <span className="text-teal-600 text-lg">#CURE-0248</span>
+                                    <span className="text-indigo-600 text-lg">#CURE-0248</span>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-4">
@@ -332,7 +358,7 @@ const AppointmentBooking: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             <div className="flex flex-col gap-4">
                                 <button
                                     onClick={onBack}
-                                    className="py-5 bg-teal-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-xl shadow-teal-500/20"
+                                    className="py-5 bg-indigo-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-xl shadow-indigo-500/20"
                                 >
                                     Home Dashboard
                                 </button>

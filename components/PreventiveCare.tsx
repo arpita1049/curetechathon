@@ -76,34 +76,53 @@ const PreventiveCare: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     // --- Sub-Components ---
 
     const Header = () => (
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-            <div>
-                <button
-                    onClick={() => step === 'dashboard' ? onBack() : setStep('dashboard')}
-                    className="flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold mb-4 transition-all"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                    {step === 'dashboard' ? "Back to Services" : "Back to Dashboard"}
-                </button>
-                <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter">
-                    {step === 'dashboard' ? "Preventive Care" : step === 'profile' ? "Health Profile" : activeModule?.toUpperCase().replace('-', ' ')}
-                </h1>
-            </div>
+        <div className="space-y-12 mb-16">
+            <div className="relative rounded-[4rem] overflow-hidden group shadow-2xl border-4 border-white/10 h-[350px]">
+                <img
+                    src="/card-2.jpg"
+                    alt="Predictive Wellness"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent opacity-80"></div>
 
-            <div className="flex items-center gap-4">
-                <select
-                    className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-3 font-bold text-sm outline-none focus:border-indigo-500 transition-all text-slate-900 dark:text-white"
-                >
-                    <option>English Voice</option>
-                    <option>हिन्दी आवाज़</option>
-                    <option>मराठी आवाज</option>
-                </select>
-                <button
-                    onClick={() => setVoiceActive(!voiceActive)}
-                    className={`p-4 rounded-2xl transition-all ${voiceActive ? 'bg-indigo-600 text-white animate-pulse shadow-lg shadow-indigo-500/30' : 'bg-slate-100 dark:bg-slate-900 text-slate-500 border-2 border-transparent'}`}
-                >
-                    <Volume2 className="w-6 h-6" />
-                </button>
+                <div className="absolute inset-0 flex flex-col justify-end p-12">
+                    <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+                        <div className="space-y-4">
+                            <button
+                                onClick={() => step === 'dashboard' ? onBack() : setStep('dashboard')}
+                                className="flex items-center gap-2 text-white/70 hover:text-white font-black uppercase tracking-widest text-xs mb-2 transition-all group/back"
+                            >
+                                <ArrowLeft className="w-4 h-4 group-hover/back:-translate-x-1 transition-transform" />
+                                {step === 'dashboard' ? "Back to Services" : "Back to Dashboard"}
+                            </button>
+                            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none">
+                                {step === 'dashboard' ? "Predictive Wellness" : step === 'profile' ? "Health Profile" : activeModule?.toUpperCase().replace('-', ' ')}
+                            </h1>
+                        </div>
+
+                        <div className="flex items-center gap-4 bg-white/10 backdrop-blur-xl p-3 rounded-[2rem] border border-white/10">
+                            <select
+                                className="bg-transparent border-none rounded-2xl px-4 py-2 font-black text-xs uppercase tracking-widest outline-none text-white appearance-none cursor-pointer"
+                            >
+                                <option className="bg-slate-900">English Voice</option>
+                                <option className="bg-slate-900">हिन्दी आवाज़</option>
+                                <option className="bg-slate-900">मराठी आवाज</option>
+                            </select>
+                            <button
+                                onClick={() => setVoiceActive(!voiceActive)}
+                                className={`p-3 rounded-2xl transition-all ${voiceActive ? 'bg-indigo-600 text-white animate-pulse shadow-lg shadow-indigo-500/30' : 'bg-white/10 text-white/70 hover:text-white'}`}
+                            >
+                                <Volume2 className="w-5 h-5" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Status Badge */}
+                <div className="absolute top-8 right-8 px-6 py-2 bg-emerald-500/20 backdrop-blur-xl border border-emerald-500/30 rounded-full flex items-center gap-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Bio-Sync: Active</span>
+                </div>
             </div>
         </div>
     );
