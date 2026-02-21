@@ -8,7 +8,7 @@ import {
   MessageCircle, ExternalLink,
   Brain, CheckCircle2,
   Lock, ShieldCheck, ArrowUpRight,
-  AlertOctagon
+  AlertOctagon, Award
 } from 'lucide-react';
 import Premium3DBG from '../components/Premium3DBG';
 import RiskMeter from '../components/RiskMeter';
@@ -23,13 +23,15 @@ import OpinionView from '../components/OpinionView';
 import HubView from '../components/HubView';
 
 import PatientProfileView from '../components/PatientProfileView';
+import CaseInsights from '../components/CaseInsights';
+import PerformanceView from '../components/PerformanceView';
 
 interface DoctorDashboardProps {
   onLogout: () => void;
   doctor?: any;
 }
 
-type DoctorView = 'DASHBOARD' | 'APPOINTMENTS' | 'PATIENTS' | 'PRESCRIPTIONS' | 'OPINION' | 'ANALYTICS' | 'HUB' | 'SETTINGS' | 'INSIGHTS';
+type DoctorView = 'DASHBOARD' | 'APPOINTMENTS' | 'PATIENTS' | 'PRESCRIPTIONS' | 'OPINION' | 'ANALYTICS' | 'HUB' | 'SETTINGS' | 'INSIGHTS' | 'CASE_INSIGHTS' | 'PERFORMANCE';
 
 const colors = {
   primary: '#0F2A47',
@@ -51,6 +53,7 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
   const [showOpinionFlow, setShowOpinionFlow] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isOnline, setIsOnline] = useState(true);
+  const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
 
   // Real Data State
   const [cases, setCases] = useState<any[]>([]);
@@ -161,19 +164,18 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
             <h1 className="text-xl font-black tracking-tighter uppercase leading-none mb-1">CURE DASH</h1>
             <div className="flex items-center gap-2">
               <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`} />
-              <span className="text-[9px] font-black uppercase tracking-widest opacity-60">Node Active</span>
+              <span className="text-[9px] font-black uppercase tracking-widest opacity-60">System Secured</span>
             </div>
           </div>
         </div>
 
         <nav className="flex-1 space-y-2 overflow-y-auto no-scrollbar">
-          <NavItem icon={LayoutDashboard} label="Operations" subtitle="System Hub" view="DASHBOARD" />
-          <NavItem icon={Users} label="Patients" subtitle="Clinical Registry" view="PATIENTS" />
-          <NavItem icon={Calendar} label="Appointments" subtitle="Task Ledger" view="APPOINTMENTS" />
-          <NavItem icon={Pill} label="Prescriptions" subtitle="Smart Rx Node" view="PRESCRIPTIONS" />
-          <NavItem icon={MessageSquare} label="Opinion" subtitle="Peer Review" view="OPINION" />
-          <NavItem icon={FileText} label="Clinical Hub" subtitle="Board Protocols" view="HUB" />
-          <NavItem icon={Activity} label="Analytics" subtitle="Performance" view="ANALYTICS" />
+          <NavItem icon={LayoutDashboard} label="Worklist" subtitle="Daily Operations" view="DASHBOARD" />
+          <NavItem icon={Users} label="Patients" subtitle="Medical Registry" view="PATIENTS" />
+          <NavItem icon={Calendar} label="Appointments" subtitle="Clinical Schedule" view="APPOINTMENTS" />
+          <NavItem icon={Pill} label="Prescriptions" subtitle="Medicine Orders" view="PRESCRIPTIONS" />
+          <NavItem icon={MessageSquare} label="Peer Review" subtitle="Second Opinion" view="OPINION" />
+          <NavItem icon={Activity} label="Performance" subtitle="Quality Metrics" view="PERFORMANCE" />
 
           <div className="pt-8 space-y-2">
             <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-6 mb-2">Urgent Protocol</p>
@@ -211,9 +213,9 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
             <div className="flex items-center gap-4 pl-4 border-l border-white/10">
               <div className="text-right">
                 <span className="block font-black uppercase text-sm tracking-tighter leading-none mb-1">Dr. Vikram Aditya</span>
-                <span className="block text-[8px] font-black text-indigo-500 uppercase tracking-widest leading-none">Senior Medical Node</span>
+                <span className="block text-[8px] font-black text-indigo-500 uppercase tracking-widest leading-none">Senior Medical Officer</span>
               </div>
-              <div className="w-12 h-12 bg-indigo-500 rounded-xl p-0.5 shadow-2xl">
+              <div className="w-12 h-12 bg-indigo-600 rounded-xl p-0.5 shadow-2xl">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=doctor" className="w-full h-full object-cover rounded-lg" />
               </div>
             </div>
@@ -231,10 +233,10 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
             >
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {[
-                  { label: "Daily Intake", value: stats?.totalToday || "24", trend: "+12%", icon: Users, color: "indigo" },
-                  { label: "Critical Case", value: stats?.criticalCases || "03", trend: "Critical", icon: AlertTriangle, color: "rose" },
-                  { label: "Monitoring", value: stats?.monitoringCount || "18", trend: "75%", icon: Zap, color: "teal" },
-                  { label: "Pending Opinions", value: stats?.pendingAlerts || "05", trend: "+2", icon: MessageCircle, color: "amber" }
+                  { label: "Patient Intake", value: stats?.totalToday || "24", trend: "+12%", icon: Users, color: "indigo" },
+                  { label: "High Risk Cases", value: stats?.criticalCases || "03", trend: "Review Required", icon: AlertTriangle, color: "rose" },
+                  { label: "Clinical Success", value: "98%", trend: "Optimal", icon: ShieldCheck, color: "teal" },
+                  { label: "Peer Consults", value: stats?.pendingAlerts || "05", trend: "+2 Pending", icon: MessageCircle, color: "amber" }
                 ].map((stat, i) => <MetricCard key={i} stat={stat} i={i} />)}
               </div>
 
@@ -242,8 +244,8 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
                 <div className="col-span-12 lg:col-span-8 p-12 bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-[4rem] border border-white/20 dark:border-slate-800/50 shadow-2xl">
                   <div className="flex justify-between items-center mb-10">
                     <div>
-                      <h3 className="text-3xl font-black uppercase tracking-tighter">Live Patient Queue</h3>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Real-time Triage Coordination</p>
+                      <h3 className="text-3xl font-black uppercase tracking-tighter">Hospital Intake Queue</h3>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Real-time Clinical Triage Management</p>
                     </div>
                     {isLoading && <div className="w-5 h-5 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />}
                   </div>
@@ -257,8 +259,15 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
                         </div>
                         <div className="flex items-center gap-4">
                           <span className={`px-4 py-1.5 rounded-full bg-${p.color}-500/10 text-${p.color}-500 text-[9px] font-black uppercase tracking-widest`}>{p.risk > 80 ? 'Urgent' : 'Routine'}</span>
-                          <button className="p-4 bg-white dark:bg-slate-800 rounded-2xl text-slate-300 group-hover:text-indigo-500 group-hover:bg-indigo-500/5 shadow-lg flex items-center justify-center transition-all">
-                            <ChevronRight className="w-5 h-5" />
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCaseId(p.id);
+                              setCurrentView('CASE_INSIGHTS');
+                            }}
+                            className="p-4 bg-white dark:bg-slate-800 rounded-2xl text-slate-300 group-hover:text-indigo-500 group-hover:bg-indigo-500/5 shadow-lg flex items-center justify-center transition-all"
+                          >
+                            <ArrowUpRight className="w-5 h-5" />
                           </button>
                         </div>
                       </div>
@@ -272,18 +281,18 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
                 </div>
 
                 <div className="col-span-12 lg:col-span-4 space-y-12">
-                  <div className="p-12 bg-slate-950 dark:bg-black rounded-[4rem] border border-white/10 shadow-3xl text-white relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-600/20 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-                    <Brain className="w-12 h-12 text-indigo-500 mb-10" />
-                    <h4 className="text-3xl font-black uppercase tracking-tighter leading-none mb-4">Neural Clinical <br />Support Engine</h4>
-                    <p className="text-slate-400 font-bold mb-10 uppercase text-[10px] tracking-widest leading-relaxed">Integrated G-Mesh Protocol Active. Monitoring vitals across 24 concurrent patients.</p>
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                        <span>CPU / Node Load</span>
-                        <span className="text-emerald-500">Optimum</span>
+                  <div className="p-10 bg-indigo-600 rounded-[3rem] shadow-2xl text-white relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
+                    <Award className="w-10 h-10 text-white mb-8" />
+                    <h4 className="text-2xl font-black uppercase tracking-tighter leading-none mb-4">Physician <br />Quality Summary</h4>
+                    <p className="text-indigo-100 font-bold mb-8 uppercase text-[10px] tracking-widest leading-relaxed">Top 5% regional performance. All clinical protocols currently synchronized with NABH standards.</p>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-widest">
+                        <span>Case Resolution Rate</span>
+                        <span>92%</span>
                       </div>
-                      <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                        <motion.div initial={{ width: 0 }} animate={{ width: '65%' }} className="h-full bg-gradient-to-r from-indigo-500 to-sky-500" />
+                      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                        <motion.div initial={{ width: 0 }} animate={{ width: '92%' }} className="h-full bg-white" />
                       </div>
                     </div>
                   </div>
@@ -317,6 +326,13 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
             {currentView === 'HUB' && <HubView />}
             {currentView === 'OPINION' && <OpinionView />}
             {currentView === 'ANALYTICS' && <PracticeAnalytics />}
+            {currentView === 'PERFORMANCE' && <PerformanceView />}
+            {currentView === 'CASE_INSIGHTS' && selectedCaseId && (
+              <CaseInsights
+                caseId={selectedCaseId}
+                onBack={() => setCurrentView('DASHBOARD')}
+              />
+            )}
           </div>
         </AnimatePresence>
       </main>
@@ -332,10 +348,12 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
         )}
 
         {isConsulting && selectedPatient && (
-          <ConsultationPortal
-            patient={selectedPatient}
-            onClose={() => setIsConsulting(false)}
-          />
+          <div className="fixed inset-0 z-[200] bg-slate-50 dark:bg-slate-950 overflow-y-auto px-12 pt-12">
+            <CaseInsights
+              caseId={selectedPatient.id}
+              onBack={() => setIsConsulting(false)}
+            />
+          </div>
         )}
         {isEmergencyMode && <EmergencyMode onExit={() => setIsEmergencyMode(false)} />}
         {showOpinionFlow && (
