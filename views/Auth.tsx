@@ -124,7 +124,7 @@ const Auth: React.FC<AuthProps> = ({ mode, onBack, onToggleMode, t, onAuthSucces
                 onClick={() => setRole(UserRole.DOCTOR)}
                 className={`flex-1 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all ${isDoctor ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-slate-500 hover:text-slate-700'}`}
               >
-                <Stethoscope className="w-4 h-4" /> Doctor
+                <Stethoscope className="w-4 h-4" /> Worker
               </button>
             </div>
 

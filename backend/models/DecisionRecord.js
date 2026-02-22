@@ -10,9 +10,13 @@ const decisionRecordSchema = new mongoose.Schema({
     specialistResponse: {
         plan: String,
         specialistName: String,
+        specialistId: String,
+        status: { type: String, enum: ['Pending', 'Reviewing', 'Responded', 'Overridden', 'Hospital_Escalation'], default: 'Pending' },
         timestamp: Date,
-        status: { type: String, enum: ['Pending', 'Responded'], default: 'Pending' }
+        clinicalNotes: String,
+        overriddenTreatment: Boolean
     },
+    blockchainHash: String,
     finalPlan: String,
     auditLog: [{
         action: String,

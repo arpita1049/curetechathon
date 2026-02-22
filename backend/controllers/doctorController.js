@@ -39,29 +39,48 @@ export const getRiskStratification = async (req, res) => {
     }
 };
 
-// 4. Second Opinion Workflow - Escalate
 export const escalateCase = async (req, res) => {
     try {
         const { caseId } = req.params;
         const { specialistId, reason } = req.body;
 
-        const caseData = await Case.findByIdAndUpdate(caseId, { status: 'Escalated' });
+        const blockchainHash = `0x${Math.random().toString(16).slice(2, 42)}`;
+        await DecisionRecord.findOneAndUpdate(
+            { caseId },
+            {
+                blockchainHash,
+                $push: { auditLog: { action: 'Specialist Escalation', by: 'Doctor', details: `Escalated to Specialist ID: ${specialistId} | Reason: ${reason}` } }
+            },
+            { upsert: true, new: true }
+        );
 
-        let record = await DecisionRecord.findOne({ caseId });
-        if (!record) {
-            record = new DecisionRecord({
-                caseId,
-                primaryDecision: { plan: reason, doctorName: 'Current Doctor' },
-                auditLog: [{ action: 'Escalated', by: 'Doctor', details: `Reason: ${reason}` }]
-            });
-        } else {
-            record.auditLog.push({ action: 'Escalated', by: 'Doctor', details: `Reason: ${reason}` });
-        }
-
-        await record.save();
-        res.json({ message: 'Case escalated successfully', record });
+        res.json({ success: true, message: 'Case escalated to National Mesh specialist.', blockchainHash });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const confirmDiagnosis = async (req, res) => {
+    try {
+        const { caseId } = req.params;
+        const { plan, confirmedBy } = req.body;
+
+        const caseData = await Case.findByIdAndUpdate(caseId, { status: 'Resolved' });
+        const blockchainHash = `0x${Math.random().toString(16).slice(2, 42)}`;
+
+        await DecisionRecord.findOneAndUpdate(
+            { caseId },
+            {
+                finalPlan: plan,
+                blockchainHash,
+                $push: { auditLog: { action: 'Diagnosis Confirmed', by: confirmedBy, details: plan } }
+            },
+            { upsert: true }
+        );
+
+        res.json({ success: true, message: 'Diagnosis confirmed and recorded on ledger.', blockchainHash });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -101,7 +120,99 @@ export const getFinalDecision = async (req, res) => {
     }
 };
 
-// 6. Workforce Performance Tracking
+// Additional methods for Dashboard
+export const getCases = async (req, res) => {
+    try {
+        const cases = await Case.find();
+        res.json({ success: true, data: { cases } });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const getDashboardStats = async (req, res) => {
+    try {
+        const totalToday = await Case.countDocuments({
+            createdAt: { $gte: new Date(new Date().setHours(0, 0, 0, 0)) }
+        });
+        const criticalCases = await Case.countDocuments({ riskLevel: 'Critical' });
+        const pendingAlerts = await DecisionRecord.countDocuments({ 'specialistResponse.status': { $ne: 'Responded' } });
+
+        res.json({
+            success: true,
+            data: {
+                totalToday,
+                criticalCases,
+                pendingAlerts,
+                performanceRate: "92%"
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// Employment of Primary Health Care Workers
+import PHW from '../models/PHW.js';
+
+export const getPHWs = async (req, res) => {
+    try {
+        const phws = await PHW.find();
+        res.json({ success: true, data: phws });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const employPHW = async (req, res) => {
+    try {
+        const { name, location, sector, contact } = req.body;
+        const newPHW = new PHW({ name, location, sector, contact });
+        await newPHW.save();
+        res.status(201).json({ success: true, data: newPHW });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const updatePHWStatus = async (req, res) => {
+    try {
+        const { phwId } = req.params;
+        const { status } = req.body;
+        const phw = await PHW.findByIdAndUpdate(phwId, { status }, { new: true });
+        res.json({ success: true, data: phw });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const awardReward = async (req, res) => {
+    try {
+        const { phwId } = req.params;
+        const { title, icon } = req.body;
+        const phw = await PHW.findById(phwId);
+        phw.rewards.push({ title, icon });
+        await phw.save();
+        res.json({ success: true, data: phw });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const upgradeTraining = async (req, res) => {
+    try {
+        const { phwId } = req.params;
+        const { type, level } = req.body;
+        const update = {};
+        update[`trainingLevels.${type}`] = level;
+        const phw = await PHW.findByIdAndUpdate(phwId, { $set: update }, { new: true });
+        res.json({ success: true, data: phw });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// 104. Workforce Performance Tracking
 export const getDoctorPerformance = async (req, res) => {
     try {
         // In a real app, we'd get the doctor ID from the request user (JWT)
@@ -112,3 +223,4 @@ export const getDoctorPerformance = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+

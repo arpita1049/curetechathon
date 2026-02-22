@@ -208,22 +208,8 @@ const App: React.FC = () => {
                 {t.nav.contact}
               </a>
 
-              {/* Hackathon Demo Role Switcher */}
-              <div className="flex bg-slate-200 dark:bg-slate-800/80 p-1.5 rounded-2xl border-2 border-white/20 shadow-inner">
-                <button
-                  onClick={() => { setUserRole(UserRole.PATIENT); setCurrentView('dashboard'); }}
-                  className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${userRole === UserRole.PATIENT ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
-                >
-                  Patient View
-                </button>
-                <button
-                  onClick={() => { setUserRole(UserRole.DOCTOR); setCurrentView('dashboard'); }}
-                  className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${userRole === UserRole.DOCTOR ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
-                >
-                  Doctor View
-                </button>
-              </div>
             </div>
+
 
             <div className="flex items-center gap-4">
               {userRole === UserRole.NONE ? (

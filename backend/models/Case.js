@@ -13,12 +13,13 @@ const caseSchema = new mongoose.Schema({
         spO2: String
     },
     medicalHistory: [String],
-    uploadedReports: [{
-        name: String,
+    audioSummary: String,
+    attachments: [{
+        type: { type: String, enum: ['ECG', 'WOUND', 'REPORT', 'SCAN'] },
         url: String,
-        type: String,
-        date: Date
+        timestamp: { type: Date, default: Date.now }
     }],
+    phwId: { type: mongoose.Schema.Types.ObjectId, ref: 'PHW' },
     riskLevel: { type: String, enum: ['Low', 'Moderate', 'High', 'Critical'], default: 'Low' },
     riskScore: { type: Number, min: 0, max: 100 },
     recommendedAction: String,

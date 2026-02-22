@@ -8,7 +8,7 @@ import {
   MessageCircle, ExternalLink,
   Brain, CheckCircle2,
   Lock, ShieldCheck, ArrowUpRight,
-  AlertOctagon, Award
+  AlertOctagon, Award, Briefcase
 } from 'lucide-react';
 import Premium3DBG from '../components/Premium3DBG';
 import RiskMeter from '../components/RiskMeter';
@@ -21,8 +21,12 @@ import AppointmentsView from '../components/AppointmentsView';
 import PrescriptionsView from '../components/PrescriptionsView';
 import OpinionView from '../components/OpinionView';
 import HubView from '../components/HubView';
+import EmploymentView from '../components/EmploymentView';
+import SecondOpinion from './SecondOpinion';
 
 import PatientProfileView from '../components/PatientProfileView';
+
+
 import CaseInsights from '../components/CaseInsights';
 import PerformanceView from '../components/PerformanceView';
 
@@ -31,7 +35,7 @@ interface DoctorDashboardProps {
   doctor?: any;
 }
 
-type DoctorView = 'DASHBOARD' | 'APPOINTMENTS' | 'PATIENTS' | 'PRESCRIPTIONS' | 'OPINION' | 'ANALYTICS' | 'HUB' | 'SETTINGS' | 'INSIGHTS' | 'CASE_INSIGHTS' | 'PERFORMANCE';
+type DoctorView = 'DASHBOARD' | 'APPOINTMENTS' | 'PATIENTS' | 'PRESCRIPTIONS' | 'OPINION' | 'ANALYTICS' | 'HUB' | 'SETTINGS' | 'INSIGHTS' | 'CASE_INSIGHTS' | 'PERFORMANCE' | 'EMPLOYMENT' | 'SECOND_OPINION';
 
 const colors = {
   primary: '#0F2A47',
@@ -81,11 +85,11 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
 
           setCases(casesData.data.cases.map((c: any) => ({
             ...c,
-            name: c.patientId?.name || "Unknown",
+            name: c.patientName || "Unknown",
             id: c._id,
             type: c.chiefComplaint,
-            risk: c.riskLevel === 'CRITICAL' ? 95 : c.riskLevel === 'HIGH' ? 75 : c.riskLevel === 'MEDIUM' ? 45 : 15,
-            color: c.riskLevel === 'CRITICAL' || c.riskLevel === 'HIGH' ? 'rose' : c.riskLevel === 'MEDIUM' ? 'amber' : 'teal'
+            risk: c.riskLevel === 'Critical' ? 95 : c.riskLevel === 'High' ? 75 : c.riskLevel === 'Moderate' ? 45 : 15,
+            color: (c.riskLevel === 'Critical' || c.riskLevel === 'High') ? 'rose' : c.riskLevel === 'Moderate' ? 'amber' : 'teal'
           })));
           setStats(statsData.data);
           setIsOnline(true);
@@ -174,7 +178,9 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
           <NavItem icon={Users} label="Patients" subtitle="Medical Registry" view="PATIENTS" />
           <NavItem icon={Calendar} label="Appointments" subtitle="Clinical Schedule" view="APPOINTMENTS" />
           <NavItem icon={Pill} label="Prescriptions" subtitle="Medicine Orders" view="PRESCRIPTIONS" />
-          <NavItem icon={MessageSquare} label="Peer Review" subtitle="Second Opinion" view="OPINION" />
+          <NavItem icon={MessageSquare} label="Peer Review" subtitle="Collaboration" view="OPINION" />
+          <NavItem icon={Stethoscope} label="Second Opinion" subtitle="Expert Analysis" view="SECOND_OPINION" />
+          <NavItem icon={Briefcase} label="Employment" subtitle="Workforce" view="EMPLOYMENT" />
           <NavItem icon={Activity} label="Performance" subtitle="Quality Metrics" view="PERFORMANCE" />
 
           <div className="pt-8 space-y-2">
@@ -325,6 +331,8 @@ const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onLogout, doctor }) =
             {currentView === 'PRESCRIPTIONS' && <PrescriptionsView />}
             {currentView === 'HUB' && <HubView />}
             {currentView === 'OPINION' && <OpinionView />}
+            {currentView === 'SECOND_OPINION' && <SecondOpinion onBack={() => setCurrentView('DASHBOARD')} />}
+            {currentView === 'EMPLOYMENT' && <EmploymentView />}
             {currentView === 'ANALYTICS' && <PracticeAnalytics />}
             {currentView === 'PERFORMANCE' && <PerformanceView />}
             {currentView === 'CASE_INSIGHTS' && selectedCaseId && (
